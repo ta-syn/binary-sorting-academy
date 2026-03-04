@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Binary Search & Sorting Academy</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <nav class="nav">
+    <div class="container nav-inner">
+      <div class="brand"><span class="badge">A</span><span id="brandLabel">Algorithm Academy</span></div>
+      <div class="links">
+        <a href="#guide" id="navGuideLink">Guide</a>
+        <a href="#binary" id="navBinaryLink">Binary Search</a>
+        <a href="#sorting" id="navSortingLink">3 Sorting</a>
+        
+        <a href="#quiz" id="navQuizLink">Quiz</a>
+      </div>
+      <button id="langToggle" class="lang-toggle" type="button">বাংলা</button>
+    </div>
+  </nav>
+
+  <main class="container">
+    <section class="hero">
+      <div>
+        <h1 id="heroTitle">Learn <span class="gradient">Binary Search</span> and the <span class="gradient">3 Core Sorting</span> Algorithms</h1>
+        <p id="heroLead">This page focuses on one goal: helping you master Binary Search, Bubble Sort, Selection Sort, and Insertion Sort through clear explanations, complexity analysis, code, and interactive simulation.</p>
+      </div>
+      <div class="hero-card">
+        <h3 class="mb-8" id="heroGetTitle">What you will get</h3>
+        <ul id="heroGetList">
+          <li>Clear explanations and real use cases</li>
+          <li>Complexity and comparison table</li>
+          <li>Step-by-step binary search simulator</li>
+          <li>Step-by-step sorting visualizer</li>
+          <li>JavaScript implementation code</li>
+        </ul>
+        <div class="pill-row">
+          <span class="pill" id="heroPillBeginner">Beginner Friendly</span>
+          <span class="pill" id="heroPillInterview">Interview Focused</span>
+          <span class="pill" id="heroPillStep">Step by Step</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="guide">
+      <h2 class="title" id="guideTitle">Study Guide</h2>
+      <div class="panel grid-2">
+        <article class="mini">
+          <h3 id="studyHowTitle">How to Study This Page</h3>
+          <div class="checklist" id="studyChecklist">
+            <div class="check">First read concept + complexity of Binary Search.</div>
+            <div class="check">Run the binary simulator until you can predict each next step.</div>
+            <div class="check">Compare all 3 sorting algorithms from the table.</div>
+            <div class="check">Use sorting visualizer with your own input values.</div>
+            <div class="check">Finish with quiz and try to score full marks.</div>
+          </div>
+        </article>
+        <article class="mini">
+          <h3 id="interviewTipsTitle">Interview Tips</h3>
+          <ul id="interviewTipsList">
+            <li>Always mention pre-condition for Binary Search: input must be sorted.</li>
+            <li>For nearly sorted arrays, Insertion Sort often performs very well.</li>
+            <li>Selection Sort does minimal swaps, useful when swap cost is high.</li>
+            <li>Bubble Sort is easy to explain and good for learning swap logic.</li>
+          </ul>
+          <div class="tips mt-10" id="interviewProTip">Pro Tip: Explain both <strong>time complexity</strong> and <strong>why</strong> it occurs.</div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="binary">
+      <h2 class="title" id="binaryTitle">Binary Search — Complete Explanation</h2>
+      <div class="panel grid-2">
+        <article class="mini">
+          <h3 id="binaryDefTitle">Definition</h3>
+          <p id="binaryDefText">Binary Search finds a target value in a sorted array by repeatedly checking the middle element and eliminating half of the search space.</p>
+          <h4 class="mt-10" id="binaryPreTitle">Pre-condition</h4>
+          <ul id="binaryPreList">
+            <li>Array must be sorted (ascending)</li>
+            <li>Works on random-access collections (like arrays)</li>
+          </ul>
+        </article>
+        <article class="mini">
+          <h3 id="binaryHowTitle">How it Works</h3>
+          <ul id="binaryHowList">
+            <li>Set low = 0 and high = n - 1</li>
+            <li>Compute mid = floor((low + high) / 2)</li>
+            <li>If array[mid] == target, found</li>
+            <li>If target &gt; array[mid], search right half</li>
+            <li>If target &lt; array[mid], search left half</li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="panel mt-12">
+        <h3 id="binaryComplexityTitle">Complexity</h3>
+        <table class="mt-8">
+          <thead id="binaryComplexityHead">
+            <tr><th>Case</th><th>Time</th><th>Space (Iterative)</th></tr>
+          </thead>
+          <tbody id="binaryComplexityBody">
+            <tr><td>Best</td><td>O(1)</td><td>O(1)</td></tr>
+            <tr><td>Average</td><td>O(log n)</td><td>O(1)</td></tr>
+            <tr><td>Worst</td><td>O(log n)</td><td>O(1)</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="panel grid-2 mt-12">
+        <article class="mini">
+          <h3 id="binaryDryRunTitle">Binary Search Dry Run (Target = 23)</h3>
+          <table class="mt-8">
+            <thead id="binaryDryRunHead">
+              <tr><th>Step</th><th>Low</th><th>High</th><th>Mid</th><th>Action</th></tr>
+            </thead>
+            <tbody id="binaryDryRunBody">
+              <tr><td>1</td><td>0</td><td>9</td><td>4</td><td>16 &lt; 23 → Right</td></tr>
+              <tr><td>2</td><td>5</td><td>9</td><td>7</td><td>56 &gt; 23 → Left</td></tr>
+              <tr><td>3</td><td>5</td><td>6</td><td>5</td><td>Found 23</td></tr>
+            </tbody>
+          </table>
+        </article>
+        <article class="mini">
+          <h3 id="binaryMistakesTitle">Common Mistakes</h3>
+          <ul id="binaryMistakesList">
+            <li>Applying Binary Search on unsorted data.</li>
+            <li>Forgetting to update low/high after comparison.</li>
+            <li>Infinite loops due to incorrect loop conditions.</li>
+            <li>Ignoring edge cases like empty array.</li>
+          </ul>
+          <h4 class="mt-10" id="binaryWhereTitle">Where to Use</h4>
+          <p id="binaryWhereText">Use it for lookups in sorted lists, searching sorted logs, and finding boundaries in monotonic arrays.</p>
+        </article>
+      </div>
+
+      <div class="panel mt-12" id="visual">
+        <h3 id="binarySimTitle">Binary Search Step Simulator</h3>
+        <div class="controls">
+          <input id="binaryArray" value="2,5,8,12,16,23,38,56,72,91" aria-label="binary array" />
+          <input id="binaryTarget" value="23" aria-label="binary target" />
+          <button class="primary" id="binaryStart">Start</button>
+          <button id="binaryRandom">Random</button>
+          <button id="binaryStep">Next Step</button>
+          <button id="binaryReset">Reset</button>
+        </div>
+        <div class="array-view" id="binaryView"></div>
+        <p class="status" id="binaryStatus" aria-live="polite">Load values and click Start.</p>
+      </div>
+
+      <div class="panel mt-12">
+        <h3 id="binaryCodeTitle">JavaScript Code</h3>
+        <div class="code">function binarySearch(arr, target) {
+  let low = 0;
+  let high = arr.length - 1;
+
+  while (low &lt;= high) {
+    const mid = Math.floor((low + high) / 2);
+
+    if (arr[mid] === target) return mid;
+    if (arr[mid] &lt; target) low = mid + 1;
+    else high = mid - 1;
+  }
+
+  return -1;
+}</div>
+      </div>
+    </section>
+
+    <section class="section" id="sorting">
+      <h2 class="title" id="sortingTitle">Three Core Sorting Algorithms</h2>
+
+      <div class="panel">
+        <h3 id="sortingCompareTitle">Comparison Table</h3>
+        <table class="mt-8">
+          <thead id="sortingCompareHead">
+            <tr>
+              <th>Algorithm</th>
+              <th>Best</th>
+              <th>Average</th>
+              <th>Worst</th>
+              <th>Space</th>
+              <th>Stable</th>
+            </tr>
+          </thead>
+          <tbody id="sortingCompareBody">
+            <tr><td>Bubble Sort</td><td>O(n)</td><td>O(n²)</td><td>O(n²)</td><td>O(1)</td><td>Yes</td></tr>
+            <tr><td>Selection Sort</td><td>O(n²)</td><td>O(n²)</td><td>O(n²)</td><td>O(1)</td><td>No</td></tr>
+            <tr><td>Insertion Sort</td><td>O(n)</td><td>O(n²)</td><td>O(n²)</td><td>O(1)</td><td>Yes</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="panel mt-12">
+        <div class="algo-tabs">
+          <button class="tab active" data-algo="bubble" id="tabBubble">Bubble Sort</button>
+          <button class="tab" data-algo="selection" id="tabSelection">Selection Sort</button>
+          <button class="tab" data-algo="insertion" id="tabInsertion">Insertion Sort</button>
+        </div>
+
+        <div class="grid-2">
+          <article class="mini">
+            <h3 id="algoTitle">Bubble Sort</h3>
+            <p id="algoDesc">Compares adjacent elements and swaps if out of order. Largest element moves to the end in each pass.</p>
+            <h4 class="mt-10" id="algoStepsTitle">Steps</h4>
+            <ul id="algoSteps"></ul>
+          </article>
+          <article class="mini">
+            <h3 id="algoCodeTitle">Algorithm Code</h3>
+            <div class="code" id="algoCode"></div>
+          </article>
+        </div>
+      </div>
+
+      <div class="panel mt-12">
+        <h3 id="sortingVisualTitle">Sorting Visualizer</h3>
+        <div class="controls">
+          <input id="sortArrayInput" value="33,10,55,2,19,44,7" aria-label="sort array" />
+          <button class="primary" id="sortLoad">Load Input</button>
+          <button id="sortRandom">Random</button>
+          <button id="sortStep">Next Step</button>
+          <button id="sortRun">Run Full</button>
+          <button id="sortReset">Reset</button>
+        </div>
+        <div class="sort-visual-layout">
+          <div>
+            <div class="bars" id="sortBars"></div>
+            <p class="status" id="sortStatus" aria-live="polite">Choose algorithm and click Load Input.</p>
+          </div>
+          <aside class="sort-history" aria-live="polite">
+            <h4 id="sortHistoryTitle">Completed Steps</h4>
+            <div class="sort-history-list" id="sortHistoryList"></div>
+          </aside>
+        </div>
+      </div>
+
+      <div class="panel grid-2 mt-12">
+        <article class="mini">
+          <h3 id="sortChooseTitle">When to Choose Which Sort?</h3>
+          <ul id="sortChooseList">
+            <li><strong>Bubble Sort:</strong> Best for learning and very small arrays.</li>
+            <li><strong>Selection Sort:</strong> Useful when writes/swaps are expensive.</li>
+            <li><strong>Insertion Sort:</strong> Great for nearly sorted arrays and online insertion.</li>
+          </ul>
+        </article>
+        <article class="mini">
+          <h3 id="sortRealTitle">Real World Examples</h3>
+          <ul id="sortRealList">
+            <li>Insertion Sort appears when arranging cards in your hand.</li>
+            <li>Selection-like logic appears when repeatedly picking the minimum-priority task.</li>
+            <li>Bubble Sort is great for understanding adjacent swaps in local optimization.</li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="quiz-box mt-12" id="quiz">
+        <h3 class="mb-8" id="quizTitle">Knowledge Check Quiz</h3>
+        <div class="quiz-meta" id="quizMeta"></div>
+        <p class="quiz-q" id="quizQuestion"></p>
+        <div class="quiz-answers" id="quizAnswers"></div>
+        <div class="quiz-result" id="quizResult" aria-live="polite"></div>
+        <div class="result-card is-hidden" id="quizResultCard"></div>
+        <div class="controls mt-8">
+          <button id="quizStartTimer">Start Timer</button>
+          <button id="nextQuiz">Next Question</button>
+          <button id="resetQuiz">Reset Quiz</button>
+          <span class="pill" id="quizTimerPill">Time Left: --s</span>
+          <span class="pill is-hidden" id="quizScorePill">Score: 0</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer-professional">
+    <div class="footer-content">
+      <div class="footer-main">
+        <span id="footerLead">Focused learning page: Binary Search + Bubble / Selection / Insertion Sort • 2026</span>
+        <span class="footer-divider">|</span>
+        <span class="author-chip">Designed & Developed by Nishan</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
