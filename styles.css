@@ -1,3 +1,13 @@
+    /* Highlight for author name in footer */
+    .author-highlight {
+      color: var(--primary);
+      font-weight: 900;
+      letter-spacing: 0.04em;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
     /* Highlight for active nav link */
     .links a.active {
       color: var(--primary);
