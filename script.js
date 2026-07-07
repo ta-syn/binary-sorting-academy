@@ -3,14 +3,12 @@
       'guide',
       'binary',
       'sorting',
-      'visual',
       'quiz'
     ];
     const navLinks = [
       document.getElementById('navGuideLink'),
       document.getElementById('navBinaryLink'),
       document.getElementById('navSortingLink'),
-      document.getElementById('navVisualLink'),
       document.getElementById('navQuizLink')
     ];
 
@@ -39,9 +37,148 @@
     const binaryView = document.getElementById('binaryView');
     const binaryStatus = document.getElementById('binaryStatus');
 
-    const binaryState = {
+    const searchData = {
+      en: {
+        linear: {
+          title: 'Searching Algorithms',
+          defTitle: 'Definition',
+          defText: 'Linear Search finds a target value in an array by checking each element sequentially from left to right.',
+          preTitle: 'Pre-condition',
+          preList: ['None. Works on sorted, unsorted, single, or empty collections.'],
+          howTitle: 'How it Works',
+          how: [
+            'Start from index 0',
+            'Compare current element with target',
+            'If equal, target found at current index',
+            'If not equal, move to the next index',
+            'If end of array is reached, target is not found'
+          ],
+          complexityTitle: 'Complexity',
+          complexityHead: '<tr><th>Case</th><th>Time</th><th>Space</th></tr>',
+          complexityBody: '<tr><td>Best</td><td>O(1)</td><td>O(1)</td></tr><tr><td>Average</td><td>O(n)</td><td>O(1)</td></tr><tr><td>Worst</td><td>O(n)</td><td>O(1)</td></tr>',
+          dryRunTitle: 'Linear Search Dry Run (Target = 23)',
+          dryRunHead: '<tr><th>Step</th><th>Index</th><th>Value</th><th>Compared</th><th>Action</th></tr>',
+          dryRunBody: '<tr><td>1</td><td>0</td><td>38</td><td>38 === 23 → False</td><td>Move Next</td></tr><tr><td>2</td><td>1</td><td>16</td><td>16 === 23 → False</td><td>Move Next</td></tr><tr><td>3</td><td>2</td><td>23</td><td>23 === 23 → True</td><td>Found 23</td></tr>',
+          mistakesTitle: 'Common Mistakes',
+          mistakesList: [
+            'Returning target not found inside the loop before checking all elements.',
+            'Iterating past the array bounds (out of bounds error).',
+            'Not handling duplicate values correctly.'
+          ],
+          whereTitle: 'Where to Use',
+          whereText: 'Use it for small unsorted arrays, linked lists, or simple lookups where the overhead of sorting is higher.',
+          simTitle: 'Linear Search Step Simulator',
+          codeTitle: 'JavaScript Code',
+          code: `function linearSearch(arr, target) {\n  for (let i = 0; i < arr.length; i++) {\n    if (arr[i] === target) return i;\n  }\n  return -1;\n}`
+        },
+        binary: {
+          title: 'Searching Algorithms',
+          defTitle: 'Definition',
+          defText: 'Binary Search finds a target value in a sorted array by repeatedly checking the middle element and eliminating half of the search space.',
+          preTitle: 'Pre-condition',
+          preList: ['Array must be sorted (ascending)', 'Works on random-access collections (like arrays)'],
+          howTitle: 'How it Works',
+          how: [
+            'Set low = 0 and high = n - 1',
+            'Compute mid = floor((low + high) / 2)',
+            'If array[mid] == target, found',
+            'If target > array[mid], search right half',
+            'If target < array[mid], search left half'
+          ],
+          complexityTitle: 'Complexity',
+          complexityHead: '<tr><th>Case</th><th>Time</th><th>Space (Iterative)</th></tr>',
+          complexityBody: '<tr><td>Best</td><td>O(1)</td><td>O(1)</td></tr><tr><td>Average</td><td>O(log n)</td><td>O(1)</td></tr><tr><td>Worst</td><td>O(log n)</td><td>O(1)</td></tr>',
+          dryRunTitle: 'Binary Search Dry Run (Target = 23)',
+          dryRunHead: '<tr><th>Step</th><th>Low</th><th>High</th><th>Mid</th><th>Action</th></tr>',
+          dryRunBody: '<tr><td>1</td><td>0</td><td>9</td><td>4</td><td>16 < 23 → Right</td></tr><tr><td>2</td><td>5</td><td>9</td><td>7</td><td>56 > 23 → Left</td></tr><tr><td>3</td><td>5</td><td>6</td><td>5</td><td>Found 23</td></tr>',
+          mistakesTitle: 'Common Mistakes',
+          mistakesList: [
+            'Applying Binary Search on unsorted data.',
+            'Forgetting to update low/high after comparison.',
+            'Infinite loops due to incorrect loop conditions.',
+            'Ignoring edge cases like empty array.'
+          ],
+          whereTitle: 'Where to Use',
+          whereText: 'Use it for lookups in sorted lists, searching sorted logs, and finding boundaries in monotonic arrays.',
+          simTitle: 'Binary Search Step Simulator',
+          codeTitle: 'JavaScript Code',
+          code: `function binarySearch(arr, target) {\n  let low = 0;\n  let high = arr.length - 1;\n\n  while (low <= high) {\n    const mid = Math.floor((low + high) / 2);\n\n    if (arr[mid] === target) return mid;\n    if (arr[mid] < target) low = mid + 1;\n    else high = mid - 1;\n  }\n\n  return -1;\n}`
+        }
+      },
+      bn: {
+        linear: {
+          title: 'সার্চ অ্যালগরিদম',
+          defTitle: 'সংজ্ঞা',
+          defText: 'Linear Search একটি array-এর প্রতি উপাদান প্রথম থেকে শেষ পর্যন্ত ক্রমান্বয়ে চেক করে target খুঁজে বের করে।',
+          preTitle: 'পূর্বশর্ত',
+          preList: ['কোনো পূর্বশর্ত নেই। Sorted বা Unsorted যেকোনো array-তে কাজ করে।'],
+          howTitle: 'কীভাবে কাজ করে',
+          how: [
+            'ইন্ডেক্স 0 থেকে শুরু করুন',
+            'বর্তমান উপাদানের সাথে target তুলনা করুন',
+            'সমান হলে বর্তমান ইন্ডেক্সে পাওয়া গেছে',
+            'সমান না হলে পরবর্তী ইন্ডেক্সে যান',
+            'অ্যারির শেষ পর্যন্ত না পাওয়া গেলে target নেই'
+          ],
+          complexityTitle: 'কমপ্লেক্সিটি',
+          complexityHead: '<tr><th>কেস</th><th>সময়</th><th>স্পেস</th></tr>',
+          complexityBody: '<tr><td>সেরা</td><td>O(1)</td><td>O(1)</td></tr><tr><td>গড়</td><td>O(n)</td><td>O(1)</td></tr><tr><td>খারাপতম</td><td>O(n)</td><td>O(1)</td></tr>',
+          dryRunTitle: 'Linear Search ড্রাই রান (Target = 23)',
+          dryRunHead: '<tr><th>ধাপ</th><th>ইন্ডেক্স</th><th>মান</th><th>তুলনা</th><th>অ্যাকশন</th></tr>',
+          dryRunBody: '<tr><td>1</td><td>0</td><td>38</td><td>38 === 23 → মিথ্যা</td><td>সামনে যান</td></tr><tr><td>2</td><td>1</td><td>16</td><td>16 === 23 → মিথ্যা</td><td>সামনে যান</td></tr><tr><td>3</td><td>2</td><td>23</td><td>23 === 23 → সত্য</td><td>23 পাওয়া গেছে</td></tr>',
+          mistakesTitle: 'সাধারণ ভুল',
+          mistakesList: [
+            'লুপের ভিতরে সব উপাদান চেক করার আগেই -1 রিটার্ন করে দেওয়া।',
+            'অ্যারের বাউন্ডারি পার হয়ে যাওয়া (out of bounds error)।',
+            'ডুপ্লিকেট মানগুলো ঠিকমতো হ্যান্ডেল না করা।'
+          ],
+          whereTitle: 'কোথায় ব্যবহার করবেন',
+          whereText: 'ছোট আকারের আন-সর্টেড ডাটা, লিঙ্কড লিস্ট এবং খুব সাধারণ খোঁজাখুঁজিতে যেখানে সর্ট করার খরচ বেশি।',
+          simTitle: 'Linear Search স্টেপ সিমুলেটর',
+          codeTitle: 'JavaScript কোড',
+          code: `function linearSearch(arr, target) {\n  for (let i = 0; i < arr.length; i++) {\n    if (arr[i] === target) return i;\n  }\n  return -1;\n}`
+        },
+        binary: {
+          title: 'সার্চ অ্যালগরিদম',
+          defTitle: 'সংজ্ঞা',
+          defText: 'Binary Search একটি sorted array-এ target value খুঁজে বের করে; প্রতি ধাপে middle element দেখে search space অর্ধেক করে।',
+          preTitle: 'পূর্বশর্ত',
+          preList: ['Array sorted (ascending) হতে হবে', 'Random-access collection (যেমন array)-এ ভালো কাজ করে'],
+          howTitle: 'কীভাবে কাজ করে',
+          how: [
+            'low = 0 এবং high = n - 1 নিন',
+            'mid = floor((low + high) / 2) হিসাব করুন',
+            'array[mid] == target হলে পাওয়া গেছে',
+            'target > array[mid] হলে ডান পাশে সার্চ করুন',
+            'target < array[mid] হলে বাম পাশে সার্চ করুন'
+          ],
+          complexityTitle: 'কমপ্লেক্সিটি',
+          complexityHead: '<tr><th>কেস</th><th>সময়</th><th>স্পেস (Iterative)</th></tr>',
+          complexityBody: '<tr><td>সেরা</td><td>O(1)</td><td>O(1)</td></tr><tr><td>গড়</td><td>O(log n)</td><td>O(1)</td></tr><tr><td>খারাপতম</td><td>O(log n)</td><td>O(1)</td></tr>',
+          dryRunTitle: 'বাইনারি সার্চ ড্রাই রান (Target = 23)',
+          dryRunHead: '<tr><th>ধাপ</th><th>Low</th><th>High</th><th>Mid</th><th>অ্যাকশন</th></tr>',
+          dryRunBody: '<tr><td>1</td><td>0</td><td>9</td><td>4</td><td>16 < 23 → ডান</td></tr><tr><td>2</td><td>5</td><td>9</td><td>7</td><td>56 > 23 → বাম</td></tr><tr><td>3</td><td>5</td><td>6</td><td>5</td><td>23 পাওয়া গেছে</td></tr>',
+          mistakesTitle: 'সাধারণ ভুল',
+          mistakesList: [
+            'Unsorted ডেটাতে Binary Search প্রয়োগ করা।',
+            'Comparison এর পরে low/high আপডেট করতে ভুলে যাওয়া।',
+            'ভুল loop condition এর কারণে infinite loop হওয়া।',
+            'Empty array-এর মতো edge case না ধরা।'
+          ],
+          whereTitle: 'কোথায় ব্যবহার করবেন',
+          whereText: 'Sorted list এ lookup, sorted log search এবং monotonic array-এ boundary খুঁজতে এটি ব্যবহার করুন।',
+          simTitle: 'বাইনারি সার্চ স্টেপ সিমুলেটর',
+          codeTitle: 'JavaScript কোড',
+          code: `function binarySearch(arr, target) {\n  let low = 0;\n  let high = arr.length - 1;\n\n  while (low <= high) {\n    const mid = Math.floor((low + high) / 2);\n\n    if (arr[mid] === target) return mid;\n    if (arr[mid] < target) low = mid + 1;\n    else high = mid - 1;\n  }\n\n  return -1;\n}`
+        }
+      }
+    };
+
+    const searchState = {
+      algorithm: 'linear', // 'linear' | 'binary'
       array: [],
       target: null,
+      index: -1,
       low: 0,
       high: -1,
       mid: -1,
@@ -56,27 +193,58 @@
         .filter(v => Number.isFinite(v));
     }
 
+    function renderSearchInfo() {
+      const current = (searchData[currentLang] || searchData.en)[searchState.algorithm];
+      document.getElementById('binaryTitle').textContent = current.title;
+      document.getElementById('binaryDefTitle').textContent = current.defTitle;
+      document.getElementById('binaryDefText').textContent = current.defText;
+      document.getElementById('binaryPreTitle').textContent = current.preTitle;
+      setListHtml('binaryPreList', current.preList);
+      document.getElementById('binaryHowTitle').textContent = current.howTitle;
+      setListHtml('binaryHowList', current.how);
+      document.getElementById('binaryComplexityTitle').textContent = current.complexityTitle;
+      document.getElementById('binaryComplexityHead').innerHTML = current.complexityHead;
+      document.getElementById('binaryComplexityBody').innerHTML = current.complexityBody;
+      document.getElementById('binaryDryRunTitle').textContent = current.dryRunTitle;
+      document.getElementById('binaryDryRunHead').innerHTML = current.dryRunHead;
+      document.getElementById('binaryDryRunBody').innerHTML = current.dryRunBody;
+      document.getElementById('binaryMistakesTitle').textContent = current.mistakesTitle;
+      setListHtml('binaryMistakesList', current.mistakesList);
+      document.getElementById('binaryWhereTitle').textContent = current.whereTitle;
+      document.getElementById('binaryWhereText').textContent = current.whereText;
+      document.getElementById('binarySimTitle').textContent = current.simTitle;
+      document.getElementById('binaryCodeTitle').textContent = current.codeTitle;
+      document.getElementById('binaryCode').textContent = current.code;
+    }
+
     function renderBinary() {
       binaryView.innerHTML = '';
-      if (!binaryState.array.length) {
+      if (!searchState.array.length) {
         binaryView.innerHTML = `<span style="color: var(--muted);">${t('noDataLoaded')}</span>`;
         return;
       }
 
-      binaryState.array.forEach((value, index) => {
+      searchState.array.forEach((value, index) => {
         const el = document.createElement('div');
         el.className = 'cell';
-        if (index === binaryState.low) el.classList.add('low');
-        if (index === binaryState.high) el.classList.add('high');
-        if (index === binaryState.mid) el.classList.add('mid');
-        if (index === binaryState.foundIndex) el.classList.add('found');
+        if (searchState.algorithm === 'binary') {
+          if (index === searchState.low) el.classList.add('low');
+          if (index === searchState.high) el.classList.add('high');
+          if (index === searchState.mid) el.classList.add('mid');
+        } else {
+          if (index === searchState.index) el.classList.add('checking');
+        }
+        if (index === searchState.foundIndex) el.classList.add('found');
         el.textContent = value;
         binaryView.appendChild(el);
       });
     }
 
     function startBinary() {
-      const values = parseNumbers(binaryArrayInput.value).sort((a, b) => a - b);
+      let values = parseNumbers(binaryArrayInput.value);
+      if (searchState.algorithm === 'binary') {
+        values.sort((a, b) => a - b);
+      }
       const target = Number(binaryTargetInput.value);
 
       if (!values.length || !Number.isFinite(target)) {
@@ -85,78 +253,125 @@
       }
 
       binaryArrayInput.value = values.join(',');
-      binaryState.array = values;
-      binaryState.target = target;
-      binaryState.low = 0;
-      binaryState.high = values.length - 1;
-      binaryState.mid = -1;
-      binaryState.done = false;
-      binaryState.foundIndex = -1;
+      searchState.array = values;
+      searchState.target = target;
+      searchState.index = -1;
+      searchState.low = 0;
+      searchState.high = values.length - 1;
+      searchState.mid = -1;
+      searchState.done = false;
+      searchState.foundIndex = -1;
 
       renderBinary();
       binaryStatus.textContent = t('startedClickNext');
     }
 
     function randomBinaryInput() {
-      const values = Array.from({ length: 10 }, () => Math.floor(Math.random() * 90) + 10).sort((a, b) => a - b);
+      let values = Array.from({ length: 10 }, () => Math.floor(Math.random() * 90) + 10);
+      if (searchState.algorithm === 'binary') {
+        values.sort((a, b) => a - b);
+      }
       const target = values[Math.floor(Math.random() * values.length)];
       binaryArrayInput.value = values.join(',');
       binaryTargetInput.value = String(target);
       startBinary();
-      binaryStatus.textContent = t('binaryRandomGenerated');
+      if (searchState.algorithm === 'binary') {
+        binaryStatus.textContent = t('binaryRandomGenerated');
+      } else {
+        binaryStatus.textContent = t('linearRandomGenerated');
+      }
     }
 
-    function stepBinary() {
-      if (!binaryState.array.length) {
-        binaryStatus.textContent = t('clickStartFirst');
-        return;
-      }
-      if (binaryState.done) {
-        binaryStatus.textContent = t('searchAlreadyDone');
-        return;
-      }
-
-      if (binaryState.low > binaryState.high) {
-        binaryState.done = true;
-        binaryState.mid = -1;
-        binaryStatus.textContent = t('targetNotFound');
+    function stepLinear() {
+      if (searchState.index >= searchState.array.length - 1) {
+        searchState.done = true;
+        searchState.index = -1;
+        binaryStatus.textContent = t('linearNotFound');
         renderBinary();
         return;
       }
 
-      binaryState.mid = Math.floor((binaryState.low + binaryState.high) / 2);
-      const midValue = binaryState.array[binaryState.mid];
+      searchState.index += 1;
+      const currentValue = searchState.array[searchState.index];
 
-      if (midValue === binaryState.target) {
-        binaryState.foundIndex = binaryState.mid;
-        binaryState.done = true;
-        binaryStatus.textContent = t('foundAtIndex')(binaryState.target, binaryState.mid);
-      } else if (midValue < binaryState.target) {
-        binaryStatus.textContent = t('moveRight')(binaryState.mid, midValue);
-        binaryState.low = binaryState.mid + 1;
+      if (currentValue === searchState.target) {
+        searchState.foundIndex = searchState.index;
+        searchState.done = true;
+        binaryStatus.textContent = t('linearFoundAtIndex')(searchState.target, searchState.index);
       } else {
-        binaryStatus.textContent = t('moveLeft')(binaryState.mid, midValue);
-        binaryState.high = binaryState.mid - 1;
+        binaryStatus.textContent = t('linearCheckingIndex')(searchState.index, currentValue);
       }
 
       renderBinary();
     }
 
+    function stepBinary() {
+      if (searchState.mid !== -1) {
+        const prevMidValue = searchState.array[searchState.mid];
+        if (prevMidValue < searchState.target) {
+          searchState.low = searchState.mid + 1;
+        } else {
+          searchState.high = searchState.mid - 1;
+        }
+      }
+
+      if (searchState.low > searchState.high) {
+        searchState.done = true;
+        searchState.mid = -1;
+        binaryStatus.textContent = t('targetNotFound');
+        renderBinary();
+        return;
+      }
+
+      searchState.mid = Math.floor((searchState.low + searchState.high) / 2);
+      const midValue = searchState.array[searchState.mid];
+
+      if (midValue === searchState.target) {
+        searchState.foundIndex = searchState.mid;
+        searchState.done = true;
+        binaryStatus.textContent = t('foundAtIndex')(searchState.target, searchState.mid);
+      } else if (midValue < searchState.target) {
+        binaryStatus.textContent = t('moveRight')(searchState.mid, midValue);
+      } else {
+        binaryStatus.textContent = t('moveLeft')(searchState.mid, midValue);
+      }
+
+      renderBinary();
+    }
+
+    function stepSearch() {
+      if (!searchState.array.length) {
+        binaryStatus.textContent = t('clickStartFirst');
+        return;
+      }
+      if (searchState.done) {
+        binaryStatus.textContent = t('searchAlreadyDone');
+        return;
+      }
+
+      if (searchState.algorithm === 'linear') {
+        stepLinear();
+      } else {
+        stepBinary();
+      }
+    }
+
     function resetBinary() {
-      binaryState.array = [];
-      binaryState.target = null;
-      binaryState.low = 0;
-      binaryState.high = -1;
-      binaryState.mid = -1;
-      binaryState.done = false;
-      binaryState.foundIndex = -1;
+      searchState.array = [];
+      searchState.target = null;
+      searchState.index = -1;
+      searchState.low = 0;
+      searchState.high = -1;
+      searchState.mid = -1;
+      searchState.done = false;
+      searchState.foundIndex = -1;
       binaryView.innerHTML = '';
       binaryStatus.textContent = t('resetComplete');
     }
 
     document.getElementById('binaryStart').addEventListener('click', startBinary);
     document.getElementById('binaryRandom').addEventListener('click', randomBinaryInput);
-    document.getElementById('binaryStep').addEventListener('click', stepBinary);
+    document.getElementById('binaryStep').addEventListener('click', stepSearch);
     document.getElementById('binaryReset').addEventListener('click', resetBinary);
 
     const algoData = {
@@ -281,7 +496,7 @@
       en: {
         brand: 'Algorithm Academy',
         navGuide: 'Guide',
-        navBinary: 'Binary Search',
+        navBinary: 'Searching',
         navSorting: '3 Sorting',
         navVisual: 'Visualizer',
         navQuiz: 'Quiz',
@@ -315,36 +530,13 @@
           'Bubble Sort is easy to explain and good for learning swap logic.'
         ],
         interviewProTip: 'Pro Tip: Explain both <strong>time complexity</strong> and <strong>why</strong> it occurs.',
-        binaryTitle: 'Binary Search — Complete Explanation',
-        binaryDefTitle: 'Definition',
-        binaryDefText: 'Binary Search finds a target value in a sorted array by repeatedly checking the middle element and eliminating half of the search space.',
-        binaryPreTitle: 'Pre-condition',
-        binaryPreList: ['Array must be sorted (ascending)', 'Works on random-access collections (like arrays)'],
-        binaryHowTitle: 'How it Works',
-        binaryHowList: [
-          'Set low = 0 and high = n - 1',
-          'Compute mid = floor((low + high) / 2)',
-          'If array[mid] == target, found',
-          'If target > array[mid], search right half',
-          'If target < array[mid], search left half'
-        ],
-        binaryComplexityTitle: 'Complexity',
-        binaryComplexityHead: '<tr><th>Case</th><th>Time</th><th>Space (Iterative)</th></tr>',
-        binaryComplexityBody: '<tr><td>Best</td><td>O(1)</td><td>O(1)</td></tr><tr><td>Average</td><td>O(log n)</td><td>O(1)</td></tr><tr><td>Worst</td><td>O(log n)</td><td>O(1)</td></tr>',
-        binarySimTitle: 'Binary Search Step Simulator',
-        binaryCodeTitle: 'JavaScript Code',
-        binaryDryRunTitle: 'Binary Search Dry Run (Target = 23)',
-        binaryDryRunHead: '<tr><th>Step</th><th>Low</th><th>High</th><th>Mid</th><th>Action</th></tr>',
-        binaryDryRunBody: '<tr><td>1</td><td>0</td><td>9</td><td>4</td><td>16 < 23 → Right</td></tr><tr><td>2</td><td>5</td><td>9</td><td>7</td><td>56 > 23 → Left</td></tr><tr><td>3</td><td>5</td><td>6</td><td>5</td><td>Found 23</td></tr>',
-        binaryMistakesTitle: 'Common Mistakes',
-        binaryMistakesList: [
-          'Applying Binary Search on unsorted data.',
-          'Forgetting to update low/high after comparison.',
-          'Infinite loops due to incorrect loop conditions.',
-          'Ignoring edge cases like empty array.'
-        ],
-        binaryWhereTitle: 'Where to Use',
-        binaryWhereText: 'Use it for lookups in sorted lists, searching sorted logs, and finding boundaries in monotonic arrays.',
+        binaryInitial: 'Load values and click Start.',
+        linearInitial: 'Load values and click Start.',
+        linearCheckingIndex: (index, val) => `Checking index ${index}: value ${val}.`,
+        linearFoundAtIndex: (target, index) => `Found target ${target} at index ${index}!`,
+        linearNotFound: 'Target not found in the array.',
+        linearRandomGenerated: 'Random array generated. Click Next Step to continue.',
+        searchSwitchedTo: title => `Switched to ${title}.`,
         sortingTitle: 'Three Core Sorting Algorithms',
         sortingCompareTitle: 'Comparison Table',
         sortingCompareHead: '<tr><th>Algorithm</th><th>Best</th><th>Average</th><th>Worst</th><th>Space</th><th>Stable</th></tr>',
@@ -447,7 +639,7 @@
       bn: {
         brand: 'অ্যালগরিদম একাডেমি',
         navGuide: 'গাইড',
-        navBinary: 'বাইনারি সার্চ',
+        navBinary: 'সার্চিং',
         navSorting: '৩টি সর্টিং',
         navVisual: 'ভিজ্যুয়ালাইজার',
         navQuiz: 'কুইজ',
@@ -481,36 +673,13 @@
           'Swap logic বোঝাতে Bubble Sort খুব সহজ।'
         ],
         interviewProTip: 'প্রো টিপ: শুধু <strong>time complexity</strong> না, <strong>কেন</strong> এমন হয় সেটাও ব্যাখ্যা করুন।',
-        binaryTitle: 'বাইনারি সার্চ — সম্পূর্ণ ব্যাখ্যা',
-        binaryDefTitle: 'সংজ্ঞা',
-        binaryDefText: 'Binary Search একটি sorted array-এ target value খুঁজে বের করে; প্রতি ধাপে middle element দেখে search space অর্ধেক করে।',
-        binaryPreTitle: 'পূর্বশর্ত',
-        binaryPreList: ['Array sorted (ascending) হতে হবে', 'Random-access collection (যেমন array)-এ ভালো কাজ করে'],
-        binaryHowTitle: 'কীভাবে কাজ করে',
-        binaryHowList: [
-          'low = 0 এবং high = n - 1 নিন',
-          'mid = floor((low + high) / 2) হিসাব করুন',
-          'array[mid] == target হলে পাওয়া গেছে',
-          'target > array[mid] হলে ডান পাশে সার্চ করুন',
-          'target < array[mid] হলে বাম পাশে সার্চ করুন'
-        ],
-        binaryComplexityTitle: 'কমপ্লেক্সিটি',
-        binaryComplexityHead: '<tr><th>কেস</th><th>সময়</th><th>স্পেস (Iterative)</th></tr>',
-        binaryComplexityBody: '<tr><td>সেরা</td><td>O(1)</td><td>O(1)</td></tr><tr><td>গড়</td><td>O(log n)</td><td>O(1)</td></tr><tr><td>খারাপতম</td><td>O(log n)</td><td>O(1)</td></tr>',
-        binarySimTitle: 'বাইনারি সার্চ স্টেপ সিমুলেটর',
-        binaryCodeTitle: 'JavaScript কোড',
-        binaryDryRunTitle: 'বাইনারি সার্চ ড্রাই রান (Target = 23)',
-        binaryDryRunHead: '<tr><th>ধাপ</th><th>Low</th><th>High</th><th>Mid</th><th>অ্যাকশন</th></tr>',
-        binaryDryRunBody: '<tr><td>1</td><td>0</td><td>9</td><td>4</td><td>16 < 23 → ডান</td></tr><tr><td>2</td><td>5</td><td>9</td><td>7</td><td>56 > 23 → বাম</td></tr><tr><td>3</td><td>5</td><td>6</td><td>5</td><td>23 পাওয়া গেছে</td></tr>',
-        binaryMistakesTitle: 'সাধারণ ভুল',
-        binaryMistakesList: [
-          'Unsorted ডেটাতে Binary Search প্রয়োগ করা।',
-          'Comparison এর পরে low/high আপডেট করতে ভুলে যাওয়া।',
-          'ভুল loop condition এর কারণে infinite loop হওয়া।',
-          'Empty array-এর মতো edge case না ধরা।'
-        ],
-        binaryWhereTitle: 'কোথায় ব্যবহার করবেন',
-        binaryWhereText: 'Sorted list এ lookup, sorted log search এবং monotonic array-এ boundary খুঁজতে এটি ব্যবহার করুন।',
+        binaryInitial: 'ভ্যালু দিন এবং Start ক্লিক করুন।',
+        linearInitial: 'ভ্যালু দিন এবং Start ক্লিক করুন।',
+        linearCheckingIndex: (index, val) => `index ${index} চেক করা হচ্ছে: মান ${val}।`,
+        linearFoundAtIndex: (target, index) => `Target ${target} index ${index} এ পাওয়া গেছে!`,
+        linearNotFound: 'Target পাওয়া যায়নি।',
+        linearRandomGenerated: 'র‌্যান্ডম array তৈরি হয়েছে। চালাতে Next Step ক্লিক করুন।',
+        searchSwitchedTo: title => `${title} এ পরিবর্তন করা হয়েছে।`,
         sortingTitle: 'তিনটি মূল সর্টিং অ্যালগরিদম',
         sortingCompareTitle: 'তুলনামূলক টেবিল',
         sortingCompareHead: '<tr><th>অ্যালগরিদম</th><th>Best</th><th>Average</th><th>Worst</th><th>Space</th><th>Stable</th></tr>',
@@ -634,8 +803,6 @@
       document.getElementById('navGuideLink').textContent = t('navGuide');
       document.getElementById('navBinaryLink').textContent = t('navBinary');
       document.getElementById('navSortingLink').textContent = t('navSorting');
-      var navVisual = document.getElementById('navVisualLink');
-      if (navVisual) navVisual.textContent = t('navVisual');
       document.getElementById('navQuizLink').textContent = t('navQuiz');
       document.getElementById('heroTitle').innerHTML = t('heroTitle');
       document.getElementById('heroLead').textContent = t('heroLead');
@@ -650,25 +817,7 @@
       document.getElementById('interviewTipsTitle').textContent = t('interviewTipsTitle');
       setListHtml('interviewTipsList', t('interviewTipsList'));
       document.getElementById('interviewProTip').innerHTML = t('interviewProTip');
-      document.getElementById('binaryTitle').textContent = t('binaryTitle');
-      document.getElementById('binaryDefTitle').textContent = t('binaryDefTitle');
-      document.getElementById('binaryDefText').textContent = t('binaryDefText');
-      document.getElementById('binaryPreTitle').textContent = t('binaryPreTitle');
-      setListHtml('binaryPreList', t('binaryPreList'));
-      document.getElementById('binaryHowTitle').textContent = t('binaryHowTitle');
-      setListHtml('binaryHowList', t('binaryHowList'));
-      document.getElementById('binaryComplexityTitle').textContent = t('binaryComplexityTitle');
-      document.getElementById('binaryComplexityHead').innerHTML = t('binaryComplexityHead');
-      document.getElementById('binaryComplexityBody').innerHTML = t('binaryComplexityBody');
-      document.getElementById('binaryDryRunTitle').textContent = t('binaryDryRunTitle');
-      document.getElementById('binaryDryRunHead').innerHTML = t('binaryDryRunHead');
-      document.getElementById('binaryDryRunBody').innerHTML = t('binaryDryRunBody');
-      document.getElementById('binaryMistakesTitle').textContent = t('binaryMistakesTitle');
-      setListHtml('binaryMistakesList', t('binaryMistakesList'));
-      document.getElementById('binaryWhereTitle').textContent = t('binaryWhereTitle');
-      document.getElementById('binaryWhereText').textContent = t('binaryWhereText');
-      document.getElementById('binarySimTitle').textContent = t('binarySimTitle');
-      document.getElementById('binaryCodeTitle').textContent = t('binaryCodeTitle');
+      renderSearchInfo();
       document.getElementById('sortingTitle').textContent = t('sortingTitle');
       document.getElementById('sortingCompareTitle').textContent = t('sortingCompareTitle');
       document.getElementById('sortingCompareHead').innerHTML = t('sortingCompareHead');
@@ -707,8 +856,8 @@
         nextQuizBtn.textContent = t('skipQuestion');
       }
 
-      if (!binaryState.array.length) {
-        binaryStatus.textContent = t('binaryInitial');
+      if (!searchState.array.length) {
+        binaryStatus.textContent = t(searchState.algorithm + 'Initial');
       }
       if (!sortState.array.length) {
         sortStatus.textContent = t('sortInitial');
@@ -740,7 +889,12 @@
         { q: 'Insertion Sort is:', options: ['Unstable', 'Stable', 'Heap-based', 'Always fastest'], ans: 1 },
         { q: 'Binary Search fails when input array is:', options: ['Sorted ascending', 'Sorted descending with adapted logic', 'Unsorted', 'Contains duplicates'], ans: 2 },
         { q: 'Which sort is usually fastest for a nearly sorted small array?', options: ['Bubble Sort', 'Selection Sort', 'Insertion Sort', 'Merge Sort'], ans: 2 },
-        { q: 'In Selection Sort, what remains true after each outer loop pass?', options: ['Last element is always maximum', 'Prefix [0..i] is sorted', 'Array becomes stable', 'No comparisons are needed'], ans: 1 }
+        { q: 'In Selection Sort, what remains true after each outer loop pass?', options: ['Last element is always maximum', 'Prefix [0..i] is sorted', 'Array becomes stable', 'No comparisons are needed'], ans: 1 },
+        { q: 'Linear Search has what worst-case time complexity?', options: ['O(1)', 'O(log n)', 'O(n)', 'O(n²)'], ans: 2 },
+        { q: 'Which of the following is true for Linear Search?', options: ['Requires sorted array', 'Does not require sorted array', 'Only works on even length arrays', 'Time complexity is always O(log n)'], ans: 1 },
+        { q: 'What is the best-case time complexity of Linear Search?', options: ['O(1)', 'O(log n)', 'O(n)', 'O(n²)'], ans: 0 },
+        { q: 'What is the average number of comparisons in a successful Linear Search on an array of size n?', options: ['n', 'n / 2', 'log n', '1'], ans: 1 },
+        { q: 'In Linear Search, if target is not present in the array, how many comparisons are made?', options: ['0', 'log n', 'n / 2', 'n'], ans: 3 }
       ],
       bn: [
         { q: 'Binary Search কোন ধরনের array-এ ঠিকভাবে কাজ করে?', options: ['Random array', 'Sorted array', 'শুধু reverse array', 'শুধু duplicate-free array'], ans: 1 },
@@ -762,7 +916,12 @@
         { q: 'Insertion Sort হলো:', options: ['Unstable', 'Stable', 'Heap-based', 'সবসময় fastest'], ans: 1 },
         { q: 'Input array কেমন হলে Binary Search ব্যর্থ হয়?', options: ['Sorted ascending', 'যুক্তি বদলালে sorted descending', 'Unsorted', 'Duplicate থাকলে'], ans: 2 },
         { q: 'Nearly sorted ছোট array-এ সাধারণত কোন sort দ্রুত?', options: ['Bubble Sort', 'Selection Sort', 'Insertion Sort', 'Merge Sort'], ans: 2 },
-        { q: 'Selection Sort এ প্রতিটি outer loop pass শেষে কী সত্য থাকে?', options: ['শেষ element সবসময় maximum', 'Prefix [0..i] sorted থাকে', 'Array stable হয়ে যায়', 'কোনো comparison লাগে না'], ans: 1 }
+        { q: 'Selection Sort এ প্রতিটি outer loop pass শেষে কী সত্য থাকে?', options: ['শেষ element সবসময় maximum', 'Prefix [0..i] sorted থাকে', 'Array stable হয়ে যায়', 'কোনো comparison লাগে না'], ans: 1 },
+        { q: 'Linear Search এর worst-case time complexity কত?', options: ['O(1)', 'O(log n)', 'O(n)', 'O(n²)'], ans: 2 },
+        { q: 'Linear Search এর ক্ষেত্রে নিচের কোনটি সঠিক?', options: ['অবশ্যই sorted array লাগবে', 'কোনো sorted array লাগে না', 'শুধু জোড় দৈর্ঘ্যের অ্যারেতে কাজ করে', 'Time complexity সবসময় O(log n)'], ans: 1 },
+        { q: 'Linear Search এর best-case time complexity কত?', options: ['O(1)', 'O(log n)', 'O(n)', 'O(n²)'], ans: 0 },
+        { q: 'n সাইজের অ্যারেতে সফল Linear Search এর গড় তুলনা (average comparisons) কয়টি?', options: ['n', 'n / 2', 'log n', '1'], ans: 1 },
+        { q: 'Linear Search-এ target যদি অ্যারেতে না থাকে, তবে মোট কয়টি তুলনা করা হয়?', options: ['0', 'log n', 'n / 2', 'n'], ans: 3 }
       ]
     };
 
@@ -1298,7 +1457,37 @@
       applyLanguage();
     });
 
+    const searchTabButtons = document.querySelectorAll('#searchTabs .tab');
+    searchTabButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        searchTabButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        searchState.algorithm = btn.dataset.search;
+
+        searchState.array = [];
+        searchState.target = null;
+        searchState.index = -1;
+        searchState.low = 0;
+        searchState.high = -1;
+        searchState.mid = -1;
+        searchState.done = false;
+        searchState.foundIndex = -1;
+
+        if (searchState.algorithm === 'linear') {
+          binaryArrayInput.value = "38,16,72,5,23,56,8,91,2,12";
+        } else {
+          binaryArrayInput.value = "2,5,8,12,16,23,38,56,72,91";
+        }
+        binaryTargetInput.value = "23";
+
+        renderSearchInfo();
+        renderBinary();
+        binaryStatus.textContent = t(searchState.algorithm + 'Initial');
+      });
+    });
+
     renderAlgoInfo();
+    renderSearchInfo();
     renderBinary();
     renderBars();
     renderQuiz();

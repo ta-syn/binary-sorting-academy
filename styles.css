@@ -366,6 +366,11 @@
     .high { outline: 2px solid #ffb86b; }
     .mid { background: linear-gradient(140deg, #6f8dff, #49d0e0); }
     .found { background: linear-gradient(140deg, #42c888, #60e3a4); color: #04231a; }
+    .checking {
+      background: linear-gradient(140deg, var(--tertiary), var(--danger));
+      border-color: rgba(255, 255, 255, 0.4);
+      box-shadow: 0 0 12px rgba(139, 109, 255, 0.45);
+    }
 
     .status {
       margin-top: 8px;

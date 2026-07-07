@@ -13,7 +13,7 @@
       <div class="brand"><span class="badge">A</span><span id="brandLabel">Algorithm Academy</span></div>
       <div class="links">
         <a href="#guide" id="navGuideLink">Guide</a>
-        <a href="#binary" id="navBinaryLink">Binary Search</a>
+        <a href="#binary" id="navBinaryLink">Searching</a>
         <a href="#sorting" id="navSortingLink">3 Sorting</a>
         
         <a href="#quiz" id="navQuizLink">Quiz</a>
@@ -72,25 +72,29 @@
     </section>
 
     <section class="section" id="binary">
-      <h2 class="title" id="binaryTitle">Binary Search — Complete Explanation</h2>
+      <h2 class="title" id="binaryTitle">Searching Algorithms</h2>
+      <div class="algo-tabs" id="searchTabs">
+        <button class="tab active" data-search="linear" id="tabLinear">Linear Search</button>
+        <button class="tab" data-search="binary" id="tabBinary">Binary Search</button>
+      </div>
+
       <div class="panel grid-2">
         <article class="mini">
           <h3 id="binaryDefTitle">Definition</h3>
-          <p id="binaryDefText">Binary Search finds a target value in a sorted array by repeatedly checking the middle element and eliminating half of the search space.</p>
+          <p id="binaryDefText">Linear Search finds a target value in an array by checking each element sequentially from left to right.</p>
           <h4 class="mt-10" id="binaryPreTitle">Pre-condition</h4>
           <ul id="binaryPreList">
-            <li>Array must be sorted (ascending)</li>
-            <li>Works on random-access collections (like arrays)</li>
+            <li>None. Works on sorted, unsorted, single, or empty collections.</li>
           </ul>
         </article>
         <article class="mini">
           <h3 id="binaryHowTitle">How it Works</h3>
           <ul id="binaryHowList">
-            <li>Set low = 0 and high = n - 1</li>
-            <li>Compute mid = floor((low + high) / 2)</li>
-            <li>If array[mid] == target, found</li>
-            <li>If target &gt; array[mid], search right half</li>
-            <li>If target &lt; array[mid], search left half</li>
+            <li>Start from index 0</li>
+            <li>Compare current element with target</li>
+            <li>If equal, target found at current index</li>
+            <li>If not equal, move to the next index</li>
+            <li>If end of array is reached, target is not found</li>
           </ul>
         </article>
       </div>
@@ -99,47 +103,46 @@
         <h3 id="binaryComplexityTitle">Complexity</h3>
         <table class="mt-8">
           <thead id="binaryComplexityHead">
-            <tr><th>Case</th><th>Time</th><th>Space (Iterative)</th></tr>
+            <tr><th>Case</th><th>Time</th><th>Space</th></tr>
           </thead>
           <tbody id="binaryComplexityBody">
             <tr><td>Best</td><td>O(1)</td><td>O(1)</td></tr>
-            <tr><td>Average</td><td>O(log n)</td><td>O(1)</td></tr>
-            <tr><td>Worst</td><td>O(log n)</td><td>O(1)</td></tr>
+            <tr><td>Average</td><td>O(n)</td><td>O(1)</td></tr>
+            <tr><td>Worst</td><td>O(n)</td><td>O(1)</td></tr>
           </tbody>
         </table>
       </div>
 
       <div class="panel grid-2 mt-12">
         <article class="mini">
-          <h3 id="binaryDryRunTitle">Binary Search Dry Run (Target = 23)</h3>
+          <h3 id="binaryDryRunTitle">Linear Search Dry Run (Target = 23)</h3>
           <table class="mt-8">
             <thead id="binaryDryRunHead">
-              <tr><th>Step</th><th>Low</th><th>High</th><th>Mid</th><th>Action</th></tr>
+              <tr><th>Step</th><th>Index</th><th>Value</th><th>Compared</th><th>Action</th></tr>
             </thead>
             <tbody id="binaryDryRunBody">
-              <tr><td>1</td><td>0</td><td>9</td><td>4</td><td>16 &lt; 23 → Right</td></tr>
-              <tr><td>2</td><td>5</td><td>9</td><td>7</td><td>56 &gt; 23 → Left</td></tr>
-              <tr><td>3</td><td>5</td><td>6</td><td>5</td><td>Found 23</td></tr>
+              <tr><td>1</td><td>0</td><td>38</td><td>38 === 23 → False</td><td>Move Next</td></tr>
+              <tr><td>2</td><td>1</td><td>16</td><td>16 === 23 → False</td><td>Move Next</td></tr>
+              <tr><td>3</td><td>2</td><td>23</td><td>23 === 23 → True</td><td>Found 23</td></tr>
             </tbody>
           </table>
         </article>
         <article class="mini">
           <h3 id="binaryMistakesTitle">Common Mistakes</h3>
           <ul id="binaryMistakesList">
-            <li>Applying Binary Search on unsorted data.</li>
-            <li>Forgetting to update low/high after comparison.</li>
-            <li>Infinite loops due to incorrect loop conditions.</li>
-            <li>Ignoring edge cases like empty array.</li>
+            <li>Returning target not found inside the loop before checking all elements.</li>
+            <li>Iterating past the array bounds (out of bounds error).</li>
+            <li>Not handling duplicate values correctly.</li>
           </ul>
           <h4 class="mt-10" id="binaryWhereTitle">Where to Use</h4>
-          <p id="binaryWhereText">Use it for lookups in sorted lists, searching sorted logs, and finding boundaries in monotonic arrays.</p>
+          <p id="binaryWhereText">Use it for small unsorted arrays, linked lists, or simple lookups where the overhead of sorting is higher.</p>
         </article>
       </div>
 
       <div class="panel mt-12" id="visual">
-        <h3 id="binarySimTitle">Binary Search Step Simulator</h3>
+        <h3 id="binarySimTitle">Linear Search Step Simulator</h3>
         <div class="controls">
-          <input id="binaryArray" value="2,5,8,12,16,23,38,56,72,91" aria-label="binary array" />
+          <input id="binaryArray" value="38,16,72,5,23,56,8,91,2,12" aria-label="binary array" />
           <input id="binaryTarget" value="23" aria-label="binary target" />
           <button class="primary" id="binaryStart">Start</button>
           <button id="binaryRandom">Random</button>
@@ -152,18 +155,10 @@
 
       <div class="panel mt-12">
         <h3 id="binaryCodeTitle">JavaScript Code</h3>
-        <div class="code">function binarySearch(arr, target) {
-  let low = 0;
-  let high = arr.length - 1;
-
-  while (low &lt;= high) {
-    const mid = Math.floor((low + high) / 2);
-
-    if (arr[mid] === target) return mid;
-    if (arr[mid] &lt; target) low = mid + 1;
-    else high = mid - 1;
+        <div class="code" id="binaryCode">function linearSearch(arr, target) {
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] === target) return i;
   }
-
   return -1;
 }</div>
       </div>
