@@ -3,9 +3,42 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Binary Search & Sorting Academy</title>
+  <meta name="description" content="Master search (Linear, Binary) and sorting (Bubble, Selection, Insertion) algorithms step-by-step with interactive simulators, complexity analysis, dry runs, and quizzes." />
+  <meta name="keywords" content="linear search, binary search, bubble sort, selection sort, insertion sort, algorithm visualizer, complexity charts, education, programming quiz" />
+  <meta name="author" content="Ta-syn" />
+  <meta name="robots" content="index, follow" />
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Algorithm Academy — Learn Search & Sorting Algorithms Interactively" />
+  <meta property="og:description" content="Master search and sorting algorithms with custom visual simulators, Dry Run step details, and dynamic quizzes." />
+  <meta property="og:image" content="favicon.svg" />
+  
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary" />
+  <meta property="twitter:title" content="Algorithm Academy — Learn Search & Sorting Algorithms Interactively" />
+  <meta property="twitter:description" content="Master search and sorting algorithms with custom visual simulators, Dry Run step details, and dynamic quizzes." />
+  
+  <title>Algorithm Academy — Learn Search & Sorting Algorithms Interactively</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="stylesheet" href="styles.css" />
+  
+  <!-- JSON-LD Structured Data Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "EducationalApplication",
+    "name": "Algorithm Academy",
+    "description": "Master searching (Linear, Binary) and sorting (Bubble, Selection, Insertion) algorithms step-by-step with interactive simulators, dry runs, complexity charts, and knowledge check quizzes.",
+    "applicationCategory": "EducationalApplication",
+    "operatingSystem": "All",
+    "author": {
+      "@type": "Person",
+      "name": "Ta-syn"
+    },
+    "inLanguage": ["en", "bn"]
+  }
+  </script>
 </head>
 <body>
   <nav class="nav">
@@ -20,12 +53,13 @@
       </div>
       <button id="langToggle" class="lang-toggle" type="button">বাংলা</button>
     </div>
+    <div class="scroll-progress" id="scrollProgress"></div>
   </nav>
 
   <main class="container">
     <section class="hero">
       <div>
-        <h1 id="heroTitle">Learn <span class="gradient">Binary Search</span> and the <span class="gradient">3 Core Sorting</span> Algorithms</h1>
+        <h1 id="heroTitle">Learn <span class="gradient">Searching</span> and the <span class="gradient">3 Core Sorting</span> Algorithms</h1>
         <p id="heroLead">This page focuses on one goal: helping you master Binary Search, Bubble Sort, Selection Sort, and Insertion Sort through clear explanations, complexity analysis, code, and interactive simulation.</p>
       </div>
       <div class="hero-card">
@@ -278,6 +312,7 @@
     </div>
   </footer>
 
+  <button id="backToTop" class="back-to-top" aria-label="Back to top" type="button">▲</button>
   <script src="script.js"></script>
 </body>
 </html>

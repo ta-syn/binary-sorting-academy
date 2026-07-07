@@ -500,7 +500,7 @@
         navSorting: '3 Sorting',
         navVisual: 'Visualizer',
         navQuiz: 'Quiz',
-        heroTitle: 'Learn <span class="gradient">Binary Search</span> and the <span class="gradient">3 Core Sorting</span> Algorithms',
+        heroTitle: 'Learn <span class="gradient">Searching</span> and the <span class="gradient">3 Core Sorting</span> Algorithms',
         heroLead: 'This page has one goal: to help you master Binary Search, Bubble Sort, Selection Sort, and Insertion Sort through clear explanations, complexity analysis, code, and interactive simulations.',
         heroGetTitle: 'What you will get',
         heroGetList: [
@@ -643,7 +643,7 @@
         navSorting: '৩টি সর্টিং',
         navVisual: 'ভিজ্যুয়ালাইজার',
         navQuiz: 'কুইজ',
-        heroTitle: '<span class="gradient">বাইনারি সার্চ</span> এবং <span class="gradient">৩টি মূল সর্টিং</span> অ্যালগরিদম শিখুন',
+        heroTitle: '<span class="gradient">সার্চিং</span> এবং <span class="gradient">৩টি মূল সর্টিং</span> অ্যালগরিদম শিখুন',
         heroLead: 'এই পেজের একটাই লক্ষ্য: স্পষ্ট ব্যাখ্যা, কমপ্লেক্সিটি বিশ্লেষণ, কোড এবং ইন্টারঅ্যাকটিভ সিমুলেশনের মাধ্যমে Binary Search, Bubble Sort, Selection Sort এবং Insertion Sort ভালোভাবে শেখানো।',
         heroGetTitle: 'আপনি যা পাবেন',
         heroGetList: [
@@ -1485,6 +1485,35 @@
         binaryStatus.textContent = t(searchState.algorithm + 'Initial');
       });
     });
+
+    // Scroll Progress and Back-to-Top Logic
+    const progressBar = document.getElementById('scrollProgress');
+    const backToTopBtn = document.getElementById('backToTop');
+
+    window.addEventListener('scroll', () => {
+      // 1. Update Scroll Progress Bar
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollPercent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      if (progressBar) {
+        progressBar.style.width = scrollPercent + '%';
+      }
+
+      // 2. Show/Hide Back to Top Button
+      if (backToTopBtn) {
+        if (window.scrollY > 300) {
+          backToTopBtn.classList.add('show');
+        } else {
+          backToTopBtn.classList.remove('show');
+        }
+      }
+    });
+
+    if (backToTopBtn) {
+      backToTopBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
 
     renderAlgoInfo();
     renderSearchInfo();
