@@ -68,8 +68,8 @@
           whereTitle: 'Where to Use',
           whereText: 'Use it for small unsorted arrays, linked lists, or simple lookups where the overhead of sorting is higher.',
           simTitle: 'Linear Search Step Simulator',
-          codeTitle: 'JavaScript Code',
-          code: `function linearSearch(arr, target) {\n  for (let i = 0; i < arr.length; i++) {\n    if (arr[i] === target) return i;\n  }\n  return -1;\n}`
+          codeTitle: 'C++ Code',
+          code: `int linearSearch(int arr[], int size, int target) {\n  for (int i = 0; i < size; i++) {\n    if (arr[i] == target) return i;\n  }\n  return -1;\n}`
         },
         binary: {
           title: 'Searching Algorithms',
@@ -101,8 +101,8 @@
           whereTitle: 'Where to Use',
           whereText: 'Use it for lookups in sorted lists, searching sorted logs, and finding boundaries in monotonic arrays.',
           simTitle: 'Binary Search Step Simulator',
-          codeTitle: 'JavaScript Code',
-          code: `function binarySearch(arr, target) {\n  let low = 0;\n  let high = arr.length - 1;\n\n  while (low <= high) {\n    const mid = Math.floor((low + high) / 2);\n\n    if (arr[mid] === target) return mid;\n    if (arr[mid] < target) low = mid + 1;\n    else high = mid - 1;\n  }\n\n  return -1;\n}`
+          codeTitle: 'C++ Code',
+          code: `int binarySearch(int arr[], int size, int target) {\n  int low = 0;\n  int high = size - 1;\n\n  while (low <= high) {\n    int mid = low + (high - low) / 2;\n\n    if (arr[mid] == target) return mid;\n    if (arr[mid] < target) low = mid + 1;\n    else high = mid - 1;\n  }\n\n  return -1;\n}`
         }
       },
       bn: {
@@ -135,8 +135,8 @@
           whereTitle: 'কোথায় ব্যবহার করবেন',
           whereText: 'ছোট আকারের আন-সর্টেড ডাটা, লিঙ্কড লিস্ট এবং খুব সাধারণ খোঁজাখুঁজিতে যেখানে সর্ট করার খরচ বেশি।',
           simTitle: 'Linear Search স্টেপ সিমুলেটর',
-          codeTitle: 'JavaScript কোড',
-          code: `function linearSearch(arr, target) {\n  for (let i = 0; i < arr.length; i++) {\n    if (arr[i] === target) return i;\n  }\n  return -1;\n}`
+          codeTitle: 'C++ কোড',
+          code: `int linearSearch(int arr[], int size, int target) {\n  for (int i = 0; i < size; i++) {\n    if (arr[i] == target) return i;\n  }\n  return -1;\n}`
         },
         binary: {
           title: 'সার্চ অ্যালগরিদম',
@@ -168,8 +168,8 @@
           whereTitle: 'কোথায় ব্যবহার করবেন',
           whereText: 'Sorted list এ lookup, sorted log search এবং monotonic array-এ boundary খুঁজতে এটি ব্যবহার করুন।',
           simTitle: 'বাইনারি সার্চ স্টেপ সিমুলেটর',
-          codeTitle: 'JavaScript কোড',
-          code: `function binarySearch(arr, target) {\n  let low = 0;\n  let high = arr.length - 1;\n\n  while (low <= high) {\n    const mid = Math.floor((low + high) / 2);\n\n    if (arr[mid] === target) return mid;\n    if (arr[mid] < target) low = mid + 1;\n    else high = mid - 1;\n  }\n\n  return -1;\n}`
+          codeTitle: 'C++ কোড',
+          code: `int binarySearch(int arr[], int size, int target) {\n  int low = 0;\n  int high = size - 1;\n\n  while (low <= high) {\n    int mid = low + (high - low) / 2;\n\n    if (arr[mid] == target) return mid;\n    if (arr[mid] < target) low = mid + 1;\n    else high = mid - 1;\n  }\n\n  return -1;\n}`
         }
       }
     };
@@ -385,7 +385,7 @@
             'Swap if arr[j] > arr[j+1]',
             'After each pass, largest value goes to the end'
           ],
-          code: `function bubbleSort(arr) {\n  const a = [...arr];\n  for (let i = 0; i < a.length - 1; i++) {\n    let swapped = false;\n    for (let j = 0; j < a.length - 1 - i; j++) {\n      if (a[j] > a[j + 1]) {\n        [a[j], a[j + 1]] = [a[j + 1], a[j]];\n        swapped = true;\n      }\n    }\n    if (!swapped) break;\n  }\n  return a;\n}`
+          code: `void bubbleSort(int arr[], int size) {\n  for (int i = 0; i < size - 1; i++) {\n    bool swapped = false;\n    for (int j = 0; j < size - i - 1; j++) {\n      if (arr[j] > arr[j + 1]) {\n        int temp = arr[j];\n        arr[j] = arr[j + 1];\n        arr[j + 1] = temp;\n        swapped = true;\n      }\n    }\n    if (!swapped) break;\n  }\n}`
         },
         selection: {
           title: 'Selection Sort',
@@ -396,7 +396,7 @@
             'Swap arr[i] with arr[minIndex]',
             'Move to next i'
           ],
-          code: `function selectionSort(arr) {\n  const a = [...arr];\n  for (let i = 0; i < a.length - 1; i++) {\n    let min = i;\n    for (let j = i + 1; j < a.length; j++) {\n      if (a[j] < a[min]) min = j;\n    }\n    [a[i], a[min]] = [a[min], a[i]];\n  }\n  return a;\n}`
+          code: `void selectionSort(int arr[], int size) {\n  for (int i = 0; i < size - 1; i++) {\n    int minIndex = i;\n    for (int j = i + 1; j < size; j++) {\n      if (arr[j] < arr[minIndex]) minIndex = j;\n    }\n    int temp = arr[minIndex];\n    arr[minIndex] = arr[i];\n    arr[i] = temp;\n  }\n}`
         },
         insertion: {
           title: 'Insertion Sort',
@@ -407,7 +407,7 @@
             'Shift larger elements one step right',
             'Insert key at correct location'
           ],
-          code: `function insertionSort(arr) {\n  const a = [...arr];\n  for (let i = 1; i < a.length; i++) {\n    const key = a[i];\n    let j = i - 1;\n    while (j >= 0 && a[j] > key) {\n      a[j + 1] = a[j];\n      j--;\n    }\n    a[j + 1] = key;\n  }\n  return a;\n}`
+          code: `void insertionSort(int arr[], int size) {\n  for (int i = 1; i < size; i++) {\n    int key = arr[i];\n    int j = i - 1;\n    while (j >= 0 && arr[j] > key) {\n      arr[j + 1] = arr[j];\n      j--;\n    }\n    arr[j + 1] = key;\n  }\n}`
         }
       },
       bn: {
@@ -420,7 +420,7 @@
             'arr[j] > arr[j+1] হলে swap করুন',
             'প্রতি pass শেষে সবচেয়ে বড় মান শেষে চলে যায়'
           ],
-          code: `function bubbleSort(arr) {\n  const a = [...arr];\n  for (let i = 0; i < a.length - 1; i++) {\n    let swapped = false;\n    for (let j = 0; j < a.length - 1 - i; j++) {\n      if (a[j] > a[j + 1]) {\n        [a[j], a[j + 1]] = [a[j + 1], a[j]];\n        swapped = true;\n      }\n    }\n    if (!swapped) break;\n  }\n  return a;\n}`
+          code: `void bubbleSort(int arr[], int size) {\n  for (int i = 0; i < size - 1; i++) {\n    bool swapped = false;\n    for (int j = 0; j < size - i - 1; j++) {\n      if (arr[j] > arr[j + 1]) {\n        int temp = arr[j];\n        arr[j] = arr[j + 1];\n        arr[j + 1] = temp;\n        swapped = true;\n      }\n    }\n    if (!swapped) break;\n  }\n}`
         },
         selection: {
           title: 'সিলেকশন সর্ট',
@@ -431,7 +431,7 @@
             'arr[i] এবং arr[minIndex] swap করুন',
             'পরের i তে যান'
           ],
-          code: `function selectionSort(arr) {\n  const a = [...arr];\n  for (let i = 0; i < a.length - 1; i++) {\n    let min = i;\n    for (let j = i + 1; j < a.length; j++) {\n      if (a[j] < a[min]) min = j;\n    }\n    [a[i], a[min]] = [a[min], a[i]];\n  }\n  return a;\n}`
+          code: `void selectionSort(int arr[], int size) {\n  for (int i = 0; i < size - 1; i++) {\n    int minIndex = i;\n    for (int j = i + 1; j < size; j++) {\n      if (arr[j] < arr[minIndex]) minIndex = j;\n    }\n    int temp = arr[minIndex];\n    arr[minIndex] = arr[i];\n    arr[i] = temp;\n  }\n}`
         },
         insertion: {
           title: 'ইনসার্শন সর্ট',
@@ -442,7 +442,7 @@
             'বড় উপাদানগুলো এক ধাপ ডানে সরান',
             'key-কে সঠিক স্থানে insert করুন'
           ],
-          code: `function insertionSort(arr) {\n  const a = [...arr];\n  for (let i = 1; i < a.length; i++) {\n    const key = a[i];\n    let j = i - 1;\n    while (j >= 0 && a[j] > key) {\n      a[j + 1] = a[j];\n      j--;\n    }\n    a[j + 1] = key;\n  }\n  return a;\n}`
+          code: `void insertionSort(int arr[], int size) {\n  for (int i = 1; i < size; i++) {\n    int key = arr[i];\n    int j = i - 1;\n    while (j >= 0 && arr[j] > key) {\n      arr[j + 1] = arr[j];\n      j--;\n    }\n    arr[j + 1] = key;\n  }\n}`
         }
       }
     };
