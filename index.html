@@ -48,7 +48,7 @@
         <a href="#guide" id="navGuideLink">Guide</a>
         <a href="#binary" id="navBinaryLink">Searching</a>
         <a href="#sorting" id="navSortingLink">3 Sorting</a>
-        
+        <a href="#stack" id="navStackLink">Stack</a>
         <a href="#quiz" id="navQuizLink">Quiz</a>
       </div>
       <button id="langToggle" class="lang-toggle" type="button">বাংলা</button>
@@ -283,8 +283,133 @@
           </ul>
         </article>
       </div>
+    </section>
 
-      <div class="quiz-box mt-12" id="quiz">
+    <!-- STACK SECTION -->
+    <section class="section" id="stack">
+      <h2 class="title" id="stackTitle">Stack & Stack Applications</h2>
+      
+      <div class="algo-tabs" id="stackTabs">
+        <button class="tab active" data-stack="basic" id="tabStackBasic">Basic Stack</button>
+        <button class="tab" data-stack="balancer" id="tabStackBalancer">Parentheses Balancer</button>
+        <button class="tab" data-stack="infix" id="tabStackInfix">Infix to Postfix</button>
+      </div>
+
+      <div class="panel grid-2" id="stackContentPanel">
+        <article class="mini">
+          <h3 id="stackInfoTitle">Stack (LIFO)</h3>
+          <p id="stackInfoDesc">Stack is a linear data structure that follows the Last In First Out (LIFO) principle.</p>
+          <h4 class="mt-10" id="stackOperationsTitle">Operations</h4>
+          <ul id="stackOperationsList">
+            <li>Push: Insert element to the top</li>
+            <li>Pop: Remove element from the top</li>
+            <li>Peek: View top element</li>
+          </ul>
+        </article>
+        <article class="mini">
+          <h3 id="stackCodeTitle">C++ Code</h3>
+          <div class="code" id="stackCode"></div>
+        </article>
+      </div>
+
+      <!-- Live Simulator Panel -->
+      <div class="panel mt-12">
+        <h3 id="stackSimTitle">Stack Interactive Simulator</h3>
+        
+        <!-- Tab 1: Basic Stack Visualizer Controls -->
+        <div id="stackBasicControls" class="stack-control-panel">
+          <div class="controls">
+            <input id="stackInputVal" value="42" placeholder="Value" aria-label="stack input value" style="width: 120px;" />
+            <button class="primary" id="stackPushBtn">Push</button>
+            <button id="stackPopBtn">Pop</button>
+            <button id="stackPeekBtn">Peek</button>
+            <button id="stackClearBtn">Clear</button>
+          </div>
+          
+          <div class="stack-visual-layout mt-10">
+            <div class="stack-container-wrapper">
+              <div class="stack-container" id="stackVisualContainer">
+                <!-- Stack elements pushed dynamically -->
+              </div>
+              <div class="stack-base">BASE</div>
+            </div>
+            <div class="stack-status-info">
+              <p class="status" id="stackStatus">Stack is Empty.</p>
+              <div class="pill-row mt-4">
+                <span class="pill" id="stackSizePill">Size: 0</span>
+                <span class="pill" id="stackTopPill">Top: None</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 2: Parentheses Balancer Controls -->
+        <div id="stackBalancerControls" class="stack-control-panel is-hidden">
+          <div class="controls">
+            <input id="balancerInput" value="{[()]}" placeholder="Brackets string" aria-label="balancer input" style="width: 250px;" />
+            <button class="primary" id="balancerStartBtn">Start</button>
+            <button id="balancerStepBtn">Next Step</button>
+            <button id="balancerResetBtn">Reset</button>
+          </div>
+          
+          <div class="balancer-visual-layout mt-10 grid-2">
+            <div class="stack-container-wrapper">
+              <div class="stack-container" id="balancerStackContainer"></div>
+              <div class="stack-base">STACK</div>
+            </div>
+            <div>
+              <div class="balancer-input-display" id="balancerInputDisplay"></div>
+              <div class="table-container mt-6">
+                <table>
+                  <thead>
+                    <tr><th>Char</th><th>Operation</th><th>Stack State</th><th>Status</th></tr>
+                  </thead>
+                  <tbody id="balancerTraceBody"></tbody>
+                </table>
+              </div>
+              <p class="status mt-4" id="balancerStatus">Click Start to begin.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 3: Infix to Postfix Controls -->
+        <div id="stackInfixControls" class="stack-control-panel is-hidden">
+          <div class="controls">
+            <input id="infixInput" value="A+B*(C-D)" placeholder="Infix Expression" aria-label="infix input" style="width: 250px;" />
+            <button class="primary" id="infixStartBtn">Start</button>
+            <button id="infixStepBtn">Next Step</button>
+            <button id="infixResetBtn">Reset</button>
+          </div>
+          
+          <div class="infix-visual-layout mt-10 grid-2">
+            <div class="stack-container-wrapper">
+              <div class="stack-container" id="infixStackContainer"></div>
+              <div class="stack-base">OPERATOR STACK</div>
+            </div>
+            <div>
+              <div class="infix-input-display" id="infixInputDisplay"></div>
+              <div class="infix-output-display mt-4">
+                <strong>Output (Postfix):</strong> <span id="infixPostfixOutput" class="postfix-output-pill">-</span>
+              </div>
+              <div class="table-container mt-6">
+                <table>
+                  <thead>
+                    <tr><th>Char</th><th>Operation</th><th>Stack State</th><th>Output String</th></tr>
+                  </thead>
+                  <tbody id="infixTraceBody"></tbody>
+                </table>
+              </div>
+              <p class="status mt-4" id="infixStatus">Click Start to begin.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- QUIZ SECTION -->
+    <section class="section" id="quiz">
+      <div class="quiz-box">
         <h3 class="mb-8" id="quizTitle">Knowledge Check Quiz</h3>
         <div class="quiz-meta" id="quizMeta"></div>
         <p class="quiz-q" id="quizQuestion"></p>

@@ -3,12 +3,14 @@
       'guide',
       'binary',
       'sorting',
+      'stack',
       'quiz'
     ];
     const navLinks = [
       document.getElementById('navGuideLink'),
       document.getElementById('navBinaryLink'),
       document.getElementById('navSortingLink'),
+      document.getElementById('navStackLink'),
       document.getElementById('navQuizLink')
     ];
 
@@ -517,6 +519,89 @@
       }
     };
 
+    const stackData = {
+      en: {
+        basic: {
+          title: 'Stack (LIFO)',
+          desc: 'Stack is a linear data structure that follows the Last In First Out (LIFO) principle. Think of it like a stack of plates: you add plates to the top, and you can only remove plates from the top.',
+          steps: [
+            'Push: Adds an item to the top of the stack.',
+            'Pop: Removes an item from the top of the stack.',
+            'Peek / Top: Returns the top element without removing it.',
+            'isEmpty: Checks if the stack has no elements.',
+            'isFull: Checks if the stack has reached maximum capacity.'
+          ],
+          code: `#define MAX 1000\n\nclass Stack {\n  int top;\npublic:\n  int a[MAX];\n  Stack() { top = -1; }\n\n  bool push(int x) {\n    if (top >= (MAX - 1)) {\n      cout << "Stack Overflow\\n";\n      return false;\n    }\n    a[++top] = x;\n    return true;\n  }\n\n  int pop() {\n    if (top < 0) {\n      cout << "Stack Underflow\\n";\n      return 0;\n    }\n    return a[top--];\n  }\n\n  int peek() {\n    if (top < 0) return 0;\n    return a[top];\n  }\n\n  bool isEmpty() {\n    return (top < 0);\n  }\n};`
+        },
+        balancer: {
+          title: 'Parentheses Balancer',
+          desc: 'This stack application checks if parentheses/brackets in an expression are balanced. For every closing bracket, we check if it matches the bracket popped from the top of the stack.',
+          steps: [
+            'Scan expression from left to right.',
+            'If opening bracket ( (, {, [ ), push to stack.',
+            'If closing bracket ( ), }, ] ), check top of stack.',
+            'If stack empty or mismatched, expression is unbalanced.',
+            'Pop from stack if it matches the current closing bracket.',
+            'At the end of expression, if stack is empty, it is balanced.'
+          ],
+          code: `bool isValid(string s) {\n  stack<char> st;\n  for (char c : s) {\n    if (c == \'(\' || c == \'{\' || c == \'[\') {\n      st.push(c);\n    } else {\n      if (st.empty()) return false;\n      if (c == \')\' && st.top() != \'(\') return false;\n      if (c == \'}\' && st.top() != \'{\') return false;\n      if (c == \']\' && st.top() != \'[\') return false;\n      st.pop();\n    }\n  }\n  return st.empty();\n}`
+        },
+        infix: {
+          title: 'Infix to Postfix',
+          desc: 'Infix expressions (like A + B) are converted to Postfix (like A B +) so that expressions can be evaluated easily by compilers. An operator stack is used to hold operators until their precedence permits them to be appended to the output string.',
+          steps: [
+            'Scan infix from left to right.',
+            'If operand, append to output string.',
+            'If opening parenthesis \'(\', push to stack.',
+            'If closing parenthesis \')\', pop operators to output until \'(\' is reached.',
+            'If operator, pop operators of higher or equal precedence from stack to output, then push current operator.',
+            'At the end, pop remaining operators from stack to output.'
+          ],
+          code: `int prec(char c) {\n  if (c == \'^\') return 3;\n  if (c == \'/\' || c == \'*\') return 2;\n  if (c == \'+\' || c == \'-\') return 1;\n  return -1;\n}\n\nstring infixToPostfix(string s) {\n  stack<char> st;\n  string result;\n  for (char c : s) {\n    if (isalnum(c)) result += c;\n    else if (c == \'(\') st.push(\'(\');\n    else if (c == \')\') {\n      while (st.top() != \'(\') {\n        result += st.top();\n        st.pop();\n      }\n      st.pop();\n    } else {\n      while (!st.empty() && prec(c) <= prec(st.top())) {\n        result += st.top();\n        st.pop();\n      }\n      st.push(c);\n    }\n  }\n  while (!st.empty()) {\n    result += st.top();\n    st.pop();\n  }\n  return result;\n}`
+        }
+      },
+      bn: {
+        basic: {
+          title: 'স্ট্যাক (LIFO)',
+          desc: 'স্ট্যাক হলো একটি লিনিয়ার ডাটা স্ট্রাকচার যা Last In First Out (LIFO) নীতি মেনে চলে। এটিকে প্লেটের স্তূপের মতো ভাবা যেতে পারে: আপনি কেবল সবার উপরে প্লেট রাখতে পারেন এবং তুলে নেওয়ার সময়ও সবার ওপরের প্লেটটিই প্রথমে নিতে হবে।',
+          steps: [
+            'Push: স্ট্যাকের শীর্ষে একটি আইটেম যুক্ত করে।',
+            'Pop: স্ট্যাকের শীর্ষ থেকে একটি আইটেম সরিয়ে নেয়।',
+            'Peek / Top: শীর্ষ উপাদানটি না সরিয়ে শুধু প্রদর্শন করে।',
+            'isEmpty: স্ট্যাক খালি কিনা তা পরীক্ষা করে।',
+            'isFull: স্ট্যাকের সর্বোচ্চ ধারণ ক্ষমতা পূর্ণ হয়েছে কিনা তা পরীক্ষা করে।'
+          ],
+          code: `#define MAX 1000\n\nclass Stack {\n  int top;\npublic:\n  int a[MAX];\n  Stack() { top = -1; }\n\n  bool push(int x) {\n    if (top >= (MAX - 1)) {\n      cout << "Stack Overflow\\n";\n      return false;\n    }\n    a[++top] = x;\n    return true;\n  }\n\n  int pop() {\n    if (top < 0) {\n      cout << "Stack Underflow\\n";\n      return 0;\n    }\n    return a[top--];\n  }\n\n  int peek() {\n    if (top < 0) return 0;\n    return a[top];\n  }\n\n  bool isEmpty() {\n    return (top < 0);\n  }\n};`
+        },
+        balancer: {
+          title: 'বন্ধনী সমতা পরীক্ষা (Parentheses Balancer)',
+          desc: 'স্ট্যাকের একটি বহুল ব্যবহৃত প্রয়োগ হলো বন্ধনীর সমতা পরীক্ষা করা। প্রতিটি বন্ধনী চিহ্নের জন্য এটি চেক করে যে বন্ধনীটি স্ট্যাক থেকে পপ হওয়া বিপরীত বন্ধনীর সাথে মেলে কিনা।',
+          steps: [
+            'রাশিমালাটি বাম থেকে ডানে স্ক্যান করুন।',
+            'যদি শুরুর বন্ধনী ( (, {, [ ) পাওয়া যায়, তবে স্ট্যাকে push করুন।',
+            'যদি শেষের বন্ধনী ( ), }, ] ) পাওয়া যায়, তবে স্ট্যাকের শীর্ষ উপাদান চেক করুন।',
+            'স্ট্যাক খালি থাকলে বা বন্ধনী অমিল হলে সমতা নষ্ট (unbalanced) হবে।',
+            'মিলে গেলে স্ট্যাকের শীর্ষ থেকে বন্ধনীটি pop করুন।',
+            'শেষে স্ট্যাক সম্পূর্ণ খালি থাকলে বন্ধনী বিন্যাস সঠিক বা Balanced।'
+          ],
+          code: `bool isValid(string s) {\n  stack<char> st;\n  for (char c : s) {\n    if (c == \'(\' || c == \'{\' || c == \'[\') {\n      st.push(c);\n    } else {\n      if (st.empty()) return false;\n      if (c == \')\' && st.top() != \'(\') return false;\n      if (c == \'}\' && st.top() != \'{\') return false;\n      if (c == \']\' && st.top() != \'[\') return false;\n      st.pop();\n    }\n  }\n  return st.empty();\n}`
+        },
+        infix: {
+          title: 'Infix থেকে Postfix রূপান্তর',
+          desc: 'কম্পাইলার যাতে গাণিতিক হিসাব সহজে করতে পারে সেজন্য Infix এক্সপ্রেশনকে (যেমন A + B) Postfix এক্সপ্রেশনে (A B +) রূপান্তর করা হয়। অপারেটরগুলোকে তাদের অগ্রাধিকার (precedence) অনুযায়ী সাজাতে একটি অপারেটর স্ট্যাক ব্যবহৃত হয়।',
+          steps: [
+            'Infix রাশিমালাটি বাম থেকে ডানে স্ক্যান করুন।',
+            'অপারেন্ড (সংখ্যা/অক্ষর) পেলে সরাসরি আউটপুটে যোগ করুন।',
+            'শুরুর বন্ধনী \'(\' পেলে স্ট্যাকে push করুন।',
+            'শেষের বন্ধনী \')\' পেলে যতক্ষণ না \'(\' পাওয়া যায়, স্ট্যাকের অপারেটর পপ করে আউটপুটে নিন।',
+            'অপারেটর পেলে, স্ট্যাকের শীর্ষের অপারেটরের অগ্রাধিকার বেশি বা সমান হলে পপ করে আউটপুটে নিন, তারপর নতুন অপারেটর পুশ করুন।',
+            'স্ক্যান শেষে স্ট্যাকের সব অবশিষ্ট অপারেটর পপ করে আউটপুটে নিন।'
+          ],
+          code: `int prec(char c) {\n  if (c == \'^\') return 3;\n  if (c == \'/\' || c == \'*\') return 2;\n  if (c == \'+\' || c == \'-\') return 1;\n  return -1;\n}\n\nstring infixToPostfix(string s) {\n  stack<char> st;\n  string result;\n  for (char c : s) {\n    if (isalnum(c)) result += c;\n    else if (c == \'(\') st.push(\'(\');\n    else if (c == \')\') {\n      while (st.top() != \'(\') {\n        result += st.top();\n        st.pop();\n      }\n      st.pop();\n    } else {\n      while (!st.empty() && prec(c) <= prec(st.top())) {\n        result += st.top();\n        st.pop();\n      }\n      st.push(c);\n    }\n  }\n  while (!st.empty()) {\n    result += st.top();\n    st.pop();\n  }\n  return result;\n}`
+        }
+      }
+    };
+
     const sortState = {
       algorithm: 'bubble',
       original: [],
@@ -568,6 +653,7 @@
         navGuide: 'Guide',
         navBinary: 'Searching',
         navSorting: '3 Sorting',
+        navStack: 'Stack',
         navVisual: 'Visualizer',
         navQuiz: 'Quiz',
         heroTitle: 'Learn <span class="gradient">Searching</span> and the <span class="gradient">3 Core Sorting</span> Algorithms',
@@ -583,6 +669,19 @@
         heroPillBeginner: 'Beginner Friendly',
         heroPillInterview: 'Interview Focused',
         heroPillStep: 'Step by Step',
+        stackTitle: 'Stack & Stack Applications',
+        tabStackBasic: 'Basic Stack',
+        tabStackBalancer: 'Parentheses Balancer',
+        tabStackInfix: 'Infix to Postfix',
+        stackSimTitle: 'Stack Interactive Simulator',
+        stackStatusEmpty: 'Stack is Empty.',
+        stackStatusSize: size => `Stack size: ${size}`,
+        stackStatusPushed: val => `Pushed ${val} to stack.`,
+        stackStatusPopped: val => `Popped ${val} from stack.`,
+        stackStatusPeeked: val => `Top element is ${val}.`,
+        stackOverflow: 'Stack Overflow! Maximum size is 6.',
+        stackUnderflow: 'Stack Underflow! Stack is empty.',
+        stackCleared: 'Stack cleared.',
         guideTitle: 'Study Guide',
         studyHowTitle: 'How to Study This Page',
         studyChecklist: [
@@ -715,6 +814,7 @@
         navGuide: 'গাইড',
         navBinary: 'সার্চিং',
         navSorting: '৩টি সর্টিং',
+        navStack: 'স্ট্যাক',
         navVisual: 'ভিজ্যুয়ালাইজার',
         navQuiz: 'কুইজ',
         heroTitle: '<span class="gradient">সার্চিং</span> এবং <span class="gradient">৩টি মূল সর্টিং</span> অ্যালগরিদম শিখুন',
@@ -730,6 +830,19 @@
         heroPillBeginner: 'বিগিনার ফ্রেন্ডলি',
         heroPillInterview: 'ইন্টারভিউ ফোকাসড',
         heroPillStep: 'স্টেপ বাই স্টেপ',
+        stackTitle: 'স্ট্যাক এবং এর ব্যবহার',
+        tabStackBasic: 'বেসিক স্ট্যাক',
+        tabStackBalancer: 'বন্ধনী সমতা পরীক্ষা',
+        tabStackInfix: 'Infix থেকে Postfix',
+        stackSimTitle: 'স্ট্যাক ইন্টারেক্টিভ সিমুলেটর',
+        stackStatusEmpty: 'স্ট্যাক খালি রয়েছে।',
+        stackStatusSize: size => `স্ট্যাকের বর্তমান সাইজ: ${size}`,
+        stackStatusPushed: val => `স্ট্যাকে ${val} পুশ করা হয়েছে।`,
+        stackStatusPopped: val => `স্ট্যাক থেকে ${val} পপ করা হয়েছে।`,
+        stackStatusPeeked: val => `শীর্ষ উপাদানটি হলো ${val}।`,
+        stackOverflow: 'Stack Overflow! সর্বোচ্চ সাইজ হলো ৬।',
+        stackUnderflow: 'Stack Underflow! স্ট্যাক খালি।',
+        stackCleared: 'স্ট্যাক খালি করা হয়েছে।',
         guideTitle: 'স্টাডি গাইড',
         studyHowTitle: 'এই পেজ কীভাবে পড়বেন',
         studyChecklist: [
@@ -881,6 +994,7 @@
       document.getElementById('navGuideLink').textContent = t('navGuide');
       document.getElementById('navBinaryLink').textContent = t('navBinary');
       document.getElementById('navSortingLink').textContent = t('navSorting');
+      document.getElementById('navStackLink').textContent = t('navStack');
       document.getElementById('navQuizLink').textContent = t('navQuiz');
       document.getElementById('heroTitle').innerHTML = t('heroTitle');
       document.getElementById('heroLead').textContent = t('heroLead');
@@ -903,6 +1017,12 @@
       document.getElementById('tabBubble').textContent = t('tabBubble');
       document.getElementById('tabSelection').textContent = t('tabSelection');
       document.getElementById('tabInsertion').textContent = t('tabInsertion');
+      document.getElementById('stackTitle').textContent = t('stackTitle');
+      document.getElementById('tabStackBasic').textContent = t('tabStackBasic');
+      document.getElementById('tabStackBalancer').textContent = t('tabStackBalancer');
+      document.getElementById('tabStackInfix').textContent = t('tabStackInfix');
+      document.getElementById('stackSimTitle').textContent = t('stackSimTitle');
+      renderStackInfo();
       document.getElementById('algoStepsTitle').textContent = t('algoStepsTitle');
       document.getElementById('algoCodeTitle').textContent = t('algoCodeTitle');
       document.getElementById('sortingVisualTitle').textContent = t('sortingVisualTitle');
@@ -972,7 +1092,12 @@
         { q: 'Which of the following is true for Linear Search?', options: ['Requires sorted array', 'Does not require sorted array', 'Only works on even length arrays', 'Time complexity is always O(log n)'], ans: 1 },
         { q: 'What is the best-case time complexity of Linear Search?', options: ['O(1)', 'O(log n)', 'O(n)', 'O(n²)'], ans: 0 },
         { q: 'What is the average number of comparisons in a successful Linear Search on an array of size n?', options: ['n', 'n / 2', 'log n', '1'], ans: 1 },
-        { q: 'In Linear Search, if target is not present in the array, how many comparisons are made?', options: ['0', 'log n', 'n / 2', 'n'], ans: 3 }
+        { q: 'In Linear Search, if target is not present in the array, how many comparisons are made?', options: ['0', 'log n', 'n / 2', 'n'], ans: 3 },
+        { q: 'Stack works on which principle?', options: ['FIFO (First In First Out)', 'LIFO (Last In First Out)', 'LILO (Last In Last Out)', 'Random Access'], ans: 1 },
+        { q: 'Which operation is used to insert an element into a Stack?', options: ['Pop', 'Peek', 'Push', 'Enqueue'], ans: 2 },
+        { q: 'Stack Overflow condition occurs when trying to:', options: ['Push on a full stack', 'Pop from an empty stack', 'Peek an empty stack', 'Check if stack is empty'], ans: 0 },
+        { q: 'Which of the following is a classic application of Stack?', options: ['Binary Search', 'Parentheses balancing check', 'Finding minimum element', 'Sorting random values'], ans: 1 },
+        { q: 'What is the postfix representation of the infix expression: A + B * C?', options: ['A B C * +', 'A B + C *', 'A B C + *', '+ A * B C'], ans: 0 }
       ],
       bn: [
         { q: 'Binary Search কোন ধরনের array-এ ঠিকভাবে কাজ করে?', options: ['Random array', 'Sorted array', 'শুধু reverse array', 'শুধু duplicate-free array'], ans: 1 },
@@ -999,7 +1124,12 @@
         { q: 'Linear Search এর ক্ষেত্রে নিচের কোনটি সঠিক?', options: ['অবশ্যই sorted array লাগবে', 'কোনো sorted array লাগে না', 'শুধু জোড় দৈর্ঘ্যের অ্যারেতে কাজ করে', 'Time complexity সবসময় O(log n)'], ans: 1 },
         { q: 'Linear Search এর best-case time complexity কত?', options: ['O(1)', 'O(log n)', 'O(n)', 'O(n²)'], ans: 0 },
         { q: 'n সাইজের অ্যারেতে সফল Linear Search এর গড় তুলনা (average comparisons) কয়টি?', options: ['n', 'n / 2', 'log n', '1'], ans: 1 },
-        { q: 'Linear Search-এ target যদি অ্যারেতে না থাকে, তবে মোট কয়টি তুলনা করা হয়?', options: ['0', 'log n', 'n / 2', 'n'], ans: 3 }
+        { q: 'Linear Search-এ target যদি অ্যারেতে না থাকে, তবে মোট কয়টি তুলনা করা হয়?', options: ['0', 'log n', 'n / 2', 'n'], ans: 3 },
+        { q: 'স্ট্যাক (Stack) কোন নীতিতে কাজ করে?', options: ['FIFO (First In First Out)', 'LIFO (Last In First Out)', 'LILO (Last In Last Out)', 'Random Access'], ans: 1 },
+        { q: 'স্ট্যাকে কোনো নতুন উপাদান যুক্ত করতে কোন অপারেশনটি ব্যবহৃত হয়?', options: ['Pop', 'Peek', 'Push', 'Enqueue'], ans: 2 },
+        { q: 'নিচের কোন সময়ে Stack Overflow ঘটে?', options: ['পূর্ণ স্ট্যাকে Push করতে গেলে', 'খালি স্ট্যাক থেকে Pop করতে গেলে', 'খালি স্ট্যাকের Peek করতে গেলে', 'স্ট্যাক খালি আছে কিনা চেক করতে গেলে'], ans: 0 },
+        { q: 'নিচের কোনটি স্ট্যাকের একটি আদর্শ প্র্যাকটিক্যাল ব্যবহার?', options: ['বাইনারি সার্চ', 'বন্ধনী সমতা পরীক্ষা (Parentheses balancing)', 'সর্বনিম্ন উপাদান খুঁজে বের করা', 'এলোমেলো মান সাজানো (Sorting)'], ans: 1 },
+        { q: 'Infix এক্সপ্রেশন A + B * C এর Postfix রূপ কোনটি?', options: ['A B C * +', 'A B + C *', 'A B C + *', '+ A * B C'], ans: 0 }
       ]
     };
 
@@ -1601,9 +1731,555 @@
       });
     }
 
+    // --- STACK AND APPLICATIONS SIMULATORS LOGIC ---
+    const stackTabs = document.getElementById('stackTabs');
+    let activeStackTab = 'basic'; // 'basic' | 'balancer' | 'infix'
+    
+    function renderStackInfo() {
+      const current = stackData[currentLang][activeStackTab];
+      if (!current) return;
+      document.getElementById('stackInfoTitle').textContent = current.title;
+      document.getElementById('stackInfoDesc').textContent = current.desc;
+      
+      const list = document.getElementById('stackOperationsList');
+      if (list) {
+        list.innerHTML = current.steps.map(step => `<li>${step}</li>`).join('');
+      }
+      
+      const codeBox = document.getElementById('stackCode');
+      if (codeBox) {
+        codeBox.textContent = current.code;
+      }
+    }
+
+    if (stackTabs) {
+      stackTabs.querySelectorAll('.tab').forEach(btn => {
+        btn.addEventListener('click', () => {
+          stackTabs.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          activeStackTab = btn.getAttribute('data-stack');
+          
+          document.querySelectorAll('.stack-control-panel').forEach(panel => {
+            panel.classList.add('is-hidden');
+          });
+          
+          if (activeStackTab === 'basic') {
+            document.getElementById('stackBasicControls').classList.remove('is-hidden');
+          } else if (activeStackTab === 'balancer') {
+            document.getElementById('stackBalancerControls').classList.remove('is-hidden');
+          } else if (activeStackTab === 'infix') {
+            document.getElementById('stackInfixControls').classList.remove('is-hidden');
+          }
+          
+          renderStackInfo();
+        });
+      });
+    }
+
+    // 1. Basic Stack Visualizer
+    const basicStackArray = [];
+    const maxBasicStackSize = 6;
+    
+    const stackInputVal = document.getElementById('stackInputVal');
+    const stackPushBtn = document.getElementById('stackPushBtn');
+    const stackPopBtn = document.getElementById('stackPopBtn');
+    const stackPeekBtn = document.getElementById('stackPeekBtn');
+    const stackClearBtn = document.getElementById('stackClearBtn');
+    
+    const stackVisualContainer = document.getElementById('stackVisualContainer');
+    const stackStatus = document.getElementById('stackStatus');
+    const stackSizePill = document.getElementById('stackSizePill');
+    const stackTopPill = document.getElementById('stackTopPill');
+    
+    function updateBasicStackUI() {
+      if (!stackVisualContainer) return;
+      stackVisualContainer.innerHTML = '';
+      
+      basicStackArray.forEach((val, idx) => {
+        const el = document.createElement('div');
+        el.className = 'stack-element';
+        el.textContent = val;
+        el.id = `stack-el-${idx}`;
+        stackVisualContainer.appendChild(el);
+      });
+      
+      if (stackSizePill) {
+        stackSizePill.textContent = `Size: ${basicStackArray.length}`;
+      }
+      if (stackTopPill) {
+        stackTopPill.textContent = `Top: ${basicStackArray.length > 0 ? basicStackArray[basicStackArray.length - 1] : 'None'}`;
+      }
+    }
+    
+    if (stackPushBtn) {
+      stackPushBtn.addEventListener('click', () => {
+        const val = stackInputVal.value.trim();
+        if (val === '') return;
+        
+        if (basicStackArray.length >= maxBasicStackSize) {
+          stackStatus.textContent = t('stackOverflow');
+          stackStatus.className = 'status match-fail';
+          return;
+        }
+        
+        basicStackArray.push(val);
+        updateBasicStackUI();
+        
+        stackStatus.textContent = t('stackStatusPushed')(val);
+        stackStatus.className = 'status';
+        stackInputVal.value = '';
+      });
+    }
+    
+    if (stackPopBtn) {
+      stackPopBtn.addEventListener('click', () => {
+        if (basicStackArray.length === 0) {
+          stackStatus.textContent = t('stackUnderflow');
+          stackStatus.className = 'status match-fail';
+          return;
+        }
+        
+        const topIdx = basicStackArray.length - 1;
+        const topEl = document.getElementById(`stack-el-${topIdx}`);
+        if (topEl) {
+          topEl.classList.add('popping');
+        }
+        
+        setTimeout(() => {
+          const popped = basicStackArray.pop();
+          updateBasicStackUI();
+          stackStatus.textContent = t('stackStatusPopped')(popped);
+          stackStatus.className = 'status';
+        }, 250);
+      });
+    }
+    
+    if (stackPeekBtn) {
+      stackPeekBtn.addEventListener('click', () => {
+        if (basicStackArray.length === 0) {
+          stackStatus.textContent = t('stackUnderflow');
+          stackStatus.className = 'status match-fail';
+          return;
+        }
+        
+        updateBasicStackUI();
+        const topIdx = basicStackArray.length - 1;
+        const topEl = document.getElementById(`stack-el-${topIdx}`);
+        if (topEl) {
+          topEl.classList.add('peeking');
+        }
+        
+        const topVal = basicStackArray[topIdx];
+        stackStatus.textContent = t('stackStatusPeeked')(topVal);
+        stackStatus.className = 'status';
+      });
+    }
+    
+    if (stackClearBtn) {
+      stackClearBtn.addEventListener('click', () => {
+        basicStackArray.length = 0;
+        updateBasicStackUI();
+        stackStatus.textContent = t('stackCleared');
+        stackStatus.className = 'status';
+      });
+    }
+
+    // 2. Parentheses Balancer Simulator
+    const balancerState = {
+      expression: '',
+      index: -1,
+      stack: [],
+      trace: [],
+      done: false,
+      isValid: true
+    };
+    
+    const balancerInput = document.getElementById('balancerInput');
+    const balancerStartBtn = document.getElementById('balancerStartBtn');
+    const balancerStepBtn = document.getElementById('balancerStepBtn');
+    const balancerResetBtn = document.getElementById('balancerResetBtn');
+    
+    const balancerStackContainer = document.getElementById('balancerStackContainer');
+    const balancerInputDisplay = document.getElementById('balancerInputDisplay');
+    const balancerTraceBody = document.getElementById('balancerTraceBody');
+    const balancerStatus = document.getElementById('balancerStatus');
+    
+    function renderBalancerUI() {
+      if (!balancerStackContainer) return;
+      balancerStackContainer.innerHTML = '';
+      balancerState.stack.forEach(char => {
+        const el = document.createElement('div');
+        el.className = 'stack-element';
+        el.textContent = char;
+        balancerStackContainer.appendChild(el);
+      });
+      
+      balancerInputDisplay.innerHTML = balancerState.expression.split('').map((char, idx) => {
+        let cls = 'balancer-char-token';
+        if (idx === balancerState.index) cls += ' active';
+        else if (idx < balancerState.index) cls += ' processed';
+        return `<span class="${cls}">${char}</span>`;
+      }).join('');
+      
+      balancerTraceBody.innerHTML = balancerState.trace.map(tr => `
+        <tr>
+          <td>${tr.char}</td>
+          <td>${tr.operation}</td>
+          <td>[${tr.stackState.join(', ')}]</td>
+          <td class="${tr.status.includes('Mismatched') || tr.status.includes('Empty') || tr.status.includes('Not Balanced') || tr.status.includes('ভুল') || tr.status.includes('অমিল') ? 'match-fail' : (tr.status.includes('Balanced') || tr.status.includes('Matched') || tr.status.includes('সঠিক') || tr.status.includes('সফল') ? 'match-success' : '')}">${tr.status}</td>
+        </tr>
+      `).join('');
+    }
+    
+    if (balancerStartBtn) {
+      balancerStartBtn.addEventListener('click', () => {
+        const expr = balancerInput.value.trim();
+        if (!expr) return;
+        
+        balancerState.expression = expr;
+        balancerState.index = -1;
+        balancerState.stack = [];
+        balancerState.trace = [];
+        balancerState.done = false;
+        balancerState.isValid = true;
+        
+        balancerStatus.textContent = currentLang === 'bn' 
+          ? 'সিমুলেশন শুরু হয়েছে। পরবর্তী ধাপ দেখতে Next Step ক্লিক করুন।'
+          : 'Simulation started. Click Next Step to step through.';
+        balancerStatus.className = 'status';
+        
+        renderBalancerUI();
+      });
+    }
+    
+    if (balancerStepBtn) {
+      balancerStepBtn.addEventListener('click', () => {
+        if (!balancerState.expression) {
+          balancerStatus.textContent = currentLang === 'bn' ? 'প্রথমে রাশিমালা দিয়ে Start ক্লিক করুন।' : 'Please enter an expression and click Start first.';
+          balancerStatus.className = 'status match-fail';
+          return;
+        }
+        if (balancerState.done) {
+          balancerStatus.textContent = currentLang === 'bn' ? 'সিমুলেশন ইতোমধ্যে শেষ হয়েছে।' : 'Simulation already finished.';
+          return;
+        }
+        
+        balancerState.index += 1;
+        
+        if (balancerState.index >= balancerState.expression.length) {
+          balancerState.done = true;
+          const isBalanced = balancerState.stack.length === 0 && balancerState.isValid;
+          
+          const statusText = isBalanced
+            ? (currentLang === 'bn' ? 'সব ব্র্যাকেট মিলেছে। রাশিমালাটি Balanced!' : 'Balanced expression!')
+            : (currentLang === 'bn' ? 'স্ট্যাক খালি নয় বা অমিল আছে। রাশিমালাটি Unbalanced!' : 'Unbalanced expression!');
+            
+          balancerState.trace.push({
+            char: '-',
+            operation: currentLang === 'bn' ? 'শেষ যাচাই' : 'Final Check',
+            stackState: [...balancerState.stack],
+            status: isBalanced 
+              ? (currentLang === 'bn' ? 'Balanced (সঠিক)' : 'Balanced')
+              : (currentLang === 'bn' ? 'Unbalanced (ভুল)' : 'Unbalanced')
+          });
+          
+          balancerStatus.textContent = statusText;
+          balancerStatus.className = isBalanced ? 'status match-success' : 'status match-fail';
+          renderBalancerUI();
+          return;
+        }
+        
+        const char = balancerState.expression[balancerState.index];
+        let op = '';
+        let status = '';
+        
+        if (char === '(' || char === '{' || char === '[') {
+          balancerState.stack.push(char);
+          op = `Push '${char}'`;
+          status = currentLang === 'bn' ? 'শুরুর বন্ধনী পুশ করা হলো' : 'Opening bracket pushed';
+        } else if (char === ')' || char === '}' || char === ']') {
+          if (balancerState.stack.length === 0) {
+            balancerState.isValid = false;
+            balancerState.done = true;
+            op = `Check '${char}'`;
+            status = currentLang === 'bn' ? 'ভুল! খালি স্ট্যাক কিন্তু শেষের বন্ধনী এসেছে।' : 'Mismatched! Empty stack on closing bracket.';
+            balancerState.trace.push({ char, operation: op, stackState: [...balancerState.stack], status });
+            balancerStatus.textContent = currentLang === 'bn' ? 'ভুল! বন্ধনী সমতা বজায় রাখেনি।' : 'Invalid! Stack empty on closing bracket.';
+            balancerStatus.className = 'status match-fail';
+            renderBalancerUI();
+            return;
+          }
+          
+          const top = balancerState.stack[balancerState.stack.length - 1];
+          const matches = (char === ')' && top === '(') || 
+                          (char === '}' && top === '{') || 
+                          (char === ']' && top === '[');
+                          
+          if (matches) {
+            balancerState.stack.pop();
+            op = `Pop ('${top}' match '${char}')`;
+            status = currentLang === 'bn' ? 'সফল জোড় এবং পপ' : 'Matched and popped';
+          } else {
+            balancerState.isValid = false;
+            balancerState.done = true;
+            op = `Check '${char}'`;
+            status = currentLang === 'bn' ? `ভুল! অমিল: '${top}' এর বিপরীতে '${char}'` : `Mismatch: '${top}' vs '${char}'`;
+            balancerState.trace.push({ char, operation: op, stackState: [...balancerState.stack], status });
+            balancerStatus.textContent = currentLang === 'bn' ? `ভুল! বন্ধনী অমিল: '${top}' এবং '${char}'` : `Mismatch error: '${top}' and '${char}'`;
+            balancerStatus.className = 'status match-fail';
+            renderBalancerUI();
+            return;
+          }
+        } else {
+          op = currentLang === 'bn' ? 'উপেক্ষা' : 'Ignore';
+          status = currentLang === 'bn' ? 'ব্র্যাকেট নয়' : 'Non-bracket skipped';
+        }
+        
+        balancerState.trace.push({
+          char,
+          operation: op,
+          stackState: [...balancerState.stack],
+          status
+        });
+        
+        balancerStatus.textContent = currentLang === 'bn' 
+          ? `চরিত্র '${char}' প্রসেস করা হচ্ছে।`
+          : `Processing char '${char}'.`;
+          
+        renderBalancerUI();
+      });
+    }
+    
+    if (balancerResetBtn) {
+      balancerResetBtn.addEventListener('click', () => {
+        balancerState.expression = '';
+        balancerState.index = -1;
+        balancerState.stack = [];
+        balancerState.trace = [];
+        balancerState.done = false;
+        balancerState.isValid = true;
+        balancerStatus.textContent = currentLang === 'bn' ? 'রিসেট করা হয়েছে।' : 'Reset completed.';
+        balancerStatus.className = 'status';
+        balancerInputDisplay.innerHTML = '';
+        balancerTraceBody.innerHTML = '';
+        balancerStackContainer.innerHTML = '';
+      });
+    }
+
+    // 3. Infix to Postfix Converter Simulator
+    const infixState = {
+      expression: '',
+      index: -1,
+      stack: [],
+      postfix: '',
+      trace: [],
+      done: false
+    };
+    
+    const infixInput = document.getElementById('infixInput');
+    const infixStartBtn = document.getElementById('infixStartBtn');
+    const infixStepBtn = document.getElementById('infixStepBtn');
+    const infixResetBtn = document.getElementById('infixResetBtn');
+    
+    const infixStackContainer = document.getElementById('infixStackContainer');
+    const infixInputDisplay = document.getElementById('infixInputDisplay');
+    const infixPostfixOutput = document.getElementById('infixPostfixOutput');
+    const infixTraceBody = document.getElementById('infixTraceBody');
+    const infixStatus = document.getElementById('infixStatus');
+    
+    function getPrecedence(char) {
+      if (char === '^') return 3;
+      if (char === '*' || char === '/') return 2;
+      if (char === '+' || char === '-') return 1;
+      return -1;
+    }
+    
+    function isOperand(char) {
+      return (char >= 'a' && char <= 'z') || 
+             (char >= 'A' && char <= 'Z') || 
+             (char >= '0' && char <= '9');
+    }
+    
+    function renderInfixUI() {
+      if (!infixStackContainer) return;
+      infixStackContainer.innerHTML = '';
+      infixState.stack.forEach(char => {
+        const el = document.createElement('div');
+        el.className = 'stack-element';
+        el.textContent = char;
+        infixStackContainer.appendChild(el);
+      });
+      
+      infixInputDisplay.innerHTML = infixState.expression.split('').map((char, idx) => {
+        let cls = 'balancer-char-token';
+        if (idx === infixState.index) cls += ' active';
+        else if (idx < infixState.index) cls += ' processed';
+        return `<span class="${cls}">${char}</span>`;
+      }).join('');
+      
+      infixPostfixOutput.textContent = infixState.postfix || '-';
+      
+      infixTraceBody.innerHTML = infixState.trace.map(tr => `
+        <tr>
+          <td>${tr.char}</td>
+          <td>${tr.operation}</td>
+          <td>[${tr.stackState.join(', ')}]</td>
+          <td>${tr.postfixOut}</td>
+        </tr>
+      `).join('');
+    }
+    
+    if (infixStartBtn) {
+      infixStartBtn.addEventListener('click', () => {
+        const expr = infixInput.value.replace(/\s+/g, '');
+        if (!expr) return;
+        
+        infixState.expression = expr;
+        infixState.index = -1;
+        infixState.stack = [];
+        infixState.postfix = '';
+        infixState.trace = [];
+        infixState.done = false;
+        
+        infixStatus.textContent = currentLang === 'bn' 
+          ? 'সিমুলেশন শুরু হয়েছে। পরবর্তী ধাপ দেখতে Next Step ক্লিক করুন।'
+          : 'Simulation started. Click Next Step to step through.';
+        infixStatus.className = 'status';
+        
+        renderInfixUI();
+      });
+    }
+    
+    if (infixStepBtn) {
+      infixStepBtn.addEventListener('click', () => {
+        if (!infixState.expression) {
+          infixStatus.textContent = currentLang === 'bn' ? 'প্রথমে রাশিমালা দিয়ে Start ক্লিক করুন।' : 'Please enter expression and click Start first.';
+          infixStatus.className = 'status';
+          return;
+        }
+        if (infixState.done) {
+          infixStatus.textContent = currentLang === 'bn' ? 'সিমুলেশন ইতোমধ্যে শেষ হয়েছে।' : 'Simulation already finished.';
+          return;
+        }
+        
+        infixState.index += 1;
+        
+        if (infixState.index >= infixState.expression.length) {
+          if (infixState.stack.length > 0) {
+            const popped = infixState.stack.pop();
+            infixState.postfix += popped;
+            
+            infixState.trace.push({
+              char: '-',
+              operation: currentLang === 'bn' ? `পপ '${popped}' (অবশিষ্ট)` : `Pop '${popped}' (Remaining)`,
+              stackState: [...infixState.stack],
+              postfixOut: infixState.postfix
+            });
+            
+            infixStatus.textContent = currentLang === 'bn' 
+              ? `স্ট্যাকের অবশিষ্ট অপারেটর '${popped}' পপ করে আউটপুটে নেওয়া হলো।`
+              : `Popping remaining operator '${popped}' to output.`;
+          } else {
+            infixState.done = true;
+            infixState.trace.push({
+              char: '-',
+              operation: currentLang === 'bn' ? 'সমাপ্ত' : 'Done',
+              stackState: [],
+              postfixOut: infixState.postfix
+            });
+            
+            infixStatus.textContent = currentLang === 'bn'
+              ? `রূপান্তর সম্পন্ন! চূড়ান্ত Postfix রাশি: ${infixState.postfix}`
+              : `Conversion complete! Final Postfix: ${infixState.postfix}`;
+            infixStatus.className = 'status match-success';
+          }
+          renderInfixUI();
+          return;
+        }
+        
+        const char = infixState.expression[infixState.index];
+        let op = '';
+        
+        if (isOperand(char)) {
+          infixState.postfix += char;
+          op = currentLang === 'bn' ? `আউটপুটে যোগ (${char})` : `Append '${char}'`;
+          infixStatus.textContent = currentLang === 'bn'
+            ? `অপারেন্ড '${char}' সরাসরি আউটপুটে যোগ করা হলো।`
+            : `Operand '${char}' appended to output.`;
+        } else if (char === '(') {
+          infixState.stack.push(char);
+          op = `Push '('`;
+          infixStatus.textContent = currentLang === 'bn'
+            ? `'(' চিহ্নে স্ট্যাকে পুশ করা হলো।`
+            : `'(' pushed to stack.`;
+        } else if (char === ')') {
+          let popStr = '';
+          while (infixState.stack.length > 0 && infixState.stack[infixState.stack.length - 1] !== '(') {
+            const popped = infixState.stack.pop();
+            infixState.postfix += popped;
+            popStr += popped;
+          }
+          if (infixState.stack.length > 0 && infixState.stack[infixState.stack.length - 1] === '(') {
+            infixState.stack.pop();
+          }
+          op = currentLang === 'bn' ? `পপ অপারেটরস (${popStr})` : `Pop operators: ${popStr}`;
+          infixStatus.textContent = currentLang === 'bn'
+            ? `')' পাওয়া গেছে, '(' পর্যন্ত অপারেটর পপ করে আউটপুটে নেওয়া হলো।`
+            : `')' found, popped operators up to '(' to output.`;
+        } else {
+          let poppedStr = '';
+          while (
+            infixState.stack.length > 0 &&
+            getPrecedence(infixState.stack[infixState.stack.length - 1]) >= getPrecedence(char)
+          ) {
+            const popped = infixState.stack.pop();
+            infixState.postfix += popped;
+            poppedStr += popped;
+          }
+          infixState.stack.push(char);
+          op = poppedStr 
+            ? (currentLang === 'bn' ? `পপ ও পুশ (${poppedStr} -> Push ${char})` : `Pop & Push (${poppedStr} -> Push ${char})`)
+            : `Push '${char}'`;
+            
+          infixStatus.textContent = currentLang === 'bn'
+            ? `অপারেটর '${char}' এর চেয়ে বেশি/সমান অগ্রাধিকারের অপারেটর পপ করে স্ট্যাকে '${char}' পুশ করা হলো।`
+            : `Higher/equal precedence operators popped, then '${char}' pushed.`;
+        }
+        
+        infixState.trace.push({
+          char,
+          operation: op,
+          stackState: [...infixState.stack],
+          postfixOut: infixState.postfix
+        });
+        
+        renderInfixUI();
+      });
+    }
+    
+    if (infixResetBtn) {
+      infixResetBtn.addEventListener('click', () => {
+        infixState.expression = '';
+        infixState.index = -1;
+        infixState.stack = [];
+        infixState.postfix = '';
+        infixState.trace = [];
+        infixState.done = false;
+        
+        infixStatus.textContent = currentLang === 'bn' ? 'রিসেট করা হয়েছে।' : 'Reset completed.';
+        infixStatus.className = 'status';
+        
+        infixInputDisplay.innerHTML = '';
+        infixPostfixOutput.textContent = '-';
+        infixTraceBody.innerHTML = '';
+        infixStackContainer.innerHTML = '';
+      });
+    }
+
     renderAlgoInfo();
     renderSearchInfo();
     renderBinary();
     renderBars();
     renderQuiz();
+    updateBasicStackUI();
     applyLanguage();
