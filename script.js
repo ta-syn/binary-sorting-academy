@@ -385,7 +385,7 @@
             'Swap if arr[j] > arr[j+1]',
             'After each pass, largest value goes to the end'
           ],
-          code: `function bubbleSort(arr) {\n  const a = [...arr];\n  for (let i = 0; i < a.length - 1; i++) {\n    for (let j = 0; j < a.length - 1 - i; j++) {\n      if (a[j] > a[j + 1]) [a[j], a[j + 1]] = [a[j + 1], a[j]];\n    }\n  }\n  return a;\n}`
+          code: `function bubbleSort(arr) {\n  const a = [...arr];\n  for (let i = 0; i < a.length - 1; i++) {\n    let swapped = false;\n    for (let j = 0; j < a.length - 1 - i; j++) {\n      if (a[j] > a[j + 1]) {\n        [a[j], a[j + 1]] = [a[j + 1], a[j]];\n        swapped = true;\n      }\n    }\n    if (!swapped) break;\n  }\n  return a;\n}`
         },
         selection: {
           title: 'Selection Sort',
@@ -420,7 +420,7 @@
             'arr[j] > arr[j+1] হলে swap করুন',
             'প্রতি pass শেষে সবচেয়ে বড় মান শেষে চলে যায়'
           ],
-          code: `function bubbleSort(arr) {\n  const a = [...arr];\n  for (let i = 0; i < a.length - 1; i++) {\n    for (let j = 0; j < a.length - 1 - i; j++) {\n      if (a[j] > a[j + 1]) [a[j], a[j + 1]] = [a[j + 1], a[j]];\n    }\n  }\n  return a;\n}`
+          code: `function bubbleSort(arr) {\n  const a = [...arr];\n  for (let i = 0; i < a.length - 1; i++) {\n    let swapped = false;\n    for (let j = 0; j < a.length - 1 - i; j++) {\n      if (a[j] > a[j + 1]) {\n        [a[j], a[j + 1]] = [a[j + 1], a[j]];\n        swapped = true;\n      }\n    }\n    if (!swapped) break;\n  }\n  return a;\n}`
         },
         selection: {
           title: 'সিলেকশন সর্ট',
@@ -599,6 +599,7 @@
         sortHistoryEmpty: 'No completed steps yet.',
         stepWord: 'Step',
         sortBubbleStepComplete: (stepNo, snapshot) => `Bubble pass ${stepNo} complete. Array: ${snapshot}`,
+        sortBubbleOptimized: 'Array is fully sorted! Optimized early exit (no swaps in this pass).',
         sortSelectionStepComplete: (stepNo, snapshot) => `Selection step ${stepNo} complete. Array: ${snapshot}`,
         sortInsertionStepComplete: (stepNo, snapshot) => `Insertion step ${stepNo} complete. Array: ${snapshot}`,
         sortFinalComplete: snapshot => `Final sorted array: ${snapshot}`,
@@ -742,6 +743,7 @@
         sortHistoryEmpty: 'এখনও কোনো ধাপ সম্পন্ন হয়নি।',
         stepWord: 'ধাপ',
         sortBubbleStepComplete: (stepNo, snapshot) => `Bubble pass ${stepNo} সম্পন্ন। Array: ${snapshot}`,
+        sortBubbleOptimized: 'অ্যারেটি সম্পূর্ণ সর্ট করা! অপ্টিমাইজড আর্লি এক্সিট (এই পাসে কোনো সোয়াপ হয়নি)।',
         sortSelectionStepComplete: (stepNo, snapshot) => `Selection ধাপ ${stepNo} সম্পন্ন। Array: ${snapshot}`,
         sortInsertionStepComplete: (stepNo, snapshot) => `Insertion ধাপ ${stepNo} সম্পন্ন। Array: ${snapshot}`,
         sortFinalComplete: snapshot => `চূড়ান্ত sorted array: ${snapshot}`,
@@ -1228,6 +1230,7 @@
       sortState.activeB = -1;
       sortState.completedSteps = 0;
       sortState.stepHistory = [];
+      sortState.swapped = false;
       if (sortState.running) {
         clearInterval(sortState.running);
         sortState.running = null;
@@ -1257,9 +1260,18 @@
     function bubbleStep() {
       const n = sortState.array.length;
       if (sortState.i >= n - 1) return true;
+
+      if (sortState.j === 0) {
+        sortState.swapped = false;
+      }
+
       if (sortState.j >= n - 1 - sortState.i) {
         const passNo = sortState.i + 1;
         addSortHistoryEntry(t('sortBubbleStepComplete')(passNo, formatSortSnapshot(sortState.array)));
+        if (!sortState.swapped) {
+          sortStatus.textContent = t('sortBubbleOptimized');
+          return true;
+        }
         sortState.j = 0;
         sortState.i += 1;
         return sortState.i >= n - 1;
@@ -1273,6 +1285,7 @@
       if (sortState.array[a] > sortState.array[b]) {
         [sortState.array[a], sortState.array[b]] = [sortState.array[b], sortState.array[a]];
         sortStatus.textContent = t('swappedIndexes')(a, b);
+        sortState.swapped = true;
       } else {
         sortStatus.textContent = t('comparedNoSwap')(a, b);
       }
