@@ -689,6 +689,8 @@
           'Run the binary simulator until you can predict each next step.',
           'Compare all 3 sorting algorithms from the table.',
           'Use sorting visualizer with your own input values.',
+          'Read Stack LIFO concept and C++ code implementation.',
+          'Step through Parentheses Balancer and Infix to Postfix simulators to understand stack tracing.',
           'Finish with quiz and try to score full marks.'
         ],
         interviewTipsTitle: 'Interview Tips',
@@ -696,7 +698,10 @@
           'Always mention pre-condition for Binary Search: input must be sorted.',
           'For nearly sorted arrays, Insertion Sort often performs very well.',
           'Selection Sort does minimal swaps, useful when swap cost is high.',
-          'Bubble Sort is easy to explain and good for learning swap logic.'
+          'Bubble Sort is easy to explain and good for learning swap logic.',
+          'All core Stack operations (Push, Pop, Peek) have O(1) constant time complexity.',
+          'Stack is a LIFO (Last In First Out) structure; remember overflow/underflow conditions.',
+          'Identify key Stack applications: recursion execution, parentheses balancing, postfix conversion.'
         ],
         interviewProTip: 'Pro Tip: Explain both <strong>time complexity</strong> and <strong>why</strong> it occurs.',
         binaryInitial: 'Load values and click Start.',
@@ -850,6 +855,8 @@
           'বাইনারি সিমুলেটর চালিয়ে পরের স্টেপ আগে থেকে অনুমান করার অভ্যাস করুন।',
           'টেবিল দেখে ৩টি sorting algorithm তুলনা করুন।',
           'নিজের ভ্যালু দিয়ে sorting visualizer ব্যবহার করুন।',
+          'স্ট্যাকের LIFO কনসেপ্ট এবং Push/Pop/Peek অপারেশনের নিয়মগুলো পড়ুন।',
+          'বন্ধনী সমতা পরীক্ষা ও Infix থেকে Postfix সিমুলেটরে ধাপে ধাপে স্ট্যাক ট্র্যাকিং প্র্যাকটিস করুন।',
           'শেষে কুইজ দিয়ে ফুল মার্কস পাওয়ার চেষ্টা করুন।'
         ],
         interviewTipsTitle: 'ইন্টারভিউ টিপস',
@@ -857,7 +864,10 @@
           'Binary Search বলার সময় pre-condition (input sorted হতে হবে) অবশ্যই উল্লেখ করুন।',
           'Nearly sorted array হলে Insertion Sort অনেক সময় ভালো কাজ করে।',
           'Swap cost বেশি হলে Selection Sort উপকারী হতে পারে।',
-          'Swap logic বোঝাতে Bubble Sort খুব সহজ।'
+          'Swap logic বোঝাতে Bubble Sort খুব সহজ।',
+          'স্ট্যাকের সব মৌলিক অপারেশন (Push, Pop, Peek) এর Time Complexity হলো O(1) বা ধ্রুবক সময়।',
+          'স্ট্যাক একটি LIFO কাঠামো; মনে রাখুন overflow (পূর্ণ) ও underflow (খালি) কন্ডিশন।',
+          'স্ট্যাকের প্রধান প্রয়োগগুলো মনে রাখুন: রিকার্শন কল ট্র্যাকিং, বন্ধনী জোড় মেলানো, পোস্টফিক্স রূপান্তর।'
         ],
         interviewProTip: 'প্রো টিপ: শুধু <strong>time complexity</strong> না, <strong>কেন</strong> এমন হয় সেটাও ব্যাখ্যা করুন।',
         binaryInitial: 'ভ্যালু দিন এবং Start ক্লিক করুন।',
