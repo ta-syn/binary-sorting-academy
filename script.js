@@ -58,7 +58,7 @@
           complexityBody: '<tr><td>Best</td><td>O(1)</td><td>O(1)</td></tr><tr><td>Average</td><td>O(n)</td><td>O(1)</td></tr><tr><td>Worst</td><td>O(n)</td><td>O(1)</td></tr>',
           dryRunTitle: 'Linear Search Dry Run (Target = 23)',
           dryRunHead: '<tr><th>Step</th><th>Index</th><th>Value</th><th>Compared</th><th>Action</th></tr>',
-          dryRunBody: '<tr><td>1</td><td>0</td><td>38</td><td>38 === 23 → False</td><td>Move Next</td></tr><tr><td>2</td><td>1</td><td>16</td><td>16 === 23 → False</td><td>Move Next</td></tr><tr><td>3</td><td>2</td><td>23</td><td>23 === 23 → True</td><td>Found 23</td></tr>',
+          dryRunBody: '<tr><td>1</td><td>0</td><td>38</td><td>38 == 23 → False</td><td>Move Next</td></tr><tr><td>2</td><td>1</td><td>16</td><td>16 == 23 → False</td><td>Move Next</td></tr><tr><td>3</td><td>2</td><td>23</td><td>23 == 23 → True</td><td>Found 23</td></tr>',
           mistakesTitle: 'Common Mistakes',
           mistakesList: [
             'Returning target not found inside the loop before checking all elements.',
@@ -125,7 +125,7 @@
           complexityBody: '<tr><td>সেরা</td><td>O(1)</td><td>O(1)</td></tr><tr><td>গড়</td><td>O(n)</td><td>O(1)</td></tr><tr><td>খারাপতম</td><td>O(n)</td><td>O(1)</td></tr>',
           dryRunTitle: 'Linear Search ড্রাই রান (Target = 23)',
           dryRunHead: '<tr><th>ধাপ</th><th>ইন্ডেক্স</th><th>মান</th><th>তুলনা</th><th>অ্যাকশন</th></tr>',
-          dryRunBody: '<tr><td>1</td><td>0</td><td>38</td><td>38 === 23 → মিথ্যা</td><td>সামনে যান</td></tr><tr><td>2</td><td>1</td><td>16</td><td>16 === 23 → মিথ্যা</td><td>সামনে যান</td></tr><tr><td>3</td><td>2</td><td>23</td><td>23 === 23 → সত্য</td><td>23 পাওয়া গেছে</td></tr>',
+          dryRunBody: '<tr><td>1</td><td>0</td><td>38</td><td>38 == 23 → মিথ্যা</td><td>সামনে যান</td></tr><tr><td>2</td><td>1</td><td>16</td><td>16 == 23 → মিথ্যা</td><td>সামনে যান</td></tr><tr><td>3</td><td>2</td><td>23</td><td>23 == 23 → সত্য</td><td>23 পাওয়া গেছে</td></tr>',
           mistakesTitle: 'সাধারণ ভুল',
           mistakesList: [
             'লুপের ভিতরে সব উপাদান চেক করার আগেই -1 রিটার্ন করে দেওয়া।',
