@@ -531,7 +531,7 @@
             'isEmpty: Checks if the stack has no elements.',
             'isFull: Checks if the stack has reached maximum capacity.'
           ],
-          code: `#define MAX 1000\n\nclass Stack {\n  int top;\npublic:\n  int a[MAX];\n  Stack() { top = -1; }\n\n  bool push(int x) {\n    if (top >= (MAX - 1)) {\n      cout << "Stack Overflow\\n";\n      return false;\n    }\n    a[++top] = x;\n    return true;\n  }\n\n  int pop() {\n    if (top < 0) {\n      cout << "Stack Underflow\\n";\n      return 0;\n    }\n    return a[top--];\n  }\n\n  int peek() {\n    if (top < 0) return 0;\n    return a[top];\n  }\n\n  bool isEmpty() {\n    return (top < 0);\n  }\n};`
+          code: `int Stack[100], Top = 0, MaxSize = 100;\n\nbool isEmpty() {\n  return (Top == 0);\n}\n\nbool isFull() {\n  return (Top == MaxSize);\n}\n\nbool push(int Element) {\n  if (isFull()) {\n    cout << "Stack is Full\\n";\n    return false;\n  }\n  Stack[Top++] = Element;\n  return true;\n}\n\nbool pop() {\n  if (isEmpty()) {\n    cout << "Stack empty\\n";\n    return false;\n  }\n  Top--;\n  return true;\n}\n\nint topElement() {\n  return Stack[Top - 1];\n}\n\nvoid show() {\n  if (isEmpty()) {\n    cout << "Stack empty\\n";\n    return;\n  }\n  for (int i = Top - 1; i >= 0; i--) {\n    cout << Stack[i] << endl;\n  }\n}`
         },
         balancer: {
           title: 'Parentheses Balancer',
@@ -558,6 +558,19 @@
             'At the end, pop remaining operators from stack to output.'
           ],
           code: `int prec(char c) {\n  if (c == \'^\') return 3;\n  if (c == \'/\' || c == \'*\') return 2;\n  if (c == \'+\' || c == \'-\') return 1;\n  return -1;\n}\n\nstring infixToPostfix(string s) {\n  stack<char> st;\n  string result;\n  for (char c : s) {\n    if (isalnum(c)) result += c;\n    else if (c == \'(\') st.push(\'(\');\n    else if (c == \')\') {\n      while (st.top() != \'(\') {\n        result += st.top();\n        st.pop();\n      }\n      st.pop();\n    } else {\n      while (!st.empty() && prec(c) <= prec(st.top())) {\n        result += st.top();\n        st.pop();\n      }\n      st.push(c);\n    }\n  }\n  while (!st.empty()) {\n    result += st.top();\n    st.pop();\n  }\n  return result;\n}`
+        },
+        evaluator: {
+          title: 'Postfix Evaluator',
+          desc: 'Evaluating postfix expressions is simple for processor stack architectures. Scanning from left to right: operands are pushed onto stack. When an operator is met, the top two elements are popped, evaluated using the operator, and the result is pushed back.',
+          steps: [
+            'Scan postfix expression from left to right.',
+            'If token is operand, push to stack.',
+            'If token is operator, pop right operand first, then left operand.',
+            'Evaluate the result: LeftOperand (Operator) RightOperand.',
+            'Push the result back onto the stack.',
+            'At the end of expression, the top of stack contains the final result.'
+          ],
+          code: `int evaluatePostfix(string exp) {\n  stack<int> st;\n  for (int i = 0; i < exp.length(); i++) {\n    if (exp[i] == \' \') continue;\n    if (isdigit(exp[i])) {\n      int val = 0;\n      while(i < exp.length() && isdigit(exp[i])) {\n        val = (val * 10) + (exp[i] - \'0\');\n        i++;\n      }\n      i--;\n      st.push(val);\n    } else {\n      int val1 = st.top(); st.pop();\n      int val2 = st.top(); st.pop();\n      switch (exp[i]) {\n        case \'+\': st.push(val2 + val1); break;\n        case \'-\': st.push(val2 - val1); break;\n        case \'*\': st.push(val2 * val1); break;\n        case \'/\': st.push(val2 / val1); break;\n      }\n    }\n  }\n  return st.top();\n}`
         }
       },
       bn: {
@@ -571,7 +584,7 @@
             'isEmpty: স্ট্যাক খালি কিনা তা পরীক্ষা করে।',
             'isFull: স্ট্যাকের সর্বোচ্চ ধারণ ক্ষমতা পূর্ণ হয়েছে কিনা তা পরীক্ষা করে।'
           ],
-          code: `#define MAX 1000\n\nclass Stack {\n  int top;\npublic:\n  int a[MAX];\n  Stack() { top = -1; }\n\n  bool push(int x) {\n    if (top >= (MAX - 1)) {\n      cout << "Stack Overflow\\n";\n      return false;\n    }\n    a[++top] = x;\n    return true;\n  }\n\n  int pop() {\n    if (top < 0) {\n      cout << "Stack Underflow\\n";\n      return 0;\n    }\n    return a[top--];\n  }\n\n  int peek() {\n    if (top < 0) return 0;\n    return a[top];\n  }\n\n  bool isEmpty() {\n    return (top < 0);\n  }\n};`
+          code: `int Stack[100], Top = 0, MaxSize = 100;\n\nbool isEmpty() {\n  return (Top == 0);\n}\n\nbool isFull() {\n  return (Top == MaxSize);\n}\n\nbool push(int Element) {\n  if (isFull()) {\n    cout << "Stack is Full\\n";\n    return false;\n  }\n  Stack[Top++] = Element;\n  return true;\n}\n\nbool pop() {\n  if (isEmpty()) {\n    cout << "Stack empty\\n";\n    return false;\n  }\n  Top--;\n  return true;\n}\n\nint topElement() {\n  return Stack[Top - 1];\n}\n\nvoid show() {\n  if (isEmpty()) {\n    cout << "Stack empty\\n";\n    return;\n  }\n  for (int i = Top - 1; i >= 0; i--) {\n    cout << Stack[i] << endl;\n  }\n}`
         },
         balancer: {
           title: 'বন্ধনী সমতা পরীক্ষা (Parentheses Balancer)',
@@ -598,6 +611,19 @@
             'স্ক্যান শেষে স্ট্যাকের সব অবশিষ্ট অপারেটর পপ করে আউটপুটে নিন।'
           ],
           code: `int prec(char c) {\n  if (c == \'^\') return 3;\n  if (c == \'/\' || c == \'*\') return 2;\n  if (c == \'+\' || c == \'-\') return 1;\n  return -1;\n}\n\nstring infixToPostfix(string s) {\n  stack<char> st;\n  string result;\n  for (char c : s) {\n    if (isalnum(c)) result += c;\n    else if (c == \'(\') st.push(\'(\');\n    else if (c == \')\') {\n      while (st.top() != \'(\') {\n        result += st.top();\n        st.pop();\n      }\n      st.pop();\n    } else {\n      while (!st.empty() && prec(c) <= prec(st.top())) {\n        result += st.top();\n        st.pop();\n      }\n      st.push(c);\n    }\n  }\n  while (!st.empty()) {\n    result += st.top();\n    st.pop();\n  }\n  return result;\n}`
+        },
+        evaluator: {
+          title: 'Postfix এক্সপ্রেশন মূল্যায়ন (Postfix Evaluator)',
+          desc: 'পোস্টফিক্স এক্সপ্রেশনের মান নির্ণয় করা প্রসেসরের স্ট্যাক আর্কিটেকচারের জন্য অনেক সহজ। বাম থেকে ডানে স্ক্যান করে: সংখ্যা পেলে পুশ করা হয়। অপারেটর পেলে স্ট্যাকের শীর্ষ ২টি সংখ্যা পপ করে হিসাব করে ফলাফলটি আবার স্ট্যাকে পুশ করা হয়।',
+          steps: [
+            'Postfix রাশিমালাটি বাম থেকে ডানে স্ক্যান করুন।',
+            'যদি টোকেনটি অপারেন্ড (সংখ্যা) হয়, তবে স্ট্যাকে push করুন।',
+            'যদি টোকেনটি অপারেটর হয়, প্রথমে ডান অপারেন্ড (Right) এবং পরে বাম অপারেন্ড (Left) পপ করুন।',
+            'ফলাফল হিসাব করুন: LeftOperand (অপারেটর) RightOperand।',
+            'হিসাবকৃত ফলাফলটি পুনরায় স্ট্যাকে push করুন।',
+            'এক্সপ্রেশনের শেষে, স্ট্যাকের শীর্ষে থাকা মানটিই চূড়ান্ত উত্তর।'
+          ],
+          code: `int evaluatePostfix(string exp) {\n  stack<int> st;\n  for (int i = 0; i < exp.length(); i++) {\n    if (exp[i] == \' \') continue;\n    if (isdigit(exp[i])) {\n      int val = 0;\n      while(i < exp.length() && isdigit(exp[i])) {\n        val = (val * 10) + (exp[i] - \'0\');\n        i++;\n      }\n      i--;\n      st.push(val);\n    } else {\n      int val1 = st.top(); st.pop();\n      int val2 = st.top(); st.pop();\n      switch (exp[i]) {\n        case \'+\': st.push(val2 + val1); break;\n        case \'-\': st.push(val2 - val1); break;\n        case \'*\': st.push(val2 * val1); break;\n        case \'/\': st.push(val2 / val1); break;\n      }\n    }\n  }\n  return st.top();\n}`
         }
       }
     };
@@ -673,6 +699,7 @@
         tabStackBasic: 'Basic Stack',
         tabStackBalancer: 'Parentheses Balancer',
         tabStackInfix: 'Infix to Postfix',
+        tabStackEvaluator: 'Postfix Evaluator',
         stackSimTitle: 'Stack Interactive Simulator',
         stackStatusEmpty: 'Stack is Empty.',
         stackStatusSize: size => `Stack size: ${size}`,
@@ -839,6 +866,7 @@
         tabStackBasic: 'বেসিক স্ট্যাক',
         tabStackBalancer: 'বন্ধনী সমতা পরীক্ষা',
         tabStackInfix: 'Infix থেকে Postfix',
+        tabStackEvaluator: 'Postfix মূল্যায়নকারী',
         stackSimTitle: 'স্ট্যাক ইন্টারেক্টিভ সিমুলেটর',
         stackStatusEmpty: 'স্ট্যাক খালি রয়েছে।',
         stackStatusSize: size => `স্ট্যাকের বর্তমান সাইজ: ${size}`,
@@ -1031,6 +1059,7 @@
       document.getElementById('tabStackBasic').textContent = t('tabStackBasic');
       document.getElementById('tabStackBalancer').textContent = t('tabStackBalancer');
       document.getElementById('tabStackInfix').textContent = t('tabStackInfix');
+      document.getElementById('tabStackEvaluator').textContent = t('tabStackEvaluator');
       document.getElementById('stackSimTitle').textContent = t('stackSimTitle');
       renderStackInfo();
       document.getElementById('algoStepsTitle').textContent = t('algoStepsTitle');
@@ -1799,6 +1828,8 @@
             document.getElementById('stackBalancerControls').classList.remove('is-hidden');
           } else if (activeStackTab === 'infix') {
             document.getElementById('stackInfixControls').classList.remove('is-hidden');
+          } else if (activeStackTab === 'evaluator') {
+            document.getElementById('stackEvaluatorControls').classList.remove('is-hidden');
           }
           
           renderStackInfo();
@@ -2303,6 +2334,176 @@
         infixPostfixOutput.textContent = '-';
         infixTraceBody.innerHTML = '';
         infixStackContainer.innerHTML = '';
+      });
+    }
+
+    // 4. Postfix Evaluator Simulator
+    const evaluatorState = {
+      tokens: [],
+      index: -1,
+      stack: [],
+      trace: [],
+      done: false
+    };
+
+    const evaluatorInput = document.getElementById('evaluatorInput');
+    const evaluatorStartBtn = document.getElementById('evaluatorStartBtn');
+    const evaluatorStepBtn = document.getElementById('evaluatorStepBtn');
+    const evaluatorResetBtn = document.getElementById('evaluatorResetBtn');
+
+    const evaluatorStackContainer = document.getElementById('evaluatorStackContainer');
+    const evaluatorInputDisplay = document.getElementById('evaluatorInputDisplay');
+    const evaluatorTraceBody = document.getElementById('evaluatorTraceBody');
+    const evaluatorStatus = document.getElementById('evaluatorStatus');
+
+    function renderEvaluatorUI() {
+      if (!evaluatorStackContainer) return;
+      evaluatorStackContainer.innerHTML = '';
+      evaluatorState.stack.forEach(val => {
+        const el = document.createElement('div');
+        el.className = 'stack-element';
+        el.textContent = val;
+        evaluatorStackContainer.appendChild(el);
+      });
+
+      evaluatorInputDisplay.innerHTML = evaluatorState.tokens.map((token, idx) => {
+        let cls = 'balancer-char-token';
+        if (idx === evaluatorState.index) cls += ' active';
+        else if (idx < evaluatorState.index) cls += ' processed';
+        return `<span class="${cls}">${token}</span>`;
+      }).join(' ');
+
+      evaluatorTraceBody.innerHTML = evaluatorState.trace.map(tr => `
+        <tr>
+          <td>${tr.token}</td>
+          <td>${tr.operation}</td>
+          <td>[${tr.stackState.join(', ')}]</td>
+          <td>${tr.action}</td>
+        </tr>
+      `).join('');
+    }
+
+    if (evaluatorStartBtn) {
+      evaluatorStartBtn.addEventListener('click', () => {
+        const expr = evaluatorInput.value.trim();
+        if (!expr) return;
+
+        evaluatorState.tokens = expr.split(/\s+/);
+        evaluatorState.index = -1;
+        evaluatorState.stack = [];
+        evaluatorState.trace = [];
+        evaluatorState.done = false;
+
+        evaluatorStatus.textContent = currentLang === 'bn'
+          ? 'সিমুলেশন শুরু হয়েছে। পরবর্তী ধাপ দেখতে Next Step ক্লিক করুন।'
+          : 'Simulation started. Click Next Step to step through.';
+        evaluatorStatus.className = 'status';
+
+        renderEvaluatorUI();
+      });
+    }
+
+    if (evaluatorStepBtn) {
+      evaluatorStepBtn.addEventListener('click', () => {
+        if (evaluatorState.tokens.length === 0) {
+          evaluatorStatus.textContent = currentLang === 'bn' ? 'প্রথমে রাশিমালা দিয়ে Start ক্লিক করুন।' : 'Please enter expression and click Start first.';
+          evaluatorStatus.className = 'status';
+          return;
+        }
+        if (evaluatorState.done) {
+          evaluatorStatus.textContent = currentLang === 'bn' ? 'সিমুলেশন ইতোমধ্যে শেষ হয়েছে।' : 'Simulation already finished.';
+          return;
+        }
+
+        evaluatorState.index += 1;
+
+        if (evaluatorState.index >= evaluatorState.tokens.length) {
+          evaluatorState.done = true;
+          const finalResult = evaluatorState.stack[evaluatorState.stack.length - 1];
+          evaluatorState.trace.push({
+            token: '-',
+            operation: currentLang === 'bn' ? 'সমাপ্ত' : 'Done',
+            stackState: [...evaluatorState.stack],
+            action: currentLang === 'bn' ? `চূড়ান্ত ফলাফল = ${finalResult}` : `Final Result = ${finalResult}`
+          });
+
+          evaluatorStatus.textContent = currentLang === 'bn'
+            ? `মূল্যায়ন সম্পন্ন! চূড়ান্ত ফলাফল: ${finalResult}`
+            : `Evaluation complete! Final Result: ${finalResult}`;
+          evaluatorStatus.className = 'status match-success';
+          renderEvaluatorUI();
+          return;
+        }
+
+        const token = evaluatorState.tokens[evaluatorState.index];
+        let op = '';
+        let act = '';
+
+        const isOperator = ['+', '-', '*', '/'].includes(token);
+
+        if (!isOperator) {
+          const num = Number(token);
+          if (Number.isNaN(num)) {
+            evaluatorStatus.textContent = currentLang === 'bn' ? `ভুল টোকেন: ${token}` : `Invalid token: ${token}`;
+            evaluatorStatus.className = 'status match-fail';
+            evaluatorState.done = true;
+            return;
+          }
+          evaluatorState.stack.push(num);
+          op = `Push '${num}'`;
+          act = currentLang === 'bn' ? 'অপারেন্ড স্ট্যাকে পুশ করা হলো' : 'Operand pushed onto stack';
+        } else {
+          if (evaluatorState.stack.length < 2) {
+            evaluatorStatus.textContent = currentLang === 'bn' ? 'ভুল পোস্টফিক্স রাশিমালা! স্ট্যাকে যথেষ্ট অপারেন্ড নেই।' : 'Invalid postfix expression! Not enough operands.';
+            evaluatorStatus.className = 'status match-fail';
+            evaluatorState.done = true;
+            return;
+          }
+
+          const right = evaluatorState.stack.pop();
+          const left = evaluatorState.stack.pop();
+          let result = 0;
+
+          switch (token) {
+            case '+': result = left + right; break;
+            case '-': result = left - right; break;
+            case '*': result = left * right; break;
+            case '/': result = left / right; break;
+          }
+
+          evaluatorState.stack.push(result);
+          op = `Pop two & Evaluate`;
+          act = `Evaluate(${left}, '${token}', ${right}) = ${result}`;
+          evaluatorStatus.textContent = currentLang === 'bn'
+            ? `অপারেটর '${token}' পাওয়া গেছে। ${left} ও ${right} পপ করে হিসাব করা হলো: ${result}`
+            : `Operator '${token}' found. Popped ${left} and ${right}, evaluated: ${result}`;
+        }
+
+        evaluatorState.trace.push({
+          token,
+          operation: op,
+          stackState: [...evaluatorState.stack],
+          action: act
+        });
+
+        renderEvaluatorUI();
+      });
+    }
+
+    if (evaluatorResetBtn) {
+      evaluatorResetBtn.addEventListener('click', () => {
+        evaluatorState.tokens = [];
+        evaluatorState.index = -1;
+        evaluatorState.stack = [];
+        evaluatorState.trace = [];
+        evaluatorState.done = false;
+
+        evaluatorStatus.textContent = currentLang === 'bn' ? 'রিসেট করা হয়েছে।' : 'Reset completed.';
+        evaluatorStatus.className = 'status';
+
+        evaluatorInputDisplay.innerHTML = '';
+        evaluatorTraceBody.innerHTML = '';
+        evaluatorStackContainer.innerHTML = '';
       });
     }
 

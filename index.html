@@ -293,6 +293,7 @@
         <button class="tab active" data-stack="basic" id="tabStackBasic">Basic Stack</button>
         <button class="tab" data-stack="balancer" id="tabStackBalancer">Parentheses Balancer</button>
         <button class="tab" data-stack="infix" id="tabStackInfix">Infix to Postfix</button>
+        <button class="tab" data-stack="evaluator" id="tabStackEvaluator">Postfix Evaluator</button>
       </div>
 
       <div class="panel grid-2" id="stackContentPanel">
@@ -400,6 +401,35 @@
                 </table>
               </div>
               <p class="status mt-4" id="infixStatus">Click Start to begin.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 4: Postfix Evaluator Controls -->
+        <div id="stackEvaluatorControls" class="stack-control-panel is-hidden">
+          <div class="controls">
+            <input id="evaluatorInput" value="2 6 * 4 1 - / 5 3 * +" placeholder="Postfix Expression (e.g. 5 3 2 * +)" aria-label="evaluator input" style="width: 320px;" />
+            <button class="primary" id="evaluatorStartBtn">Start</button>
+            <button id="evaluatorStepBtn">Next Step</button>
+            <button id="evaluatorResetBtn">Reset</button>
+          </div>
+          
+          <div class="evaluator-visual-layout mt-10 grid-2">
+            <div class="stack-container-wrapper">
+              <div class="stack-container" id="evaluatorStackContainer"></div>
+              <div class="stack-base">EVALUATION STACK</div>
+            </div>
+            <div>
+              <div class="infix-input-display" id="evaluatorInputDisplay"></div>
+              <div class="table-container mt-6">
+                <table>
+                  <thead>
+                    <tr><th>Token</th><th>Operation</th><th>Stack State</th><th>Action / Result</th></tr>
+                  </thead>
+                  <tbody id="evaluatorTraceBody"></tbody>
+                </table>
+              </div>
+              <p class="status mt-4" id="evaluatorStatus">Click Start to begin.</p>
             </div>
           </div>
         </div>
