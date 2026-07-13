@@ -1270,10 +1270,7 @@
     }
 
     function formatSortSnapshot(values) {
-      if (values.length <= 8) return values.join(', ');
-      const head = values.slice(0, 4).join(', ');
-      const tail = values.slice(-3).join(', ');
-      return `${head}, ..., ${tail}`;
+      return values.join(', ');
     }
 
     function getSortHistoryTime() {
