@@ -308,7 +308,15 @@
           </ul>
         </article>
         <article class="mini">
-          <h3 id="stackCodeTitle">C++ Code</h3>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <h3 id="stackCodeTitle" style="margin: 0;">C++ Code</h3>
+            <select id="stackCodeSelect" class="is-hidden" aria-label="C++ Code Variant" style="background: rgba(255,255,255,0.05); color: var(--color-text); border: 1px solid rgba(255,255,255,0.1); padding: 4px 8px; border-radius: 4px; font-size: 13px; cursor: pointer; outline: none;">
+              <option value="array" id="optStackArray">Array Implementation</option>
+              <option value="oop" id="optStackOop">OOP (MyStack Class)</option>
+              <option value="dynamic" id="optStackDynamic">Dynamic Resizing Stack</option>
+              <option value="generic" id="optStackGeneric">Generic (Template Stack)</option>
+            </select>
+          </div>
           <div class="code" id="stackCode"></div>
         </article>
       </div>

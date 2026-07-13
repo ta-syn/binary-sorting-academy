@@ -531,7 +531,13 @@
             'isEmpty: Checks if the stack has no elements.',
             'isFull: Checks if the stack has reached maximum capacity.'
           ],
-          code: `int Stack[100], Top = 0, MaxSize = 100;\n\nbool isEmpty() {\n  return (Top == 0);\n}\n\nbool isFull() {\n  return (Top == MaxSize);\n}\n\nbool push(int Element) {\n  if (isFull()) {\n    cout << "Stack is Full\\n";\n    return false;\n  }\n  Stack[Top++] = Element;\n  return true;\n}\n\nbool pop() {\n  if (isEmpty()) {\n    cout << "Stack empty\\n";\n    return false;\n  }\n  Top--;\n  return true;\n}\n\nint topElement() {\n  return Stack[Top - 1];\n}\n\nvoid show() {\n  if (isEmpty()) {\n    cout << "Stack empty\\n";\n    return;\n  }\n  for (int i = Top - 1; i >= 0; i--) {\n    cout << Stack[i] << endl;\n  }\n}`
+          code: `int Stack[100], Top = 0, MaxSize = 100;\n\nbool isEmpty() {\n  return (Top == 0);\n}\n\nbool isFull() {\n  return (Top == MaxSize);\n}\n\nbool push(int Element) {\n  if (isFull()) {\n    cout << "Stack is Full\\n";\n    return false;\n  }\n  Stack[Top++] = Element;\n  return true;\n}\n\nbool pop() {\n  if (isEmpty()) {\n    cout << "Stack empty\\n";\n    return false;\n  }\n  Top--;\n  return true;\n}\n\nint topElement() {\n  return Stack[Top - 1];\n}\n\nvoid show() {\n  if (isEmpty()) {\n    cout << "Stack empty\\n";\n    return;\n  }\n  for (int i = Top - 1; i >= 0; i--) {\n    cout << Stack[i] << endl;\n  }\n}`,
+          codes: {
+            array: `int Stack[100], Top = 0, MaxSize = 100;\n\nbool isEmpty() {\n  return (Top == 0);\n}\n\nbool isFull() {\n  return (Top == MaxSize);\n}\n\nbool push(int Element) {\n  if (isFull()) {\n    cout << "Stack is Full\\n";\n    return false;\n  }\n  Stack[Top++] = Element;\n  return true;\n}\n\nbool pop() {\n  if (isEmpty()) {\n    cout << "Stack empty\\n";\n    return false;\n  }\n  Top--;\n  return true;\n}\n\nint topElement() {\n  return Stack[Top - 1];\n}\n\nvoid show() {\n  if (isEmpty()) {\n    cout << "Stack empty\\n";\n    return;\n  }\n  for (int i = Top - 1; i >= 0; i--) {\n    cout << Stack[i] << endl;\n  }\n}`,
+            oop: `class MyStack {\n  int Stack[100], Top, MaxSize;\npublic:\n  MyStack(int Size = 100) {\n    MaxSize = Size;\n    Top = 0;\n  }\n\n  bool isEmpty() {\n    return (Top == 0);\n  }\n\n  bool isFull() {\n    return (Top == MaxSize);\n  }\n\n  bool push(int Element) {\n    if (isFull()) {\n      cout << "Stack is Full\\n";\n      return false;\n    }\n    Stack[Top++] = Element;\n    return true;\n  }\n\n  bool pop() {\n    if (isEmpty()) {\n      cout << "Stack empty\\n";\n      return false;\n    }\n    Top--;\n    return true;\n  }\n\n  int topElement() {\n    return Stack[Top - 1];\n  }\n\n  void show() {\n    if (isEmpty()) {\n      cout << "Stack empty\\n";\n      return;\n    }\n    for (int i = Top - 1; i >= 0; i--) {\n      cout << Stack[i] << endl;\n    }\n  }\n};`,
+            dynamic: `class MyStack {\n  int *Stack, Top, MaxSize;\npublic:\n  MyStack(int Size = 100) {\n    MaxSize = Size;\n    Stack = new int[MaxSize];\n    Top = 0;\n  }\n\n  ~MyStack() {\n    delete [] Stack;\n  }\n\n  void resize(int Size = 100) {\n    int *tempStk = new int[MaxSize + Size];\n    for (int i = 0; i < MaxSize; i++) {\n      tempStk[i] = Stack[i];\n    }\n    MaxSize += Size;\n    delete [] Stack;\n    Stack = tempStk;\n  }\n\n  bool push(int Element) {\n    if (Top == MaxSize) {\n      resize();\n    }\n    Stack[Top++] = Element;\n    return true;\n  }\n\n  bool pop() {\n    if (Top == 0) return false;\n    Top--;\n    return true;\n  }\n};`,
+            generic: `template <typename T>\nclass MyStack {\n  T *Stack;\n  int Top, MaxSize;\npublic:\n  MyStack(int Size = 100) {\n    MaxSize = Size;\n    Stack = new T[MaxSize];\n    Top = 0;\n  }\n\n  ~MyStack() {\n    delete [] Stack;\n  }\n\n  bool push(T Element) {\n    if (Top == MaxSize) return false;\n    Stack[Top++] = Element;\n    return true;\n  }\n\n  bool pop() {\n    if (Top == 0) return false;\n    Top--;\n    return true;\n  }\n};`
+          }
         },
         balancer: {
           title: 'Parentheses Balancer',
@@ -584,7 +590,13 @@
             'isEmpty: স্ট্যাক খালি কিনা তা পরীক্ষা করে।',
             'isFull: স্ট্যাকের সর্বোচ্চ ধারণ ক্ষমতা পূর্ণ হয়েছে কিনা তা পরীক্ষা করে।'
           ],
-          code: `int Stack[100], Top = 0, MaxSize = 100;\n\nbool isEmpty() {\n  return (Top == 0);\n}\n\nbool isFull() {\n  return (Top == MaxSize);\n}\n\nbool push(int Element) {\n  if (isFull()) {\n    cout << "Stack is Full\\n";\n    return false;\n  }\n  Stack[Top++] = Element;\n  return true;\n}\n\nbool pop() {\n  if (isEmpty()) {\n    cout << "Stack empty\\n";\n    return false;\n  }\n  Top--;\n  return true;\n}\n\nint topElement() {\n  return Stack[Top - 1];\n}\n\nvoid show() {\n  if (isEmpty()) {\n    cout << "Stack empty\\n";\n    return;\n  }\n  for (int i = Top - 1; i >= 0; i--) {\n    cout << Stack[i] << endl;\n  }\n}`
+          code: `int Stack[100], Top = 0, MaxSize = 100;\n\nbool isEmpty() {\n  return (Top == 0);\n}\n\nbool isFull() {\n  return (Top == MaxSize);\n}\n\nbool push(int Element) {\n  if (isFull()) {\n    cout << "Stack is Full\\n";\n    return false;\n  }\n  Stack[Top++] = Element;\n  return true;\n}\n\nbool pop() {\n  if (isEmpty()) {\n    cout << "Stack empty\\n";\n    return false;\n  }\n  Top--;\n  return true;\n}\n\nint topElement() {\n  return Stack[Top - 1];\n}\n\nvoid show() {\n  if (isEmpty()) {\n    cout << "Stack empty\\n";\n    return;\n  }\n  for (int i = Top - 1; i >= 0; i--) {\n    cout << Stack[i] << endl;\n  }\n}`,
+          codes: {
+            array: `int Stack[100], Top = 0, MaxSize = 100;\n\nbool isEmpty() {\n  return (Top == 0);\n}\n\nbool isFull() {\n  return (Top == MaxSize);\n}\n\nbool push(int Element) {\n  if (isFull()) {\n    cout << "Stack is Full\\n";\n    return false;\n  }\n  Stack[Top++] = Element;\n  return true;\n}\n\nbool pop() {\n  if (isEmpty()) {\n    cout << "Stack empty\\n";\n    return false;\n  }\n  Top--;\n  return true;\n}\n\nint topElement() {\n  return Stack[Top - 1];\n}\n\nvoid show() {\n  if (isEmpty()) {\n    cout << "Stack empty\\n";\n    return;\n  }\n  for (int i = Top - 1; i >= 0; i--) {\n    cout << Stack[i] << endl;\n  }\n}`,
+            oop: `class MyStack {\n  int Stack[100], Top, MaxSize;\npublic:\n  MyStack(int Size = 100) {\n    MaxSize = Size;\n    Top = 0;\n  }\n\n  bool isEmpty() {\n    return (Top == 0);\n  }\n\n  bool isFull() {\n    return (Top == MaxSize);\n  }\n\n  bool push(int Element) {\n    if (isFull()) {\n      cout << "Stack is Full\\n";\n      return false;\n    }\n    Stack[Top++] = Element;\n    return true;\n  }\n\n  bool pop() {\n    if (isEmpty()) {\n      cout << "Stack empty\\n";\n      return false;\n    }\n    Top--;\n    return true;\n  }\n\n  int topElement() {\n    return Stack[Top - 1];\n  }\n\n  void show() {\n    if (isEmpty()) {\n      cout << "Stack empty\\n";\n      return;\n    }\n    for (int i = Top - 1; i >= 0; i--) {\n      cout << Stack[i] << endl;\n    }\n  }\n};`,
+            dynamic: `class MyStack {\n  int *Stack, Top, MaxSize;\npublic:\n  MyStack(int Size = 100) {\n    MaxSize = Size;\n    Stack = new int[MaxSize];\n    Top = 0;\n  }\n\n  ~MyStack() {\n    delete [] Stack;\n  }\n\n  void resize(int Size = 100) {\n    int *tempStk = new int[MaxSize + Size];\n    for (int i = 0; i < MaxSize; i++) {\n      tempStk[i] = Stack[i];\n    }\n    MaxSize += Size;\n    delete [] Stack;\n    Stack = tempStk;\n  }\n\n  bool push(int Element) {\n    if (Top == MaxSize) {\n      resize();\n    }\n    Stack[Top++] = Element;\n    return true;\n  }\n\n  bool pop() {\n    if (Top == 0) return false;\n    Top--;\n    return true;\n  }\n};`,
+            generic: `template <typename T>\nclass MyStack {\n  T *Stack;\n  int Top, MaxSize;\npublic:\n  MyStack(int Size = 100) {\n    MaxSize = Size;\n    Stack = new T[MaxSize];\n    Top = 0;\n  }\n\n  ~MyStack() {\n    delete [] Stack;\n  }\n\n  bool push(T Element) {\n    if (Top == MaxSize) return false;\n    Stack[Top++] = Element;\n    return true;\n  }\n\n  bool pop() {\n    if (Top == 0) return false;\n    Top--;\n    return true;\n  }\n};`
+          }
         },
         balancer: {
           title: 'বন্ধনী সমতা পরীক্ষা (Parentheses Balancer)',
@@ -700,6 +712,10 @@
         tabStackBalancer: 'Parentheses Balancer',
         tabStackInfix: 'Infix to Postfix',
         tabStackEvaluator: 'Postfix Evaluator',
+        optStackArray: 'Array Implementation (Slides 4-10)',
+        optStackOop: 'OOP (MyStack Class) (Slide 11)',
+        optStackDynamic: 'Dynamic Resizing (Slides 12-14)',
+        optStackGeneric: 'Generic (Template Stack) (Slide 15)',
         stackSimTitle: 'Stack Interactive Simulator',
         stackStatusEmpty: 'Stack is Empty.',
         stackStatusSize: size => `Stack size: ${size}`,
@@ -867,6 +883,10 @@
         tabStackBalancer: 'বন্ধনী সমতা পরীক্ষা',
         tabStackInfix: 'Infix থেকে Postfix',
         tabStackEvaluator: 'Postfix মূল্যায়নকারী',
+        optStackArray: 'অ্যারে ইমপ্লিমেন্টেশন (স্লাইড ৪-১০)',
+        optStackOop: 'OOP (MyStack ক্লাস) (স্লাইড ১১)',
+        optStackDynamic: 'ডাইনামিক রিসাইজিং (স্লাইড ১২-১৪)',
+        optStackGeneric: 'জেনেরিক (টেম্পলেট স্ট্যাক) (স্লাইড ১৫)',
         stackSimTitle: 'স্ট্যাক ইন্টারেক্টিভ সিমুলেটর',
         stackStatusEmpty: 'স্ট্যাক খালি রয়েছে।',
         stackStatusSize: size => `স্ট্যাকের বর্তমান সাইজ: ${size}`,
@@ -1060,6 +1080,10 @@
       document.getElementById('tabStackBalancer').textContent = t('tabStackBalancer');
       document.getElementById('tabStackInfix').textContent = t('tabStackInfix');
       document.getElementById('tabStackEvaluator').textContent = t('tabStackEvaluator');
+      document.getElementById('optStackArray').textContent = t('optStackArray');
+      document.getElementById('optStackOop').textContent = t('optStackOop');
+      document.getElementById('optStackDynamic').textContent = t('optStackDynamic');
+      document.getElementById('optStackGeneric').textContent = t('optStackGeneric');
       document.getElementById('stackSimTitle').textContent = t('stackSimTitle');
       renderStackInfo();
       document.getElementById('algoStepsTitle').textContent = t('algoStepsTitle');
@@ -1794,6 +1818,13 @@
     const stackTabs = document.getElementById('stackTabs');
     let activeStackTab = 'basic'; // 'basic' | 'balancer' | 'infix'
     
+    const stackCodeSelect = document.getElementById('stackCodeSelect');
+    if (stackCodeSelect) {
+      stackCodeSelect.addEventListener('change', () => {
+        renderStackInfo();
+      });
+    }
+
     function renderStackInfo() {
       const current = stackData[currentLang][activeStackTab];
       if (!current) return;
@@ -1806,7 +1837,23 @@
       }
       
       const codeBox = document.getElementById('stackCode');
-      if (codeBox) {
+      const selectBox = document.getElementById('stackCodeSelect');
+      if (selectBox) {
+        if (activeStackTab === 'basic') {
+          selectBox.classList.remove('is-hidden');
+          const variant = selectBox.value;
+          if (codeBox && current.codes) {
+            codeBox.textContent = current.codes[variant] || current.code;
+          } else if (codeBox) {
+            codeBox.textContent = current.code;
+          }
+        } else {
+          selectBox.classList.add('is-hidden');
+          if (codeBox) {
+            codeBox.textContent = current.code;
+          }
+        }
+      } else if (codeBox) {
         codeBox.textContent = current.code;
       }
     }
