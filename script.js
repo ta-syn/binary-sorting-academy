@@ -183,7 +183,8 @@
       high: -1,
       mid: -1,
       done: false,
-      foundIndex: -1
+      foundIndex: -1,
+      stepHistory: []
     };
 
     function parseNumbers(text) {
@@ -261,6 +262,11 @@
       searchState.mid = -1;
       searchState.done = false;
       searchState.foundIndex = -1;
+      searchState.stepHistory = [];
+
+      const algoName = searchState.algorithm === 'linear' ? (currentLang === 'bn' ? 'Linear' : 'Linear') : (currentLang === 'bn' ? 'Binary' : 'Binary');
+      document.getElementById('binaryDryRunTitle').textContent = t('liveDryRunTitle')(algoName, target);
+      document.getElementById('binaryDryRunBody').innerHTML = '';
 
       renderBinary();
       binaryStatus.textContent = t('startedClickNext');
@@ -294,6 +300,19 @@
       searchState.index += 1;
       const currentValue = searchState.array[searchState.index];
 
+      const stepNo = searchState.stepHistory.length + 1;
+      const isFound = currentValue === searchState.target;
+      const comparedStr = `${currentValue} == ${searchState.target} → ${isFound ? (currentLang === 'bn' ? 'সত্য' : 'True') : (currentLang === 'bn' ? 'মিথ্যা' : 'False')}`;
+      const actionStr = isFound ? t('linearFoundAction')(searchState.target) : t('linearMoveAction');
+
+      searchState.stepHistory.push({
+        stepNo,
+        index: searchState.index,
+        value: currentValue,
+        compared: comparedStr,
+        action: actionStr
+      });
+
       if (currentValue === searchState.target) {
         searchState.foundIndex = searchState.index;
         searchState.done = true;
@@ -303,6 +322,7 @@
       }
 
       renderBinary();
+      renderSearchDryRunTable();
     }
 
     function stepBinary() {
@@ -326,6 +346,24 @@
       searchState.mid = Math.floor((searchState.low + searchState.high) / 2);
       const midValue = searchState.array[searchState.mid];
 
+      const stepNo = searchState.stepHistory.length + 1;
+      let actionStr = '';
+      if (midValue === searchState.target) {
+        actionStr = t('linearFoundAction')(searchState.target);
+      } else if (midValue < searchState.target) {
+        actionStr = `${midValue} < ${searchState.target} → ${currentLang === 'bn' ? 'ডান' : 'Right'}`;
+      } else {
+        actionStr = `${midValue} > ${searchState.target} → ${currentLang === 'bn' ? 'বাম' : 'Left'}`;
+      }
+
+      searchState.stepHistory.push({
+        stepNo,
+        low: searchState.low,
+        high: searchState.high,
+        mid: searchState.mid,
+        action: actionStr
+      });
+
       if (midValue === searchState.target) {
         searchState.foundIndex = searchState.mid;
         searchState.done = true;
@@ -337,6 +375,7 @@
       }
 
       renderBinary();
+      renderSearchDryRunTable();
     }
 
     function stepSearch() {
@@ -365,8 +404,39 @@
       searchState.mid = -1;
       searchState.done = false;
       searchState.foundIndex = -1;
+      searchState.stepHistory = [];
       binaryView.innerHTML = '';
       binaryStatus.textContent = t('resetComplete');
+      renderSearchInfo();
+    }
+
+    function renderSearchDryRunTable() {
+      const body = document.getElementById('binaryDryRunBody');
+      if (!body) return;
+
+      if (searchState.algorithm === 'linear') {
+        body.innerHTML = searchState.stepHistory
+          .map(step => `
+            <tr>
+              <td>${step.stepNo}</td>
+              <td>${step.index}</td>
+              <td>${step.value}</td>
+              <td>${step.compared}</td>
+              <td>${step.action}</td>
+            </tr>
+          `).join('');
+      } else {
+        body.innerHTML = searchState.stepHistory
+          .map(step => `
+            <tr>
+              <td>${step.stepNo}</td>
+              <td>${step.low}</td>
+              <td>${step.high}</td>
+              <td>${step.mid}</td>
+              <td>${step.action}</td>
+            </tr>
+          `).join('');
+      }
     }
 
     document.getElementById('binaryStart').addEventListener('click', startBinary);
@@ -532,6 +602,9 @@
         interviewProTip: 'Pro Tip: Explain both <strong>time complexity</strong> and <strong>why</strong> it occurs.',
         binaryInitial: 'Load values and click Start.',
         linearInitial: 'Load values and click Start.',
+        linearMoveAction: 'Move Next',
+        linearFoundAction: target => `Found ${target}`,
+        liveDryRunTitle: (algo, target) => `${algo} Search Dry Run (Target = ${target})`,
         linearCheckingIndex: (index, val) => `Checking index ${index}: value ${val}.`,
         linearFoundAtIndex: (target, index) => `Found target ${target} at index ${index}!`,
         linearNotFound: 'Target not found in the array.',
@@ -676,6 +749,9 @@
         interviewProTip: 'প্রো টিপ: শুধু <strong>time complexity</strong> না, <strong>কেন</strong> এমন হয় সেটাও ব্যাখ্যা করুন।',
         binaryInitial: 'ভ্যালু দিন এবং Start ক্লিক করুন।',
         linearInitial: 'ভ্যালু দিন এবং Start ক্লিক করুন।',
+        linearMoveAction: 'সামনে যান',
+        linearFoundAction: target => `${target} পাওয়া গেছে`,
+        liveDryRunTitle: (algo, target) => `${algo} Search ড্রাই রান (Target = ${target})`,
         linearCheckingIndex: (index, val) => `index ${index} চেক করা হচ্ছে: মান ${val}।`,
         linearFoundAtIndex: (target, index) => `Target ${target} index ${index} এ পাওয়া গেছে!`,
         linearNotFound: 'Target পাওয়া যায়নি।',
