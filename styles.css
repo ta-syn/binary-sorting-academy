@@ -321,6 +321,10 @@
       border-radius: 12px;
       padding: 12px;
       transition: border-color 0.2s ease, transform 0.15s ease;
+    }
+
+    .mini:has(.code) {
+      height: 420px;
       display: flex;
       flex-direction: column;
     }
