@@ -523,21 +523,16 @@
       en: {
         basic: {
           title: 'Stack (LIFO)',
-          desc: 'Stack is a linear data structure that follows the Last In First Out (LIFO) principle. Think of it like a stack of plates: you add plates to the top, and you can only remove plates from the top.',
+          desc: 'Stack is a linear LIFO (Last In First Out) structure. Stacks can be Bounded (fixed size, leads to Overflow) or Non-Bounded (dynamic resizing, no overflow limit). Common applications include recursion stack, backtracking (Towers of Hanoi), and Undo/Redo operations.',
           steps: [
-            'Push: Adds an item to the top of the stack.',
-            'Pop: Removes an item from the top of the stack.',
-            'Peek / Top: Returns the top element without removing it.',
-            'isEmpty: Checks if the stack has no elements.',
-            'isFull: Checks if the stack has reached maximum capacity.'
+            'Push: Adds an element at Stack[Top++] (takes O(1) constant time).',
+            'Pop: Removes the top element by decrementing Top-- (takes O(1) constant time).',
+            'Peek / TopElement: Returns Stack[Top - 1] without removing it (takes O(1) constant time).',
+            'isEmpty: Returns true if Top == 0 (Underflow state check).',
+            'isFull: Returns true if Top == MaxSize (Overflow state check).',
+            'Runtime Resizing: Creates new array of capacity MaxSize + Size, copies elements, releases old memory (takes O(N) linear time).'
           ],
-          code: `int Stack[100], Top = 0, MaxSize = 100;\n\nbool isEmpty() {\n  return (Top == 0);\n}\n\nbool isFull() {\n  return (Top == MaxSize);\n}\n\nbool push(int Element) {\n  if (isFull()) {\n    cout << "Stack is Full\\n";\n    return false;\n  }\n  Stack[Top++] = Element;\n  return true;\n}\n\nbool pop() {\n  if (isEmpty()) {\n    cout << "Stack empty\\n";\n    return false;\n  }\n  Top--;\n  return true;\n}\n\nint topElement() {\n  return Stack[Top - 1];\n}\n\nvoid show() {\n  if (isEmpty()) {\n    cout << "Stack empty\\n";\n    return;\n  }\n  for (int i = Top - 1; i >= 0; i--) {\n    cout << Stack[i] << endl;\n  }\n}`,
-          codes: {
-            array: `int Stack[100], Top = 0, MaxSize = 100;\n\nbool isEmpty() {\n  return (Top == 0);\n}\n\nbool isFull() {\n  return (Top == MaxSize);\n}\n\nbool push(int Element) {\n  if (isFull()) {\n    cout << "Stack is Full\\n";\n    return false;\n  }\n  Stack[Top++] = Element;\n  return true;\n}\n\nbool pop() {\n  if (isEmpty()) {\n    cout << "Stack empty\\n";\n    return false;\n  }\n  Top--;\n  return true;\n}\n\nint topElement() {\n  return Stack[Top - 1];\n}\n\nvoid show() {\n  if (isEmpty()) {\n    cout << "Stack empty\\n";\n    return;\n  }\n  for (int i = Top - 1; i >= 0; i--) {\n    cout << Stack[i] << endl;\n  }\n}`,
-            oop: `class MyStack {\n  int Stack[100], Top, MaxSize;\npublic:\n  MyStack(int Size = 100) {\n    MaxSize = Size;\n    Top = 0;\n  }\n\n  bool isEmpty() {\n    return (Top == 0);\n  }\n\n  bool isFull() {\n    return (Top == MaxSize);\n  }\n\n  bool push(int Element) {\n    if (isFull()) {\n      cout << "Stack is Full\\n";\n      return false;\n    }\n    Stack[Top++] = Element;\n    return true;\n  }\n\n  bool pop() {\n    if (isEmpty()) {\n      cout << "Stack empty\\n";\n      return false;\n    }\n    Top--;\n    return true;\n  }\n\n  int topElement() {\n    return Stack[Top - 1];\n  }\n\n  void show() {\n    if (isEmpty()) {\n      cout << "Stack empty\\n";\n      return;\n    }\n    for (int i = Top - 1; i >= 0; i--) {\n      cout << Stack[i] << endl;\n    }\n  }\n};`,
-            dynamic: `class MyStack {\n  int *Stack, Top, MaxSize;\npublic:\n  MyStack(int Size = 100) {\n    MaxSize = Size;\n    Stack = new int[MaxSize];\n    Top = 0;\n  }\n\n  ~MyStack() {\n    delete [] Stack;\n  }\n\n  void resize(int Size = 100) {\n    int *tempStk = new int[MaxSize + Size];\n    for (int i = 0; i < MaxSize; i++) {\n      tempStk[i] = Stack[i];\n    }\n    MaxSize += Size;\n    delete [] Stack;\n    Stack = tempStk;\n  }\n\n  bool push(int Element) {\n    if (Top == MaxSize) {\n      resize();\n    }\n    Stack[Top++] = Element;\n    return true;\n  }\n\n  bool pop() {\n    if (Top == 0) return false;\n    Top--;\n    return true;\n  }\n};`,
-            generic: `template <typename T>\nclass MyStack {\n  T *Stack;\n  int Top, MaxSize;\npublic:\n  MyStack(int Size = 100) {\n    MaxSize = Size;\n    Stack = new T[MaxSize];\n    Top = 0;\n  }\n\n  ~MyStack() {\n    delete [] Stack;\n  }\n\n  bool push(T Element) {\n    if (Top == MaxSize) return false;\n    Stack[Top++] = Element;\n    return true;\n  }\n\n  bool pop() {\n    if (Top == 0) return false;\n    Top--;\n    return true;\n  }\n};`
-          }
+          code: `// ============================================\n// 1. ARRAY IMPLEMENTATION (Slides 4-10)\n// ============================================\nint Stack[100], Top = 0, MaxSize = 100;\n\nbool isEmpty() {\n  return (Top == 0);\n}\n\nbool isFull() {\n  return (Top == MaxSize);\n}\n\nbool push(int Element) {\n  if (isFull()) {\n    cout << "Stack is Full\\n";\n    return false;\n  }\n  Stack[Top++] = Element;\n  return true;\n}\n\nbool pop() {\n  if (isEmpty()) {\n    cout << "Stack empty\\n";\n    return false;\n  }\n  Top--;\n  return true;\n}\n\nint topElement() {\n  return Stack[Top - 1];\n}\n\nvoid show() {\n  if (isEmpty()) {\n    cout << "Stack empty\\n";\n    return;\n  }\n  for (int i = Top - 1; i >= 0; i--) {\n    cout << Stack[i] << endl;\n  }\n}\n\n// ============================================\n// 2. OOP CLASS APPROACH (Slide 11)\n// ============================================\nclass MyStack {\n  int Stack[100], Top, MaxSize;\npublic:\n  MyStack(int Size = 100) {\n    MaxSize = Size;\n    Top = 0;\n  }\n  bool isEmpty() { return (Top == 0); }\n  bool isFull() { return (Top == MaxSize); }\n  bool push(int Element) {\n    if (isFull()) return false;\n    Stack[Top++] = Element;\n    return true;\n  }\n  bool pop() {\n    if (isEmpty()) return false;\n    Top--;\n    return true;\n  }\n  int topElement() { return Stack[Top - 1]; }\n};\n\n// ============================================\n// 3. DYNAMIC STACK & RESIZING (Slides 12-14)\n// ============================================\nclass DynamicStack {\n  int *Stack, Top, MaxSize;\npublic:\n  DynamicStack(int Size = 100) {\n    MaxSize = Size;\n    Stack = new int[MaxSize];\n    Top = 0;\n  }\n  ~DynamicStack() {\n    delete [] Stack;\n  }\n  void resize(int Size = 100) {\n    int *tempStk = new int[MaxSize + Size];\n    for (int i = 0; i < MaxSize; i++) {\n      tempStk[i] = Stack[i];\n    }\n    MaxSize += Size;\n    delete [] Stack;\n    Stack = tempStk;\n  }\n  void push(int Element) {\n    if (Top == MaxSize) resize();\n    Stack[Top++] = Element;\n  }\n};\n\n// ============================================\n// 4. GENERIC TEMPLATE STACK (Slide 15)\n// ============================================\ntemplate <typename T>\nclass GenericStack {\n  T *Stack;\n  int Top, MaxSize;\npublic:\n  GenericStack(int Size = 100) {\n    MaxSize = Size;\n    Stack = new T[MaxSize];\n    Top = 0;\n  }\n  ~GenericStack() {\n    delete [] Stack;\n  }\n  void push(T Element) {\n    if (Top == MaxSize) return;\n    Stack[Top++] = Element;\n  }\n};`
         },
         balancer: {
           title: 'Parentheses Balancer',
@@ -582,21 +577,16 @@
       bn: {
         basic: {
           title: 'স্ট্যাক (LIFO)',
-          desc: 'স্ট্যাক হলো একটি লিনিয়ার ডাটা স্ট্রাকচার যা Last In First Out (LIFO) নীতি মেনে চলে। এটিকে প্লেটের স্তূপের মতো ভাবা যেতে পারে: আপনি কেবল সবার উপরে প্লেট রাখতে পারেন এবং তুলে নেওয়ার সময়ও সবার ওপরের প্লেটটিই প্রথমে নিতে হবে।',
+          desc: 'স্ট্যাক হলো একটি লিনিয়ার LIFO (Last In First Out) কাঠামো। স্ট্যাক Bounded (নির্দিষ্ট আকারের, যাতে Overflow হতে পারে) অথবা Non-Bounded (ডাইনামিক মেমরি যা প্রয়োজন অনুযায়ী বৃদ্ধি পায়) হতে পারে। বাস্তব প্রয়োগগুলোর মধ্যে রয়েছে রিকার্শন স্ট্যাক, ব্যাকট্র্যাকিং (Towers of Hanoi) এবং ব্যাংকিং লেনদেনের সর্বশেষ ভিউ।',
           steps: [
-            'Push: স্ট্যাকের শীর্ষে একটি আইটেম যুক্ত করে।',
-            'Pop: স্ট্যাকের শীর্ষ থেকে একটি আইটেম সরিয়ে নেয়।',
-            'Peek / Top: শীর্ষ উপাদানটি না সরিয়ে শুধু প্রদর্শন করে।',
-            'isEmpty: স্ট্যাক খালি কিনা তা পরীক্ষা করে।',
-            'isFull: স্ট্যাকের সর্বোচ্চ ধারণ ক্ষমতা পূর্ণ হয়েছে কিনা তা পরীক্ষা করে।'
+            'Push: Stack[Top++] এ নতুন উপাদান যুক্ত করে (সময় O(1) বা ধ্রুবক সময়)।',
+            'Pop: Top-- করে শীর্ষের উপাদানটি সরিয়ে দেয় (সময় O(1) বা ধ্রুবক সময়)।',
+            'Peek / TopElement: Stack[Top - 1] এর মান রিটার্ন করে (সময় O(1) বা ধ্রুবক সময়)।',
+            'isEmpty: Top == 0 হলে true রিটার্ন করে (Underflow পরীক্ষা)।',
+            'isFull: Top == MaxSize হলে true রিটার্ন করে (Overflow পরীক্ষা)।',
+            'Runtime Resizing: ক্যাপাসিটি পূর্ণ হলে নতুন মেমরি ডাইনামিকালি নিয়ে কপি করে ও পুরনো মেমরি রিলিজ করে (সময় O(N))।'
           ],
-          code: `int Stack[100], Top = 0, MaxSize = 100;\n\nbool isEmpty() {\n  return (Top == 0);\n}\n\nbool isFull() {\n  return (Top == MaxSize);\n}\n\nbool push(int Element) {\n  if (isFull()) {\n    cout << "Stack is Full\\n";\n    return false;\n  }\n  Stack[Top++] = Element;\n  return true;\n}\n\nbool pop() {\n  if (isEmpty()) {\n    cout << "Stack empty\\n";\n    return false;\n  }\n  Top--;\n  return true;\n}\n\nint topElement() {\n  return Stack[Top - 1];\n}\n\nvoid show() {\n  if (isEmpty()) {\n    cout << "Stack empty\\n";\n    return;\n  }\n  for (int i = Top - 1; i >= 0; i--) {\n    cout << Stack[i] << endl;\n  }\n}`,
-          codes: {
-            array: `int Stack[100], Top = 0, MaxSize = 100;\n\nbool isEmpty() {\n  return (Top == 0);\n}\n\nbool isFull() {\n  return (Top == MaxSize);\n}\n\nbool push(int Element) {\n  if (isFull()) {\n    cout << "Stack is Full\\n";\n    return false;\n  }\n  Stack[Top++] = Element;\n  return true;\n}\n\nbool pop() {\n  if (isEmpty()) {\n    cout << "Stack empty\\n";\n    return false;\n  }\n  Top--;\n  return true;\n}\n\nint topElement() {\n  return Stack[Top - 1];\n}\n\nvoid show() {\n  if (isEmpty()) {\n    cout << "Stack empty\\n";\n    return;\n  }\n  for (int i = Top - 1; i >= 0; i--) {\n    cout << Stack[i] << endl;\n  }\n}`,
-            oop: `class MyStack {\n  int Stack[100], Top, MaxSize;\npublic:\n  MyStack(int Size = 100) {\n    MaxSize = Size;\n    Top = 0;\n  }\n\n  bool isEmpty() {\n    return (Top == 0);\n  }\n\n  bool isFull() {\n    return (Top == MaxSize);\n  }\n\n  bool push(int Element) {\n    if (isFull()) {\n      cout << "Stack is Full\\n";\n      return false;\n    }\n    Stack[Top++] = Element;\n    return true;\n  }\n\n  bool pop() {\n    if (isEmpty()) {\n      cout << "Stack empty\\n";\n      return false;\n    }\n    Top--;\n    return true;\n  }\n\n  int topElement() {\n    return Stack[Top - 1];\n  }\n\n  void show() {\n    if (isEmpty()) {\n      cout << "Stack empty\\n";\n      return;\n    }\n    for (int i = Top - 1; i >= 0; i--) {\n      cout << Stack[i] << endl;\n    }\n  }\n};`,
-            dynamic: `class MyStack {\n  int *Stack, Top, MaxSize;\npublic:\n  MyStack(int Size = 100) {\n    MaxSize = Size;\n    Stack = new int[MaxSize];\n    Top = 0;\n  }\n\n  ~MyStack() {\n    delete [] Stack;\n  }\n\n  void resize(int Size = 100) {\n    int *tempStk = new int[MaxSize + Size];\n    for (int i = 0; i < MaxSize; i++) {\n      tempStk[i] = Stack[i];\n    }\n    MaxSize += Size;\n    delete [] Stack;\n    Stack = tempStk;\n  }\n\n  bool push(int Element) {\n    if (Top == MaxSize) {\n      resize();\n    }\n    Stack[Top++] = Element;\n    return true;\n  }\n\n  bool pop() {\n    if (Top == 0) return false;\n    Top--;\n    return true;\n  }\n};`,
-            generic: `template <typename T>\nclass MyStack {\n  T *Stack;\n  int Top, MaxSize;\npublic:\n  MyStack(int Size = 100) {\n    MaxSize = Size;\n    Stack = new T[MaxSize];\n    Top = 0;\n  }\n\n  ~MyStack() {\n    delete [] Stack;\n  }\n\n  bool push(T Element) {\n    if (Top == MaxSize) return false;\n    Stack[Top++] = Element;\n    return true;\n  }\n\n  bool pop() {\n    if (Top == 0) return false;\n    Top--;\n    return true;\n  }\n};`
-          }
+          code: `// ============================================\n// ১. অ্যারে ইমপ্লিমেন্টেশন (Slides 4-10)\n// ============================================\nint Stack[100], Top = 0, MaxSize = 100;\n\nbool isEmpty() {\n  return (Top == 0);\n}\n\nbool isFull() {\n  return (Top == MaxSize);\n}\n\nbool push(int Element) {\n  if (isFull()) {\n    cout << "Stack is Full\\n";\n    return false;\n  }\n  Stack[Top++] = Element;\n  return true;\n}\n\nbool pop() {\n  if (isEmpty()) {\n    cout << "Stack empty\\n";\n    return false;\n  }\n  Top--;\n  return true;\n}\n\nint topElement() {\n  return Stack[Top - 1];\n}\n\nvoid show() {\n  if (isEmpty()) {\n    cout << "Stack empty\\n";\n    return;\n  }\n  for (int i = Top - 1; i >= 0; i--) {\n    cout << Stack[i] << endl;\n  }\n}\n\n// ============================================\n// ২. অবজেক্ট অরিয়েন্টেড ক্লাস পদ্ধতি (Slide 11)\n// ============================================\nclass MyStack {\n  int Stack[100], Top, MaxSize;\npublic:\n  MyStack(int Size = 100) {\n    MaxSize = Size;\n    Top = 0;\n  }\n  bool isEmpty() { return (Top == 0); }\n  bool isFull() { return (Top == MaxSize); }\n  bool push(int Element) {\n    if (isFull()) return false;\n    Stack[Top++] = Element;\n    return true;\n  }\n  bool pop() {\n    if (isEmpty()) return false;\n    Top--;\n    return true;\n  }\n  int topElement() { return Stack[Top - 1]; }\n};\n\n// ============================================\n// ৩. ডাইনামিক স্ট্যাক ও মেমরি রিসাইজিং (Slides 12-14)\n// ============================================\nclass DynamicStack {\n  int *Stack, Top, MaxSize;\npublic:\n  DynamicStack(int Size = 100) {\n    MaxSize = Size;\n    Stack = new int[MaxSize];\n    Top = 0;\n  }\n  ~DynamicStack() {\n    delete [] Stack;\n  }\n  void resize(int Size = 100) {\n    int *tempStk = new int[MaxSize + Size];\n    for (int i = 0; i < MaxSize; i++) {\n      tempStk[i] = Stack[i];\n    }\n    MaxSize += Size;\n    delete [] Stack;\n    Stack = tempStk;\n  }\n  void push(int Element) {\n    if (Top == MaxSize) resize();\n    Stack[Top++] = Element;\n  }\n};\n\n// ============================================\n// ৪. জেনেরিক টেমপ্লেট স্ট্যাক (Slide 15)\n// ============================================\ntemplate <typename T>\nclass GenericStack {\n  T *Stack;\n  int Top, MaxSize;\npublic:\n  GenericStack(int Size = 100) {\n    MaxSize = Size;\n    Stack = new T[MaxSize];\n    Top = 0;\n  }\n  ~GenericStack() {\n    delete [] Stack;\n  }\n  void push(T Element) {\n    if (Top == MaxSize) return;\n    Stack[Top++] = Element;\n  }\n};`
         },
         balancer: {
           title: 'বন্ধনী সমতা পরীক্ষা (Parentheses Balancer)',
@@ -712,10 +702,6 @@
         tabStackBalancer: 'Parentheses Balancer',
         tabStackInfix: 'Infix to Postfix',
         tabStackEvaluator: 'Postfix Evaluator',
-        optStackArray: 'Array Implementation (Slides 4-10)',
-        optStackOop: 'OOP (MyStack Class) (Slide 11)',
-        optStackDynamic: 'Dynamic Resizing (Slides 12-14)',
-        optStackGeneric: 'Generic (Template Stack) (Slide 15)',
         stackSimTitle: 'Stack Interactive Simulator',
         stackStatusEmpty: 'Stack is Empty.',
         stackStatusSize: size => `Stack size: ${size}`,
@@ -883,10 +869,6 @@
         tabStackBalancer: 'বন্ধনী সমতা পরীক্ষা',
         tabStackInfix: 'Infix থেকে Postfix',
         tabStackEvaluator: 'Postfix মূল্যায়নকারী',
-        optStackArray: 'অ্যারে ইমপ্লিমেন্টেশন (স্লাইড ৪-১০)',
-        optStackOop: 'OOP (MyStack ক্লাস) (স্লাইড ১১)',
-        optStackDynamic: 'ডাইনামিক রিসাইজিং (স্লাইড ১২-১৪)',
-        optStackGeneric: 'জেনেরিক (টেম্পলেট স্ট্যাক) (স্লাইড ১৫)',
         stackSimTitle: 'স্ট্যাক ইন্টারেক্টিভ সিমুলেটর',
         stackStatusEmpty: 'স্ট্যাক খালি রয়েছে।',
         stackStatusSize: size => `স্ট্যাকের বর্তমান সাইজ: ${size}`,
@@ -1080,10 +1062,6 @@
       document.getElementById('tabStackBalancer').textContent = t('tabStackBalancer');
       document.getElementById('tabStackInfix').textContent = t('tabStackInfix');
       document.getElementById('tabStackEvaluator').textContent = t('tabStackEvaluator');
-      document.getElementById('optStackArray').textContent = t('optStackArray');
-      document.getElementById('optStackOop').textContent = t('optStackOop');
-      document.getElementById('optStackDynamic').textContent = t('optStackDynamic');
-      document.getElementById('optStackGeneric').textContent = t('optStackGeneric');
       document.getElementById('stackSimTitle').textContent = t('stackSimTitle');
       renderStackInfo();
       document.getElementById('algoStepsTitle').textContent = t('algoStepsTitle');
@@ -1818,13 +1796,6 @@
     const stackTabs = document.getElementById('stackTabs');
     let activeStackTab = 'basic'; // 'basic' | 'balancer' | 'infix'
     
-    const stackCodeSelect = document.getElementById('stackCodeSelect');
-    if (stackCodeSelect) {
-      stackCodeSelect.addEventListener('change', () => {
-        renderStackInfo();
-      });
-    }
-
     function renderStackInfo() {
       const current = stackData[currentLang][activeStackTab];
       if (!current) return;
@@ -1837,23 +1808,7 @@
       }
       
       const codeBox = document.getElementById('stackCode');
-      const selectBox = document.getElementById('stackCodeSelect');
-      if (selectBox) {
-        if (activeStackTab === 'basic') {
-          selectBox.classList.remove('is-hidden');
-          const variant = selectBox.value;
-          if (codeBox && current.codes) {
-            codeBox.textContent = current.codes[variant] || current.code;
-          } else if (codeBox) {
-            codeBox.textContent = current.code;
-          }
-        } else {
-          selectBox.classList.add('is-hidden');
-          if (codeBox) {
-            codeBox.textContent = current.code;
-          }
-        }
-      } else if (codeBox) {
+      if (codeBox) {
         codeBox.textContent = current.code;
       }
     }
