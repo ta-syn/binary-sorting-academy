@@ -600,7 +600,7 @@
       border-radius: 12px;
       padding: 12px;
       overflow: auto;
-      max-height: 480px;
+      max-height: 600px;
       white-space: pre;
       font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
       font-size: 0.84rem;
