@@ -1097,7 +1097,17 @@
         { q: 'Which operation is used to insert an element into a Stack?', options: ['Pop', 'Peek', 'Push', 'Enqueue'], ans: 2 },
         { q: 'Stack Overflow condition occurs when trying to:', options: ['Push on a full stack', 'Pop from an empty stack', 'Peek an empty stack', 'Check if stack is empty'], ans: 0 },
         { q: 'Which of the following is a classic application of Stack?', options: ['Binary Search', 'Parentheses balancing check', 'Finding minimum element', 'Sorting random values'], ans: 1 },
-        { q: 'What is the postfix representation of the infix expression: A + B * C?', options: ['A B C * +', 'A B + C *', 'A B C + *', '+ A * B C'], ans: 0 }
+        { q: 'What is the postfix representation of the infix expression: A + B * C?', options: ['A B C * +', 'A B + C *', 'A B C + *', '+ A * B C'], ans: 0 },
+        { q: 'What is the value of the postfix expression: 5 3 2 * +?', options: ['16', '11', '10', '25'], ans: 1 },
+        { q: 'Which data structure is used by compilers to implement recursion and function calls?', options: ['Queue', 'Linked List', 'Stack', 'Tree'], ans: 2 },
+        { q: 'What is the term for looking at the top element of a stack without removing it?', options: ['Pop', 'Peek', 'Push', 'Rear'], ans: 1 },
+        { q: 'What happens when an opening parenthesis \'(\' is encountered during Infix to Postfix conversion?', options: ['Appended to output', 'Pushed to stack', 'Ignored', 'Pops operators of higher precedence'], ans: 1 },
+        { q: 'Which stack application uses a stack to evaluate postfix expressions?', options: ['Prefix Evaluation', 'Postfix Evaluation', 'Depth First Search', 'All of the above'], ans: 1 },
+        { q: 'If a stack is implemented using an array, what does top = -1 indicate?', options: ['Stack Overflow', 'Stack Underflow / Empty', 'Stack is Full', 'Random State'], ans: 1 },
+        { q: 'In C++, which header file must be included to use the standard stack container?', options: ['<vector>', '<array>', '<stack>', '<algorithm>'], ans: 2 },
+        { q: 'Which data structure is typically used to implement the Undo/Redo feature in text editors?', options: ['Queue', 'Graph', 'Stack', 'Binary Tree'], ans: 2 },
+        { q: 'Attempting to pop an element from an empty stack leads to which error?', options: ['Stack Overflow', 'Stack Underflow', 'Index Out of Bounds', 'Null Pointer Exception'], ans: 1 },
+        { q: 'When evaluating a postfix expression, when an operator is encountered, how are operands popped?', options: ['First popped is right operand, second popped is left operand', 'First popped is left operand, second popped is right operand', 'Both popped at once randomly', 'Only one operand is popped'], ans: 0 }
       ],
       bn: [
         { q: 'Binary Search কোন ধরনের array-এ ঠিকভাবে কাজ করে?', options: ['Random array', 'Sorted array', 'শুধু reverse array', 'শুধু duplicate-free array'], ans: 1 },
@@ -1129,7 +1139,17 @@
         { q: 'স্ট্যাকে কোনো নতুন উপাদান যুক্ত করতে কোন অপারেশনটি ব্যবহৃত হয়?', options: ['Pop', 'Peek', 'Push', 'Enqueue'], ans: 2 },
         { q: 'নিচের কোন সময়ে Stack Overflow ঘটে?', options: ['পূর্ণ স্ট্যাকে Push করতে গেলে', 'খালি স্ট্যাক থেকে Pop করতে গেলে', 'খালি স্ট্যাকের Peek করতে গেলে', 'স্ট্যাক খালি আছে কিনা চেক করতে গেলে'], ans: 0 },
         { q: 'নিচের কোনটি স্ট্যাকের একটি আদর্শ প্র্যাকটিক্যাল ব্যবহার?', options: ['বাইনারি সার্চ', 'বন্ধনী সমতা পরীক্ষা (Parentheses balancing)', 'সর্বনিম্ন উপাদান খুঁজে বের করা', 'এলোমেলো মান সাজানো (Sorting)'], ans: 1 },
-        { q: 'Infix এক্সপ্রেশন A + B * C এর Postfix রূপ কোনটি?', options: ['A B C * +', 'A B + C *', 'A B C + *', '+ A * B C'], ans: 0 }
+        { q: 'Infix এক্সপ্রেশন A + B * C এর Postfix রূপ কোনটি?', options: ['A B C * +', 'A B + C *', 'A B C + *', '+ A * B C'], ans: 0 },
+        { q: 'Postfix এক্সপ্রেশন 5 3 2 * + এর মান কত?', options: ['16', '11', '10', '25'], ans: 1 },
+        { q: 'কম্পাইলার রিকার্শন (Recursion) এবং ফাংশন কল ইমপ্লিমেন্ট করতে কোন ডাটা স্ট্রাকচার ব্যবহার করে?', options: ['Queue', 'Linked List', 'Stack', 'Tree'], ans: 2 },
+        { q: 'স্ট্যাক থেকে কোনো উপাদান না সরিয়ে শুধুমাত্র শীর্ষ উপাদানটি দেখার অপারেশনকে কী বলে?', options: ['Pop', 'Peek', 'Push', 'Rear'], ans: 1 },
+        { q: 'Infix থেকে Postfix রূপান্তরের সময় শুরুর বন্ধনী \'(\' পাওয়া গেলে কী করা হয়?', options: ['আউটপুটে যোগ করা হয়', 'স্ট্যাকে পুশ করা হয়', 'উপেক্ষা করা হয়', 'বেশি অগ্রাধিকারের অপারেটর পপ করা হয়'], ans: 1 },
+        { q: 'নিচের কোনটিতে পোস্টফিক্স এক্সপ্রেশনের মান বের করতে স্ট্যাক ব্যবহৃত হয়?', options: ['Prefix Evaluation', 'Postfix Evaluation', 'Depth First Search', 'সবগুলোই সঠিক'], ans: 1 },
+        { q: 'যদি অ্যারে দিয়ে স্ট্যাক ইমপ্লিমেন্ট করা হয়, তবে top = -1 দিয়ে কী বোঝানো হয়?', options: ['Stack Overflow', 'স্ট্যাক খালি / Stack Empty', 'স্ট্যাক পূর্ণ', 'এলোমেলো অবস্থা'], ans: 1 },
+        { q: 'C++ এ স্ট্যান্ডার্ড স্ট্যাক কন্টেইনার ব্যবহার করতে কোন হেডার ফাইলটি যুক্ত করতে হয়?', options: ['<vector>', '<array>', '<stack>', '<algorithm>'], ans: 2 },
+        { q: 'টেক্সট এডিটরে Undo/Redo ফিচার ইমপ্লিমেন্ট করতে সাধারণত কোন ডাটা স্ট্রাকচার ব্যবহৃত হয়?', options: ['Queue', 'Graph', 'Stack', 'Binary Tree'], ans: 2 },
+        { q: 'একটি খালি স্ট্যাক থেকে উপাদান পপ (Pop) করার চেষ্টা করলে নিচের কোন ত্রুটি বা এরর ঘটে?', options: ['Stack Overflow', 'Stack Underflow', 'Index Out of Bounds', 'Null Pointer Exception'], ans: 1 },
+        { q: 'একটি Postfix এক্সপ্রেশন মূল্যায়নের সময় যখন কোনো অপারেটর পাওয়া যায়, তখন পপ হওয়া অপারেন্ডের ক্রম কেমন হয়?', options: ['প্রথম পপ হওয়া মানটি ডান অপারেন্ড, দ্বিতীয়টি বাম অপারেন্ড', 'প্রথম পপ হওয়া মানটি বাম অপারেন্ড, দ্বিতীয়টি ডান অপারেন্ড', 'উভয় মান এলোমেলোভাবে পপ হয়', 'শুধু একটি অপারেন্ড পপ হয়'], ans: 0 }
       ]
     };
 
