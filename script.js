@@ -508,7 +508,7 @@
           'Complexity and comparison table',
           'Step-by-step binary search simulator',
           'Step-by-step sorting visualizer',
-          'JavaScript implementation code'
+          'C++ implementation code'
         ],
         heroPillBeginner: 'Beginner Friendly',
         heroPillInterview: 'Interview Focused',
@@ -542,7 +542,7 @@
         sortingCompareHead: '<tr><th>Algorithm</th><th>Best</th><th>Average</th><th>Worst</th><th>Space</th><th>Stable</th></tr>',
         sortingCompareBody: '<tr><td>Bubble Sort</td><td>O(n)</td><td>O(n²)</td><td>O(n²)</td><td>O(1)</td><td>Yes</td></tr><tr><td>Selection Sort</td><td>O(n²)</td><td>O(n²)</td><td>O(n²)</td><td>O(1)</td><td>No</td></tr><tr><td>Insertion Sort</td><td>O(n)</td><td>O(n²)</td><td>O(n²)</td><td>O(1)</td><td>Yes</td></tr>',
         algoStepsTitle: 'Steps',
-        algoCodeTitle: 'Algorithm Code',
+        algoCodeTitle: 'C++ Code',
         sortingVisualTitle: 'Sorting Visualizer',
         sortChooseTitle: 'When to Choose Which Sort?',
         sortChooseList: [
@@ -652,7 +652,7 @@
           'কমপ্লেক্সিটি ও তুলনামূলক টেবিল',
           'ধাপে ধাপে বাইনারি সার্চ সিমুলেটর',
           'ধাপে ধাপে সর্টিং ভিজ্যুয়ালাইজার',
-          'JavaScript ইমপ্লিমেন্টেশন কোড'
+          'C++ ইমপ্লিমেন্টেশন কোড'
         ],
         heroPillBeginner: 'বিগিনার ফ্রেন্ডলি',
         heroPillInterview: 'ইন্টারভিউ ফোকাসড',
@@ -686,7 +686,7 @@
         sortingCompareHead: '<tr><th>অ্যালগরিদম</th><th>Best</th><th>Average</th><th>Worst</th><th>Space</th><th>Stable</th></tr>',
         sortingCompareBody: '<tr><td>Bubble Sort</td><td>O(n)</td><td>O(n²)</td><td>O(n²)</td><td>O(1)</td><td>হ্যাঁ</td></tr><tr><td>Selection Sort</td><td>O(n²)</td><td>O(n²)</td><td>O(n²)</td><td>O(1)</td><td>না</td></tr><tr><td>Insertion Sort</td><td>O(n)</td><td>O(n²)</td><td>O(n²)</td><td>O(1)</td><td>হ্যাঁ</td></tr>',
         algoStepsTitle: 'ধাপসমূহ',
-        algoCodeTitle: 'অ্যালগরিদম কোড',
+        algoCodeTitle: 'C++ কোড',
         sortingVisualTitle: 'সর্টিং ভিজ্যুয়ালাইজার',
         sortChooseTitle: 'কোন sort কখন ব্যবহার করবেন?',
         sortChooseList: [
